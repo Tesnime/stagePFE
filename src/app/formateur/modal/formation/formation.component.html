@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Formations Académiques et Certifications</h2>
+<form [formGroup]="formationForm" (ngSubmit)="addFormation()" class="infoper">
+    <mat-dialog-content class="mat-typography">
+        <div class="field">
+            <mat-form-field class="example-full-width">
+                <mat-label>Diplôme/Certification obtenue</mat-label>
+                <input matInput formControlName="diplome" type="text" class="form-control"  placeholder="nom du diplome" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Établissement/Université</mat-label>
+                <input matInput formControlName="etablissement" type="text" class="form-control" id="exampleInputPassword1" placeholder="etablissement" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Domaine</mat-label>
+                <input matInput formControlName="specialite" type="text" class="form-control" id="exampleInputPassword1" placeholder="Specialite" required>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Date d'obtention</mat-label>
+                <mat-select formControlName="date">
+                    @for (item of generateYears(1900, 2100); ; track $index) {
+                      <mat-option value={{item}}>{{item}}</mat-option>
+                    }
+                  </mat-select>
+            </mat-form-field>
+            
+            <div class="form-group">
+                <label for="exampleInputPassword1">Preuve</label>
+                <input formControlName="preuve" type="file" class="form-control" id="exampleInputPassword1" placeholder="Specialite" >
+            </div>
+        </div>
+      
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" >
+        <button mat-button mat-dialog-close>Annuler</button>
+        <button mat-button [mat-dialog-close]="true" type="submit" cdkFocusInitial>Ajouter</button>
+
+    </mat-dialog-actions>
+</form>

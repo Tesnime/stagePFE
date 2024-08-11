@@ -1,0 +1,24 @@
+.mat-typography{
+    min-height: 65vh;
+    max-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.agenda{
+    padding: 1rem;
+    /* width: 70%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: aqua; */
+}
+.a{
+    display: grid;
+    grid-template-columns: 95% 5%;
+    align-items: center;
+    
+}
+.mat-typography::-webkit-scrollbar {
+    width: 0px; /* Width of the scrollbar */
+}

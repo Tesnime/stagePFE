@@ -1,0 +1,33 @@
+.container{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 10px;
+    min-height: 40vh;
+}
+.t{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
+.total{
+    background-color: white;
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+
+}
+.total span{
+    font-weight: 700;
+    font-size: 30px;
+    color: rgb(16, 16, 74);
+}
+.chart{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}

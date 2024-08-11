@@ -1,0 +1,95 @@
+.container{
+    background-color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    border: 1px solid #eee;
+    min-height: 75vh;
+    display: grid;
+    grid-template-rows: 15% 15% 70%;
+    /* align-items: center; */
+    /* justify-content: center; */
+    width: 100%;
+}
+.container h2{
+    text-transform: capitalize;
+    color: #081F5c;
+    font-family:  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', cursive;
+    font-weight: 800;
+    font-size: 25px;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+}
+input[type=text]{
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 8px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    background-color: #eeeeeead;
+}
+.add{
+    align-self: center;
+    width: 100%;
+    position: relative;    
+}
+.add span{
+    position: absolute;
+    top: -10px;
+    right: -4px;
+    background-color: #081F5c;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+    color: white;
+}
+ul{
+    padding: 2px;
+    list-style: none;
+    /* max-height: 40vh; */
+    overflow-y: auto;
+    
+}
+ul::-webkit-scrollbar {
+    width: 8px; 
+}
+ul::-webkit-scrollbar-thumb {
+    background-color: #c9c7c7a9;
+    border-radius: 4px; 
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+    background-color: #c3c3c3; 
+}
+
+ul::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ul li{
+    background-color: #eeeeee63;
+    margin: 5px;
+    padding: 10px;
+    border-left: 4px solid #081F5c;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border-right: 4px solid #081F5c; */
+}
+ul li i{
+    padding: 4px;
+    float: right;
+    cursor: pointer;
+    font-size: larger;
+}
+ul li i:hover{
+    font-size: large;
+}
+ul li div span{
+    font-size: smaller;
+    color: #c3c3c3;
+}

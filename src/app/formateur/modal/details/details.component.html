@@ -1,0 +1,54 @@
+@if(demande){
+    <h2  mat-dialog-title>{{demande.titre}}</h2>
+    <div style="padding: 0 15px;">
+        @if (demande.status=='refus') {
+            <ngb-alert [dismissible]="false">
+                Nous regrettons de vous informer que votre demande n'a pas pu être approuvée.
+            </ngb-alert> 
+        }@else if (demande.status=='terminer') {
+            <ngb-alert type="primary" [dismissible]="false">
+                Vos sessions sont terminées.
+            </ngb-alert> 
+        }
+        @else {
+            <ngb-alert type="success" [dismissible]="false">
+                Nous sommes ravis de vous informer que votre demande a été approuvée avec succès. 
+            </ngb-alert> 
+        }
+       
+    </div>
+    <mat-dialog-content class="mat-typography">
+    <div class="info">
+        <div class="a"><h6>Formateur:</h6><small>{{demande.formateur.firstname}} {{demande.formateur.lastname}}</small></div>
+        <div class="a"><h6>Theme de session:</h6><small>{{demande.theme}}</small></div>
+        <div class="a"><h6>Nombre de sessions:</h6><small>{{demande.nbrSession}}</small></div>
+        <div class="a"><h6>Date depot:</h6><small>{{demande.date|date:'dd/MM/yyyy'}}</small></div>
+        <div class="a"><h6>Status:</h6><small>{{demande.status}}</small></div>
+    </div>
+    @if (demande.status=='refus') {
+        <h4>Raison:</h4>
+        <p>{{demande.raison}}</p>
+        <div style="width: 90%; display: flex; justify-content: flex-end;"><a style="color: rgba(22, 22, 22, 0.655);" mat-flat-button routerLink=".">Contacter l'administration</a></div>
+    }@else {
+        <h4>Reponse:</h4>
+        <div>
+            <mat-list role="list">
+                @for (item of sessions; track $index) {
+                    
+                    <mat-list-item role="listitem"><div class="a"><h6>{{$index+1}}. {{item.nom}}</h6 > <small>{{item.date|date:'dd/MM/yyyy'}}</small></div></mat-list-item>
+                }
+                
+              </mat-list>
+        </div>
+        <div class="bttn">
+            <button (click)="memoire(demande.id)" mat-raised-button>Memoir de vacation</button>
+            <a style="color: gray;" (click)="session()" [routerLink]="['/formateur/session']" [queryParams]="{ key: demande.id }">details Sessions</a>
+        </div>
+    }
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Annuler</button>
+    
+    </mat-dialog-actions>
+}
+

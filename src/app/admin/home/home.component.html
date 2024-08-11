@@ -1,0 +1,48 @@
+<nav>
+    <div class="logo"><img src="../../../assets/images/s2tLogo.png" alt=""> </div>
+    <div class="logout">
+        <button (click)="logout()" mat-button>Déconnecter</button>
+    </div>
+</nav>
+<div class="d-flex">
+	<div ngbNav #nav="ngbNav" [(activeId)]="active" (activeIdChange)="onTabChange($event)" class="nav-pills flex-column" orientation="vertical">
+        <ng-container ngbNavItem="top">
+            <button ngbNavLink><div class="btnTit"><i class="fa-solid fa-house"></i>Tableau de bord</div></button>
+            <ng-template ngbNavContent>
+                <app-stat></app-stat>
+            </ng-template>
+        </ng-container>
+        <ng-container ngbNavItem="agenda">
+            <button ngbNavLink><div (click)="agenda()" class="btnTit"><i class="fa-regular fa-calendar-days"></i><span>Agenda</span></div></button>
+            <ng-template ngbNavContent>
+              
+            </ng-template>
+        </ng-container>
+        <ng-container ngbNavItem="demande">
+            <button matBadge="{{nbDemandes}}" [matBadgeHidden]="hidden" ngbNavLink><div class="btnTit"><i class="fa-solid fa-hourglass-start"></i><span>Demandes</span></div></button>
+            <ng-template ngbNavContent>
+                <app-demandes></app-demandes>
+            </ng-template>
+        </ng-container>
+        <ng-container ngbNavItem="sessions">
+            <button ngbNavLink><div class="btnTit"><i class="fa-solid fa-chalkboard-user"></i><span>Sessions</span></div></button>
+            <ng-template ngbNavContent>
+                <app-sessionsAd></app-sessionsAd>
+            </ng-template>
+        </ng-container>
+        <ng-container ngbNavItem="messages">
+            <button matBadge="7" [matBadgeHidden]="hidden" ngbNavLink><div class="btnTit"><i class="fa-regular fa-envelope"></i><span>Messages</span></div></button>
+            <ng-template ngbNavContent>
+                <app-chat></app-chat>
+            </ng-template>
+        </ng-container>
+        <ng-container ngbNavItem="rapport">
+            <button ngbNavLink><div class="btnTit"><i class="fa-regular fa-file-lines"></i>Rapport</div></button>
+            <ng-template ngbNavContent>
+                <app-rapport></app-rapport>
+            </ng-template>
+        </ng-container>
+	</div>
+
+	<div [ngbNavOutlet]="nav" class="ms-4"></div>
+</div>

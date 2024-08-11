@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Autres</h2>
+
+<form [formGroup]="autreForm" (ngSubmit)="addprofile()" class="infoper">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+        <label for="cv">CV</label>
+        <input type="file" id="cv" (change)="onFileSelected($event)" class="form-control" required>
+      </div>
+    <div class="form-group">
+      <label for="portfolio">Portfolio</label>
+      <div class="input-group iconinput">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
+        </div>
+        <input matInput formControlName="portfolio" type="text" class="form-control" id="portfolio" placeholder="Link">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="linkedin">LinkedIn</label>
+      <div class="input-group iconinput">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa-brands fa-linkedin"></i></span>
+        </div>
+        <input matInput formControlName="linkedin" type="text" class="form-control" id="linkedin" placeholder="Link">
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" type="submit" cdkFocusInitial>Modify</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

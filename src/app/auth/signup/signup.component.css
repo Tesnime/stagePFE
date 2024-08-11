@@ -1,0 +1,165 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    background-image: url(../../../assets/images/login_background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100%;
+}
+.container1{
+    margin-top: -70px;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    
+}
+.tit{
+    font-size: 28px;
+    font-weight: 600;
+    color: aliceblue;
+}
+.container1 p{
+    color: aliceblue;
+    text-align: center;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+.conn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+}
+.conn small{
+    color: aliceblue;
+    font-size: smaller;
+}
+
+.btn{
+    padding: 2% 10%;
+    border-radius: 25px;
+    font-weight: 500;
+    width: 40%;
+    border-width: 2px;
+    width: fit-content;
+}
+.login{
+    background-color: aliceblue;
+    height: 88%;
+    border-radius: 10% 0 0 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.logo{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-inline-end: 5%;
+    padding-top: 10px;
+}
+.logo img{
+   
+    height: 80px;
+
+
+}
+.con{
+    margin: -25px 0 10px 0;
+    font-size: 25px;
+    font-weight: 600;
+}
+form{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+}
+.form-control{
+    padding: 8px;
+    margin-top: 8px;
+}
+.l{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.l button{
+    background-color: #3658A2;
+    border-color: #3658A2;
+}
+.mdpoub{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+    padding-right: 20px;
+}
+.mdpoub a{
+    font-size: 12px;
+    color: darkblue;
+}
+.role{
+    display: flex;
+    justify-content: space-around;
+    border-radius: 25px;
+    background-color: white;
+    border: 1px solid #ddd;
+    align-self: center;
+    overflow: hidden;
+    min-width: 300px;
+    margin-bottom: 10px;
+}
+.role label {
+    position: relative;
+    width: 50%;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .btn-check:checked + .btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check) + .btn:active{
+    background-color: #3658A2;
+    border-color: #3658A2;
+
+  }
+  .btn-outline-primary{
+    border-color: transparent;
+    color: #3658A2;
+  }
+  .btn-outline-primary {
+    --bs-btn-color: #3658A2;
+    --bs-btn-border-color: #3658A2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #3658A2;
+    --bs-btn-hover-border-color: #3658A2;
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #3658A2;
+    --bs-btn-active-border-color: #3658A2;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #3658A2;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #3658A2;
+    --bs-gradient: none;
+}
+
+ 

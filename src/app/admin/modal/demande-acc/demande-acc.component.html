@@ -1,0 +1,111 @@
+<h2 class="titre" mat-dialog-title>{{demande.titre}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="details">
+    <div class="a">Titre de la formation:<small>{{demande.titre}}</small></div>
+    <div class="a">Description:<small>{{demande.description}}</small></div>
+    
+    <div class="a">Sujet de session:
+      <small>
+        <ng-container *ngFor="let item of demande.theme; let i = index">
+          {{item}}{{i < demande.theme.length - 1 ? ', ' : ''}}
+        </ng-container>
+      </small>
+    </div>
+    @if(demande.status=='accept'){
+        <div class="a">Nombre des sessions:<small>{{session.length}}</small></div>
+        @if(session.length>0){
+            <div class="a">Date de la premiere session:<small>{{session[0].date| date: 'dd/MM/yyyy'}}</small></div>
+            <div class="a">Lieu:<small>{{session[0].lieu}}</small></div>
+        }
+        <div class="a">code de la session:<small>{{demande.code}}</small></div>
+    }
+  </div>
+
+  <div class="other">
+    <div class="donnee"> 
+        <div class="formateur">
+            <div class="a">Nom du formateur:<small>{{demande.formateur.firstname}} {{demande.formateur.lastname}}</small></div>
+            <div class="a">Bio:<small>{{demande.formateur.bio}}</small></div>
+            <div class="a">poste:<small>{{demande.formateur.poste}}</small></div> 
+            <div class="a">Email:<small>{{demande.formateur.email}}</small></div>
+            <div class="a">Numero:<small>{{demande.formateur.tel}}</small></div>
+            <div class="a">CIN:<small>{{demande.formateur.cin}} </small></div>
+            <div class="a">competances technique:<small><ng-container *ngFor="let item of demande.formateur.comTech; let i = index">
+                {{item}}{{i < demande.formateur.comTech.length - 1 ? ', ' : ''}}
+              </ng-container></small></div> 
+        </div>
+       
+        
+       @if(demande.status=='accept'){
+            <h3>Liste des sessions</h3>
+            <table class="table table-hover tab">
+                <tbody>
+                    <tr *ngFor="let sess of session; let i = index" (click)="openSession(sess)">
+                        <td style="width: 7%;">{{i + 1}} - </td>
+                        <td style="width: 73%;">{{sess.nom}}</td>
+                        <td style="width: 20%;">{{sess.date| date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="width: 1005;" align="end" *ngIf="!ajout"><button (click)="ajouter()"  mat-raised-button>ajouter une session</button></div>
+            <div class="agendaa" *ngIf="ajout">
+                <p style="margin-top: 50px;">Sélectionner la date de votre session.</p>
+                <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
+                    <div class="agenda"><app-agenda [agendaData]=demande.id  (sessionAdded)="onSessionAdded($event)"></app-agenda></div>
+                </div>
+            </div>
+        }@else if(lower(demande.status)=='refus'){
+            <div style="margin-bottom: 30px;" class="info">
+                <div class="b"><h6>Raisons de refus:</h6><small>{{demande.raison || "aucun raison n'est disponible"}}</small></div>
+            </div>
+        }
+    </div> 
+
+    <div class="apprenant">
+      <h3 style="margin-left: 10px;">Liste des apprenants</h3>
+      <table class="table table-hover tab">
+        <tbody>
+          <tr *ngFor="let apprenant of demande.apprenants; let i = index">
+            <td >
+              {{i + 1}} - {{apprenant.firstname}} {{apprenant.lastname}}
+            </td>
+           
+          </tr>
+        </tbody>
+      </table>
+      <h3 style="margin-left: 10px;">Document</h3>
+      
+            <table class="table table-hover tab">
+                <tbody>
+                    <tr>
+                        @if(demande.certifications.length>0){
+                            <td (click)="viewCertif(demande.certifications[0].id)"> Modèle de l'attestation </td>
+                        }
+                        
+                    </tr>
+                    <tr>
+                        <td mat-dialog-close (click)="viewVacation()">Memoire de vacation</td>
+                    </tr>
+                    @if(demande.status=="terminer"){
+                        <tr>
+                            <td mat-dialog-close (click)="viewPresence()">Feuille de Présence</td>
+                        </tr>
+                        <tr>
+                            <td mat-dialog-close (click)="viewCommodites()">Accusé de Réception des Commodités </td>
+                        </tr>
+                        <tr>
+                            <td mat-dialog-close (click)="viewRapport()">Rapport de Formation</td>
+                        </tr>
+                    }
+                    
+                </tbody>
+            </table> 
+    </div>
+
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Quitter</button>
+</mat-dialog-actions>
+ 

@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="container1">
+        <img src="../../../assets/images/icons8-user-64.png" alt="">
+        <div class="tit"> Bienvenue</div>
+        <p>Si vous n'avez pas de compte, créez-en un maintenant.</p>
+        <button (click)="navigateToSignUp()" type="button" class="btn btn-outline-light">S'inscrire</button>
+    </div>
+    <div class="login">
+        <p class="logo"><img src="../../assets/images/s2t-logo.png" alt=""></p>
+        <div class="con">Se connecter</div>
+        <form [formGroup]="loginForm">
+            <mat-form-field appearance="outline" class="form-group">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email" class="form-control" placeholder="Enter email" required>
+
+              <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"> 
+                entrer le valid email</mat-error>
+            </mat-form-field>
+            
+              <mat-form-field  appearance="outline" class="form-group">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput formControlName="password" class="form-control" placeholder="mot de passe" required [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"> 
+                  entrer le valid email</mat-error>
+              </mat-form-field>
+            
+            <!-- <mat-form-field appearance="outline" class="form-group">
+              <mat-label >Password</mat-label>
+              <input matInput formControlName="password" type="password" class="form-control" placeholder="Password" required>
+
+              <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"> 
+                entrer le valid email</mat-error>
+            </mat-form-field> -->
+            <div class="mdpoub"><a href="">Mot de passe oublie ?</a></div>
+            <div class="l"> <button mat-raised-Button type="submit" (click)="onSubmit()"  class="btn btn-primary">Submit</button></div>
+           
+          </form>
+    </div>
+
+</div>
+
+

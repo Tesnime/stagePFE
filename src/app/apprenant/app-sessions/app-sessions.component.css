@@ -1,0 +1,14 @@
+.container1{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #e7e9ee3f;
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between; */
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

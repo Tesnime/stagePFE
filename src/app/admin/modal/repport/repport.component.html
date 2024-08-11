@@ -1,0 +1,229 @@
+@if (demande) {
+<div class="container">
+    <div class="titre">Rapport d'evaluation de seminaire</div>
+    <div class="details">
+        <div class="div" style="border-right: 1px solid black;border-bottom: 1px solid black; grid-area: a;">
+            <div class="tit">Thème et date du séminaire :</div>
+            <div class="rep">
+                {{demande.theme}} <br>
+                @for (item of sessions; track $index) {
+                    {{item.date|date:'dd/MM/yyy'}},
+                }
+            </div>
+        </div>
+        <div class="div" id="b" style="border-bottom: 1px solid black;grid-area: b;">
+            <div class="tit">Lieu :</div>
+            <div class="rep">
+                {{demande.lieu}}
+            </div>
+        </div>
+        <div class="div" style="grid-area: c;">
+            <div class="tit">Formateur :</div>
+            <div class="rep">
+                Mr/Mme {{demande.formateur.firstname}} {{demande.formateur.lastname}}
+            </div>   
+        </div>
+        <div class="div" style="grid-area: d; border-right: 1px solid black; border-left: 1px solid black;">
+            <div class="tit">Entreprise :</div>
+            <div class="rep">
+                @if (demande.apprenants.length >0) {
+                    @for (item of societesUniques; track $index) {
+                        {{item}},  
+                    }
+                }
+            </div>
+        </div>
+        <div class="div" style="grid-area: e;">
+            <div class="tit">Nombre de candidats :</div>
+            <div class="rep">
+                {{demande.apprenants.length}}
+            </div>
+        </div>
+    </div>
+    <div style="border-bottom: 1px solid black;">
+        <div class="charts">
+            <div class="divChart">
+                <div style="height: 250px;" [chart]="presence"></div>
+            </div>
+            <div class="rate">
+                <h4 class="highcharts-title" data-z-index="4" style="font-size: 1.2em; color: rgb(51, 51, 51); font-weight: 600; text-align: center;width: 100%; padding: 6px; font-family: Arial;" y="25">Notation</h4>
+                <div class="star"><i class="fa-solid fa-star"></i></div>
+                <p>{{star}}</p>
+            </div>
+        </div>
+        <div style="padding: 2rem 1rem 1.5rem 1rem;">
+            <div style="max-height: 450px;" class="divChart">
+                <div style="height: 400px;" [chart]="presenceSem"></div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="who">
+        Condidat
+    </div>
+    @if (stat) {
+    
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 5px; text-align: center;">N°</th>
+            <th scope="col">Evaluation</th>
+            <th scope="col" style="width: 8%; text-align: center;">Très bien</th>
+            <th scope="col" style="width: 8%; text-align: center;">Bien</th>
+            <th scope="col" style="width: 8%; text-align: center;">Passable</th>
+            <th scope="col" style="width: 8%; text-align: center;">Insuffisant</th>
+            <th scope="col" style="width: 8%; text-align: center;">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>
+                <div class="eval">
+                    <div>Respect du programme de la formation et atteinte des objectifs</div>
+                    <div style="font-weight:bolder;">Commentaire:</div>
+                </div>
+            </td>
+            
+           <td>{{stat['q1']['très bien'] || 0}} <br>  {{ '('+percentage('q1','très bien')+'%)' }}</td>
+           <td>{{stat['q1']['bien'] || 0}} <br>  {{ '('+percentage('q1','bien')+'%)' }}</td>
+           <td>{{stat['q1']['passable'] || 0 }} <br>  {{ '('+percentage('q1','passable')+'%)' }}</td>
+           <td>{{stat['q1']['insuffisant'] || 0 }} <br>  {{ '('+percentage('q1','insuffisant')+'%)' }}</td>
+            <td>{{calculateTotal('q1') }} <br> {{'('+round(calculateTotal('q1')*100/demande.apprenants.length)+'%)' }}</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>
+                <div class="eval">
+                    <div>Mises en pratique des connaissances acquises</div>
+                    <div style="font-weight:bolder;">Commentaire:</div>
+                </div>
+            </td>
+            <td>{{stat['q2']['très bien'] || 0}} <br>  {{ '('+percentage('q2','très bien')+'%)' }}</td>
+           <td>{{stat['q2']['bien'] || 0}} <br>  {{ '('+percentage('q2','bien')+'%)' }}</td>
+           <td>{{stat['q2']['passable'] || 0 }} <br>  {{ '('+percentage('q2','passable')+'%)' }}</td>
+           <td>{{stat['q2']['insuffisant'] || 0 }} <br>  {{ '('+percentage('q2','insuffisant')+'%)' }}</td>
+            <td>{{calculateTotal('q2') }} <br> {{'('+round(calculateTotal('q2')*100/demande.apprenants.length)+'%)'}}</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td >
+                <div class="eval">
+                    <div>Niveau de compétences techniques de l'animateur</div>
+                    <div style="font-weight:bolder;">Commentaire:</div>
+                </div>
+            </td>
+            <td>{{stat['q3']['très bien'] || 0}} <br>  {{ '('+percentage('q3','très bien')+'%)' }}</td>
+           <td>{{stat['q3']['bien'] || 0}} <br>  {{ '('+percentage('q3','bien')+'%)' }}</td>
+           <td>{{stat['q3']['passable'] || 0 }} <br>  {{ '('+percentage('q3','passable')+'%)' }}</td>
+           <td>{{stat['q3']['insuffisant'] || 0 }} <br>  {{ '('+percentage('q3','insuffisant')+'%)' }}</td>
+            <td>{{calculateTotal('q3') }} <br> {{'('+round(calculateTotal('q3')*100/demande.apprenants.length)+'%)' }}</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td >
+                <div class="eval">
+                    <div>Supports pédagogiques utilisés par l'animateur [qualité, contenu, ...]</div>
+                    <div style="font-weight:bolder;">Commentaire:</div>
+                </div>
+            </td>
+            <td>{{stat['q4']['très bien'] || 0}} <br>  {{ '('+percentage('q4','très bien')+'%)' }}</td>
+           <td>{{stat['q4']['bien'] || 0}} <br>  {{ '('+percentage('q4','bien')+'%)' }}</td>
+           <td>{{stat['q4']['passable'] || 0 }} <br>  {{ '('+percentage('q4','passable')+'%)' }}</td>
+           <td>{{stat['q4']['insuffisant'] || 0 }}  <br>  {{ '('+percentage('q4','insuffisant')+'%)' }}</td>
+            <td>{{calculateTotal('q4') }} <br> {{'('+round(calculateTotal('q4')*100/demande.apprenants.length)+'%)' }}</td>
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <td >
+                <div class="eval">
+                    <div>Les conditions du déroulement de la formation [accueil, local, restauration, rythme, durée, ...]</div>
+                    <div style="font-weight:bolder;">Commentaire:</div>
+                </div>
+            </td>
+            <td>{{stat['q5']['très bien'] || 0}} <br>  {{ '('+percentage('q5','très bien')+'%)' }}</td>
+            <td>{{stat['q5']['bien'] || 0}} <br>  {{ '('+percentage('q5','bien')+'%)' }}</td>
+            <td>{{stat['q5']['passable'] || 0 }} <br>  {{ '('+percentage('q5','passable')+'%)' }}</td>
+            <td>{{stat['q5']['insuffisant'] || 0 }}  <br>  {{ '('+percentage('q5','insuffisant')+'%)' }}</td>
+            <td>{{calculateTotal('q5') }} <br> {{ '('+round(calculateTotal('q5')*100/demande.apprenants.length)  +'%)'}}</td>
+          </tr>
+          <tr>
+            <th colspan="2" scope="row" style="text-align: end; text-transform: uppercase; background-color: #44435f26;">Total</th>
+            <td style="background-color: #44435f26;"></td>
+            <td style="background-color: #44435f26;"></td>
+            <td style="background-color: #44435f26;"></td>
+            <td style="background-color: #44435f26;"></td>
+            <td style="background-color: #44435f26;"></td>
+          </tr>
+          <tr>
+            <th scope="row">6</th>
+            <td>
+                <div class="eval">
+                    <div>Souhait des candidats d'une suite à cette formation</div>
+                    <div style="font-weight:bolder;">Commentaire:</div>
+                </div>
+            </td>
+            <td colspan="2"><span>Oui: </span> {{stat['q6']['oui'] || 0}} <br>  {{ '('+percentage('q6','oui')+'%)' }}</td>
+            <td colspan="2"><span>Non: </span> {{stat['q6']['non'] || 0}} <br>  {{ '('+percentage('q6','non')+'%)' }}</td>
+            <td>{{calculateTotal('q6') }} <br> {{'('+round(calculateTotal('q6')*100/demande.apprenants.length)+'%)'}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    }
+      <div class="who">
+        Formateur
+    </div>
+    @for (item of demande.evaluationFormateurs ; track $index) {
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th style="width: 15px;" scope="row">1</th>
+                <td style="text-align: left;">
+                    <span>Niveau de participation des participants et l'ambiance de la session: </span>
+                    {{item.q1}}
+                    
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15px;" scope="row">2</th>
+                <td style="text-align: left;">
+                    <span>Temps imparti au déroulement du contenu pédagogique: </span>
+                    {{item.q2}}
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15px;" scope="row">3</th>
+                <td style="text-align: left;">
+                   <span>Conclusions après évaluation rapide de la session de formation: </span>
+                   {{item.q3}}
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15px;" scope="row">4</th>
+                <td style="text-align: left;">
+                    <span>Éventuels problèmes rencontrés: </span>
+                    {{item.q4}}
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15px;" scope="row">5</th>
+                <td style="text-align: left;">
+                    <span>Propositions d'améliorations: </span>
+                    {{item.q5}}
+                </td>
+              </tr>
+
+        </tbody>
+        <!-- <tfoot>
+            <tr>
+                <td style="text-align: left;"><span>OBSERVATIONS:</span></td>
+            </tr>
+        </tfoot> -->
+    </table>
+}
+</div>
+<div style="width: 100%; display: flex; justify-content: center;margin-bottom: 50px;">
+    <button mat-raised-button><i class="fa-solid fa-download"></i> Enregistrer</button>
+</div>
+}

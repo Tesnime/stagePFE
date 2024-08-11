@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+<app-nav></app-nav>
+<div class="container" >
+    <input class="search" type="search" name="" id="">
+    <div mat-subheader>
+       
+            <mat-list>
+                @for (cours of cours; track $index) {
+                <mat-list-item>
+                    <mat-icon matListItemIcon>note</mat-icon>
+                    <div matListItemTitle>{{cours.nom}}</div>
+                    <div matListItemLine>{{cours.date_depo|date:'dd/MM/yyyy'}}</div>
+                </mat-list-item>
+            }@empty {
+                <div style="justify-self:center ;">Aucun cours trouvé. </div>
+            }
+            </mat-list>
+           
+            <!-- <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>{{cours.nom}}</mat-card-title>
+                  <mat-card-subtitle>{{cours.theme}} </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>{{cours.description}}</p>
+                  <div class="view">
+                    <span><i class="fa-solid fa-eye"></i> 20</span>
+                    <span><i class="fa-solid fa-heart"></i> 5</span>
+                </div>
+                </mat-card-content>
+                <mat-card-actions class="plus">
+                        <span style="font-size: small;">{{cours.date_depo|date:'dd/MM/yyyy'}}</span>
+                        <div class="view edit">
+                            <button mat-button>    
+                                <i style=" color: rgba(0, 0, 0, 0.605);" class="fa-solid fa-pen"></i>
+                          </button>
+                          <button mat-button>
+                            <i style=" color: rgba(0, 0, 0, 0.605);"  class="fa-solid fa-trash"></i>
+                          </button>
+                        </div>
+                    
+                 
+                </mat-card-actions>
+              </mat-card> -->
+        <!-- <div class="cours">
+            <a href="#"><img src="../../../assets/images/image-removebg-preview (18).png" alt="">{{cours.nom}}</a>
+            <div class="detail">
+                <h4>{{cours.theme}} </h4>
+                <small>{{cours.description}}</small>
+                <div class="view">
+                    <span><i class="fa-solid fa-eye"></i> 20</span>
+                    <span><i class="fa-solid fa-heart"></i> 5</span>
+                </div>
+                <div class="plus">
+                    <span style="font-size: small;">{{cours.date_depo|date:'shortDate'}}</span>
+                    <div class="view edit">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    
+    
+    </div>
+    
+    
+    
+</div>
+<button class="btn btn-outline-primary mb-2 me-2 ajout" (click)="openVerticallyCentered(content)" mat-mini-fab matTooltip="Primary" color="primary" aria-label="Example mini fab with a heart icon">
+    <mat-icon>add</mat-icon>
+  </button>
+  <ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Ajouter un cours</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<app-courses></app-courses>
+	</div>
+</ng-template>

@@ -1,0 +1,98 @@
+nav{
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #374375; 
+  color: #fff; 
+  /* padding: 10px; */
+  height: 10%;
+    
+}
+.logo{
+    width: 18%;
+    max-height: 100% ;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1rem;
+    padding-top: 10px;
+    background-color: #d3d4d7;
+    border-right: 1px solid #ccc;
+}
+.logo img{
+    height: 120px;
+}
+.logout{
+    width: 82%;
+    display: flex;
+    justify-content: end;
+    padding: 0 2rem;
+}
+.mat-mdc-button:not(:disabled){
+    color: #fffcf5;
+}
+.mat-mdc-button[_ngcontent-ng-c2941239319]:hover{
+    background-color: #fffcf591;
+}
+.nav-pills{
+    min-width: 18%;
+    margin: 0;
+    margin-right: -1.5rem;
+    border-right: 1px solid #cccccc83;
+    min-height: 90vh;
+    background-color: #d3d4d758;
+    padding: 1rem;
+}
+.ms-4{
+    min-width: 82%;
+    max-height: 90vh;
+    margin: 0;
+    background-color: #fffcf5;
+    padding: 1rem;
+    overflow-y: scroll;
+}
+.nav-pills .nav-link,.btnl{
+    border-radius: 0;
+    color: #44435F;
+    position: relative;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 68%;
+    padding: 0.6rem 1rem;
+    font-weight: 500;
+    transition: all 300ms ease 0s;
+    font-size: 13px;
+
+}
+.nav-pills .nav-link i{
+    color: #44435f83;
+    font-size: larger;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background-color: transparent;
+    color: #7396D1;
+}
+.nav-pills .nav-link.active i, .nav-pills .show > .nav-link{
+    color: #7396d195;
+}
+.mat-badge-medium .mat-badge-content {
+    width: 16.5px;
+    height: 16px;
+    /* line-height: var(--mat-badge-legacy-container-size, var(--mat-badge-container-size)); */
+    padding: var(--mat-badge-container-padding);
+    font-size: 9px;
+    margin: var(--mat-badge-container-offset);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btnTit{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    /* gap: 15px; */
+}

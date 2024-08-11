@@ -1,0 +1,105 @@
+<h2 mat-dialog-title>Informations personnelles</h2>
+<form [formGroup]="profileForm" (ngSubmit)="addprofile()" class="infoper">
+    <mat-dialog-content class="mat-typography">
+        <div class="field">
+            <div class="nom">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="lastname" value={{profile.lastname}} type="text" class="form-control" placeholder="nom" required>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Prenom</mat-label>
+                    <input matInput formControlName="firstname" type="text" class="form-control" placeholder="prenom" required>
+                </mat-form-field>
+            </div>
+               
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" type="email" class="form-control" placeholder="email" required>
+                </mat-form-field>
+                
+                <mat-form-field class="example-full-width">
+                    <mat-label>Bio</mat-label>
+                    <textarea matInput formControlName="bio" placeholder="Bio..." style="width: 100%;" rows="3"></textarea>
+                </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>CIN</mat-label>
+                <input matInput formControlName="cin" type="text" class="form-control" placeholder="CIN" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Date de naissance</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="naissance" [value]="profile?.naissance | date: 'yyyy-MM-dd'">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              
+           
+            <mat-form-field class="example-full-width">
+                <mat-label>Numero</mat-label>
+                <input matInput formControlName="tel" type="tel" class="form-control" placeholder="numero" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>RIB/RIP</mat-label>
+                <input matInput formControlName="rib" type="text" class="form-control" placeholder="RIB/RIP">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Adresse</mat-label>
+                <input matInput formControlName="adresse" type="text" class="form-control" placeholder="adresse">
+            </mat-form-field>
+           
+            <mat-form-field class="example-chip-list">
+                <mat-label>Competances </mat-label>
+                <mat-chip-grid #chipGrid1 aria-label="entrer vos competances">
+                    <mat-chip-row *ngFor="let t of comp; track $index"
+                        (removed)="removeC(t)"
+                        [editable]="true"
+                        (edited)="editC(t, $event)"
+                        [aria-description]="'press enter to edit ' + t">
+                        {{t}}
+                        <button matChipRemove [attr.aria-label]="'remove ' + t">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                    <input placeholder="ex  ..."
+                        [matChipInputFor]="chipGrid1"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addC($event)">
+                </mat-chip-grid>
+            </mat-form-field>
+
+            <mat-form-field class="example-chip-list">
+                <mat-label>Competances techniques</mat-label>
+                <mat-chip-grid #chipGrid aria-label="entrer le theme">
+                    <mat-chip-row *ngFor="let t of comTech; track $index"
+                        (removed)="remove(t)"
+                        [editable]="true"
+                        (edited)="edit(t, $event)"
+                        [aria-description]="'press enter to edit ' + t">
+                        {{t}}
+                        <button matChipRemove [attr.aria-label]="'remove ' + t">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                    <input placeholder="ex java ..."
+                        [matChipInputFor]="chipGrid"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-grid>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Autre</mat-label>
+                <textarea matInput formControlName="autre" type="tel" class="form-control" placeholder="autres"></textarea>
+            </mat-form-field>
+        </div>
+        
+       
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button type="button" mat-dialog-close>Fermer</button>
+        <button mat-button type="submit" mat-dialog-close cdkFocusInitial>Modifier</button>
+    </mat-dialog-actions>
+</form>

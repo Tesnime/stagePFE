@@ -1,0 +1,60 @@
+<h2  mat-dialog-title>{{session.nom}} </h2>
+<mat-dialog-content style="max-height: 50vh; min-height: 50vh;" class="mat-typography">
+    @if(!isPresent){
+        @if( !code) { 
+            <div class="newsletter-subscribe" >
+                <div class="container">
+                    <div class="intro">
+                        <h2 class="text-center">Validation de l'email</h2>
+                        <p class="text-center">Pour marquer votre présence, veuillez vérifier que votre adresse e-mail est valide. Si vous avez récemment changé d'adresse, merci de la mettre à jour. Nous allons envoyer un code de vérification à votre e-mail. Confirmez que votre e-mail est correct et actif pour continuer. </p>
+                    </div>
+                    @if (!confirm){
+                    <form [formGroup]="mailForm" (ngSubmit)="send()" class="form-inline">
+                        <div class="form-group"><input  matInput formControlName="mail" class="form-control" type="email"  placeholder="email"></div>
+                        <div class="form-group"><button class="btn " style="background-color: #7d8285 ; color: white;" [disabled]=confirm type="submit">Confirmer</button></div>
+                    </form>
+                    }@else  {
+                        <div align="center" style="margin-top: 24px;"><img src="../../../../assets/images/Spinning line.gif" alt=""></div>
+                    }
+                </div>
+            </div>
+        }@else if (code ) {
+                <div class="newsletter-subscribe" >
+                    <div class="container">
+                        <div class="intro">
+                            <p class="text-center"> Pour confirmer votre présence, veuillez entrer le code de vérification que nous vous avons envoyé par email. <br>
+                            <strong style="color: black;">{{ minutesDisplay | number: '2.0' }} : {{ secondsDisplay | number: '2.0' }}</strong>  </p>
+                        </div>
+                    <form [formGroup]="codeForm" (ngSubmit)="present()" class="form-inline">
+                            <div class="form-group"><input  matInput formControlName="code" class="form-control" type="text"  placeholder="donner le code"></div>
+                            <div class="form-group"><button class="btn " style="background-color: #7d8285 ; color: white;" type="submit">Envoyer</button></div>
+                        </form>
+                        <div class="intro" style="margin-top: 15px;">
+                            <p class="text-center">  Si le code a expiré, vous pouvez demander un nouveau code en cliquant sur le bouton ci-dessous. </p>                    
+                        </div>
+                        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                            @if (!confirm) {
+                            <button (click)="send()" align="center" style="background-color: transparent;border-color: transparent; text-decoration: underline;">Renvoyer le code</button>
+                            }@else  {
+                                <button (click)="send()" align="center" disabled  style="background-color: transparent;border-color: transparent; text-decoration: underline;">Renvoyer le code</button>
+
+                        }
+                        </div>
+                    </div>
+                </div>
+        }
+    }@else if(isPresent) {
+        <div>
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding: 1rem; margin-top: 80px;">
+                <i  style="color: green; font-size: 8rem;" class="fa-solid fa-circle-check"></i>
+            </div>
+            <p class="text-center">Vous êtes présent(e)</p>
+        </div>  
+        
+    }
+
+    
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button  mat-dialog-close>Quitter</button> 
+</mat-dialog-actions>

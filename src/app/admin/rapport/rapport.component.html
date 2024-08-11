@@ -1,0 +1,62 @@
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+    <mat-tab label="Session">
+        <div class="content">
+            <div class="search">
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Sessions</mat-label>
+                      <input type="text"
+                             placeholder="Choisir la Session"
+                             aria-label="Number"
+                             matInput
+                             [formControl]="myControl"
+                             [matAutocomplete]="auto"
+                            >
+                            <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+                              @for (option of filteredOptions | async; track option) {
+                              <mat-option [value]="option">
+                                {{ option.titre }} ({{ option.formateur.firstname }} {{ option.formateur.lastname }})
+                              </mat-option>
+                            }
+                            </mat-autocomplete> -->
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+                        @for (option of filteredOptions | async; track option) {
+                          <mat-option [value]="option">{{ option }}</mat-option>
+                        }
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+            </div>
+            <div class="deviser">
+                <hr><i class="fa-solid fa-bookmark"></i> Enregistrés<hr>
+            </div>
+            <div class="saved"></div>
+        </div>
+    </mat-tab>
+    <mat-tab label="formateur">
+        <div class="content">
+            <div class="search">
+              <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Formateur</mat-label>
+                  <input type="text"
+                         placeholder="Choisir le formateur"
+                         aria-label="Number"
+                         matInput
+                         [formControl]="myControl"
+                         [matAutocomplete]="formateursAuto" >
+                  <mat-autocomplete autoActiveFirstOption #formateursAuto="matAutocomplete" (optionSelected)="onOptionSelectedFormateur($event)">
+                    @for (option of filteredOptions1 | async; track option) {
+                      <mat-option [value]="option">{{option}}</mat-option>
+                    }
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+            </div>
+            <div class="deviser">
+                <hr><i class="fa-solid fa-bookmark"></i> Enregistrés<hr>
+            </div>
+            <div class="saved"></div>
+        </div>
+    </mat-tab>
+  </mat-tab-group>

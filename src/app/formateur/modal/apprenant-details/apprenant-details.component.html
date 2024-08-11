@@ -1,0 +1,16 @@
+<div class="titre" mat-dialog-title>
+    <h2  >Détails de la demande </h2>
+    <span style="color: gray; font-size: medium; margin-top: -20px; margin-left: 20px;">{{apprenants.firstname}} {{apprenants.lastname}} </span></div>
+    <mat-dialog-content class="mat-typography">
+        <div style="margin-bottom: 30px; margin-top: 20px;" class="info">
+            <div class="a"><h6>Nom :</h6><small>{{apprenants.firstname}} {{apprenants.lastname}} </small></div>
+            <div class="a"><h6>Date de naissance:</h6><small>{{apprenants.naissance| date: 'dd/MM/yyyy'}}</small></div>
+            <div class="a"><h6>Email:</h6><small> {{apprenants.email}}</small></div>
+            <div class="a"><h6>Numero telephone:</h6><small>{{apprenants.tel}}</small></div>
+            <div class="a"><h6>Societe:</h6><small>{{apprenants.societe}}</small></div>
+            <div class="a"><h6>Poste:</h6><small>{{apprenants.poste}}</small></div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Quitter</button>
+        </mat-dialog-actions> 

@@ -1,0 +1,152 @@
+<div class="titre" mat-dialog-title>
+    <h2  >Détails de la demande </h2>
+    <span style="color: gray; font-size: medium; margin-top: -20px; margin-left: 20px;">{{apprenants.firstname}} {{apprenants.lastname}} </span></div>
+    <mat-dialog-content class="mat-typography">
+        <div style="margin-bottom: 30px;" class="info">
+            <div class="a"><h6>Nom :</h6><small>{{apprenants.firstname}} {{apprenants.lastname}} </small></div>
+            <div class="a"><h6>Date de naissance:</h6><small>{{apprenants.naissance| date: 'dd/MM/yyyy'}}</small></div>
+            <div class="a"><h6>Email:</h6><small> {{apprenants.email}}</small></div>
+            <div class="a"><h6>Numero telephone:</h6><small>{{apprenants.tel}}</small></div>
+            <div class="a"><h6>Numero fix:</h6><small>{{apprenants.telFix}}</small></div>
+            <div class="a"><h6>CIN:</h6><small>{{apprenants.cin}}</small></div>
+            <div class="a"><h6>Adresse:</h6><small>{{apprenants.adrress}}</small></div>
+            <div class="a"><h6>Societe:</h6><small>{{apprenants.societe}}</small></div>
+            <div class="a"><h6>Poste:</h6><small>{{apprenants.poste}}</small></div>
+        </div>
+        @if(!isFutureDate(data.session.date)){
+        @if (presence){
+        <div class="donnee">
+          <h3>Suivi de la session</h3>
+          <div class="x">Présence: 
+              @if (presence.present) {
+                  <i style="color: green;" class="fa-solid fa-check"></i>
+              }@else {
+                  <i style="color: red;" class="fa-solid fa-xmark"></i>
+              }
+          </div>
+          
+          <table class="table table-bordered">
+              <thead>
+                <tr>
+                  @if (data.session.id == sess['firstSessionId']) { 
+                  <th style="width: 12%;" scope="col">Manuel de formation + cle USB</th>
+                  <th style="width: 12%;" scope="col">Cartable</th>
+                  }
+                  <th style="width: 12%;" scope="col">Pause cafe</th>
+                  <th style="width: 12%;" scope="col">Dejeuner</th>
+                </tr>
+              </thead>
+              <tbody>
+                  
+                <tr>
+                  @if (data.session.id == sess['firstSessionId']) { 
+                      @if(presence.manuel=='oui'){
+                      <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                      }@else{
+                      <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                      }
+                      @if(presence.cartable=='oui'){
+                          <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                          }@else{
+                          <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                          }
+                  }
+                  @if(presence.pauseCafe=="oui"){
+                      <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                  }@else {
+                      <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                  }
+                  @if(presence.dejeuner=="oui"){
+                      <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                  }@else{
+                      <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                  }
+
+                </tr>
+              
+               
+              </tbody>
+            </table>
+          </div>
+          }@else{
+            <div class="donnee">
+              <h3>Suivi de la session</h3>
+              <div class="x">Présence: 
+                <i style="color: red;" class="fa-solid fa-xmark"></i>    
+              </div>
+              <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      @if (data.session.id == sess['firstSessionId']) { 
+                      <th style="width: 12%;" scope="col">Manuel de formation + cle USB</th>
+                      <th style="width: 12%;" scope="col">Cartable</th>
+                      }
+                      <th style="width: 12%;" scope="col">Pause cafe</th>
+                      <th style="width: 12%;" scope="col">Dejeuner</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      
+                    <tr>
+                      @if (data.session.id == sess['firstSessionId']) { 
+                          <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                          <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                      }
+                      <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                      <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          }
+        }
+        <!-- <div class="info">
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;" scope="col"></th>
+                    <th scope="col">S1</th>
+                    <th scope="col">S2</th>
+                    <th scope="col">S3</th>
+                    <th scope="col">S4</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Presence</th>
+                    <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                    <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                    <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                    <td><i style="color: gray;" class="fa-solid fa-hourglass-start"></i></td>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">Manuel de formation+cle USB</th>
+                    <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                    <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                    <td><i style="color: gray;" class="fa-solid fa-hourglass-start"></i></td>
+                    <td><i style="color: gray;" class="fa-solid fa-hourglass-start"></i></td>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">Pause cafe</th>
+                    <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                    <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                    <td><i style="color: gray;" class="fa-solid fa-hourglass-start"></i></td>
+                    <td><i style="color: gray;" class="fa-solid fa-hourglass-start"></i></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Dejeuner</th>
+                    <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                    <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                    <td><i style="color: gray;" class="fa-solid fa-hourglass-start"></i></td>
+                    <td><i style="color: gray;" class="fa-solid fa-hourglass-start"></i></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div> -->
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Quitter</button>
+        </mat-dialog-actions> 
+

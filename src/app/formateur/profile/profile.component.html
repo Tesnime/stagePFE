@@ -1,0 +1,164 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="container" *ngIf="profile">
+    <div class="image">
+        <div class="titre">Photo de profile </div>
+        <div class="contenu">
+            @if (profile.image==null) {
+            <img src="../../assets/images/user.png" alt="">
+        }@else {
+            <img [src]="imageUrl" alt="">
+        }
+            <input type="file" id="customFile" name="file" (change)="onFileSelected($event)"  hidden="">
+            <label class="btn btn-success-soft btn-block"  for="customFile">Importer</label>
+            <!-- <small>{{  'Aucune image importée' }}</small>
+            <input type="file" (change)="onFileSelected($event)" /> -->
+        </div>
+    </div>
+    
+    <div class="donnee" style=" position: fixed; gap: 10px;">
+        <div class="image" style="background-color: transparent;"></div>
+        
+        <!-- <div class="donn chammp">
+            <a href="formateur/profile/#infoper" class="champs">Informations personnelles</a>
+            <a href="formateur/profile/#formation" class="champs">Formations Académiques et Certifications</a>
+            <a href="formateur/profile/#experiences" class="champs">Expériences professionnelles</a>
+            <a href="formateur/profile/#autres" class="champs">Autres</a>
+        </div> -->
+    </div>
+    <div class="donnee">
+        <div class="donn" id="infoper">
+            <div class="titre" >Informations personnelles</div>
+            <div class="contenu cont0">
+                <div class="cont1"><h6>Nom complet:</h6><small>{{profile.firstname}} {{profile.lastname}}</small></div>
+                <div class="cont1"><h6>Email:</h6> <small>{{profile.email}}</small></div>
+                <div class="cont1"><h6>Bio:</h6><small>{{profile.bio}}</small></div>
+                <div class="cont1"><h6>CIN:</h6> <small>{{profile.cin}}</small> </div>
+                <div class="cont1"><h6>Date de naissance:</h6 > <small>{{profile.naissance|date:'dd/MM/yyyy'}}</small></div>
+                <div class="cont1"><h6>Numero:</h6 > <small>{{profile.numero}}</small></div>
+                <div class="cont1"><h6>RIB/RIP</h6> <small>{{profile.rib}}</small> </div>
+                <div class="cont1"><h6>Adresse:</h6><small>{{profile.adresse}}</small></div>
+                <div class="cont1"><h6>Competances:</h6><small>{{profile.competance}}</small></div>
+                <div class="cont1"><h6>Competances techniques:</h6><small>{{profile.comTech}}</small></div>
+                <div class="cont1"><h6>Autres:</h6><small>{{profile.autre}}</small></div>
+                <div class="separateur"></div>
+                <button style="align-self: flex-start;" class="btn" (click)="openDialog()">
+                    <i class="fa-solid fa-pen"></i>  Modifier mes informations
+                </button>  
+            </div>
+        </div>
+        <div class="donn" id="formation">
+            <div class="titre">Formations Académiques et Certifications</div>
+            <div class="contenu cont0">
+                <ul class="formation list-group list-group-flush" >
+                    @for (item of formation; track $index) {
+                        <li class="list-group-item item">
+                            <div>
+                                <div class="cont1"><h6>Diplôme/Certification obtenue:</h6><small>{{item.diplome}}</small></div>
+                                <div class="cont1"><h6>Établissement/Université:</h6><small>{{item.etablissement}}</small></div>
+                                <div class="cont2">
+                                    <div class="cont1"><h6>Domaine:</h6><small>{{item.specialite}}</small></div>
+                                    <div class="cont1"><h6>Date d'obtention:</h6><small>{{item.date}}</small></div>
+                                </div>
+                            </div>
+                            <div class="edi">
+                                <button (click)="editForm(item.id)"><i class="fa-solid fa-pen"></i></button>
+                                <button (click)="deleteForm(item.id)"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </li>
+                    }@empty {
+                        <small align="center">Auccune Formations Académiques et Certifications trouvees </small> 
+                    }
+                   
+                </ul>
+                <div class="separateur"></div>
+                <button style="align-self: flex-start;" class="btn btn-outline-primary mb-2 me-2" (click)="openDialog1()">
+                    <i class="fa-solid fa-plus"></i>  Ajouter
+                </button>
+                     
+                
+
+            </div>
+        </div>
+        <div class="donn" id="experiences">
+            <div class="titre">Expériences professionnelles</div>
+            <div class="contenu cont0">
+                <ul class="formation list-group list-group-flush">
+                    @for (item of experience; track $index) {
+                        <li class="list-group-item item">
+                            <div>
+                                <div class="cont1"><h6>Titre de poste:</h6><small>{{item.poste}}</small></div>
+                            <div class="cont1"><h6>Entreprise ou Organisation:</h6><small>{{item.entreprise}}</small></div>
+                            <div class="cont1"><h6>Lieu:</h6><small>{{item.lieu}}</small></div>
+                            <div class="cont2">
+                                <div class="cont1"><h6>Debut:</h6><small>{{item.debut}}</small></div>
+                                <div class="cont1"><h6>Fin:</h6><small>{{item.fin || '__'}}</small></div>
+                            </div>
+                            </div>
+                            <div class="edi">
+                                <button (click)="editExpr(item.id)"><i class="fa-solid fa-pen"></i></button>
+                                <button (click)="deleteExpr(item.id)"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </li>
+                    }@empty {
+                        <small align="center">Auccune Expériences professionnelles trouvees </small> 
+                    }      
+                </ul>
+                <div class="separateur"></div>
+                <button style="align-self: flex-start;" class="btn btn-outline-primary mb-2 me-2" (click)="openDialog2()">
+                    <i class="fa-solid fa-plus"></i>  Ajouter
+                </button>
+                
+            </div>
+        </div>
+        <div class="donn" id="autres">
+            <div class="titre">Autres</div>
+            <div class="contenu cont0">
+                
+
+                <h5>Fichiers</h5>
+                <div class="cont1"><h6>CV:</h6><small style="cursor: pointer;" (click)="openCvInNewTab()">cv.pdf</small></div>
+                <div class="cont1"><h6>Portfolio:</h6><small>{{profile.portfolio||'Non renseigné'}}</small></div>
+                <h5>PRÉSENCE SUR LE WEB</h5>
+                <div class="cont1"><h6>LinkedIn:</h6><small>{{profile.linkedin||'Non renseigné'}}</small></div>
+                <div class="separateur"></div>
+                <button style="align-self: flex-start;" class="btn btn-outline-primary mb-2 me-2" (click)="openDialog3()">
+                    <i class="fa-solid fa-pen"></i>  Modifier 
+                </button>  
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <ng-template #content1 let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Formations Académiques et Certifications</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <div style="width: 100%;"><app-formation></app-formation></div>
+		
+	</div>
+	
+</ng-template>
+<ng-template #content2 let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Expériences professionnelles</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <div style="width: 100%;"><app-experience></app-experience></div>
+		
+	</div>
+</ng-template>
+<ng-template #content3 let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Autres</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <div style="width: 100%;"><app-autre></app-autre></div>
+	</div>
+</ng-template> -->

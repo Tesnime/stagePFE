@@ -1,0 +1,102 @@
+.container{
+    /* margin: 2rem; */
+    border: 1px solid black;
+    padding: 0;
+    margin-bottom: 30px;
+}
+.titre{
+    text-transform: uppercase;
+    padding: 0 3px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    border-bottom:  1px solid black;
+}
+.details{
+    display: grid;
+    /* grid-template-columns: 70% 30%; */
+    border-bottom: 1px solid black;
+    grid-template-areas:"a a b"
+                        "c d e" ;
+    grid-template-columns: 30% 40% 30%;
+}
+.div{
+    display: flex;
+    align-items:flex-start ;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 7px 1rem;
+}
+.tit{
+    font-weight: 600;
+}
+.aa{
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+.charts{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    max-height: 250px;
+    min-height: 250px;
+    /* background-color: #0c265f; */
+    padding: 1rem;
+}
+.divChart,.rate{
+    border-radius: 8px;
+    border: 1px solid #cccccc47;
+    max-height: 250px;
+    min-height: 250px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 7px 9px -4px rgba(53, 49, 49, 0.621);
+}
+.star{
+    font-size: 7rem;
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: goldenrod;
+}
+.rate p{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    font-weight: 600;
+}
+.who{
+    border-bottom:1px solid black ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 4px;
+    margin: 0;
+    background-color:#44435f26 ;
+    font-weight: 600;
+}
+.eval{
+    display: grid;
+    grid-template-rows: 30px 30px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+}
+tr{
+    border: 1px solid black;
+}
+th,td{
+    text-align: center;
+}
+span{
+    font-weight: bolder;
+}
+table{
+    margin: 0;
+}

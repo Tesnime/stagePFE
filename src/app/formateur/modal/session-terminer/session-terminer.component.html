@@ -1,0 +1,245 @@
+@if(session){
+    <h2  mat-dialog-title>{{session.nom}}</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="d-flex" style="min-height: 100%;">
+            <div ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills flex-column" orientation="vertical">
+                <ng-container ngbNavItem="top">
+                    <button ngbNavLink>Details</button>
+                    <ng-template ngbNavContent>
+                        <div style="margin-bottom: 30px;" class="info">
+                            <div class="a"><h6>Formateur:</h6><small>{{session.demande.formateur.firstname}} {{session.demande.formateur.lastname}}</small></div>
+                            <div class="a"><h6>Sujet de session:</h6><small>
+                                <mat-chip-listbox>
+                                    <mat-chip *ngFor="let tag of session.demande.theme">{{tag}}</mat-chip>
+                               </mat-chip-listbox>
+                            </small></div>
+                            <div class="a"><h6>Num de sessions:</h6><small>1</small></div>
+                            <div class="a"><h6>Date:</h6><small>{{session.date|date:'dd/MM/yyyy'}} de {{session.debut}} a {{session.fin}}</small></div>
+                            <div class="a"><h6>Lieu:</h6><small>{{session.lieu}}</small></div>
+                            
+                        </div>
+                        <div class="info">
+                            <h3>Liste des apprenants</h3>
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                    @for (item of session.demande.apprenants; track $index) {
+                                  <tr>
+                                    <td style="padding-left: 1rem;" (click)="openApprenant(item)">{{$index+1}}- {{item.firstname}} {{item.lastname}}</td>
+                                  </tr>
+                                }
+                                </tbody>
+                              </table>
+                        </div>
+                        
+                    </ng-template>
+                </ng-container>
+                <!-- <ng-container ngbNavItem="liste">
+                    <button ngbNavLink>Liste des apprenants </button>
+                    <ng-template ngbNavContent>
+                        <div style="margin-top: 30px;" class="info">
+                            <table class="table table-hover">
+                                <tbody>
+                                    @for (item of session.demande.apprenants; track $index) {
+                                  <tr>
+                                    <td (click)="openApprenant(item)">{{item.firstname}} {{item.lastname}}</td>
+                                  </tr>
+                                }
+                                </tbody>
+                              </table>
+                           <mat-list role="list">
+                                <mat-list-item (click)="openApprenant()" role="listitem"> nom</mat-list-item>
+                        </mat-list> 
+                        </div>
+                    </ng-template>
+                </ng-container> -->
+                <ng-container ngbNavItem="middle">
+                    <button ngbNavLink>Suivi de la session</button>
+                    <ng-template ngbNavContent>
+                        <mat-stepper orientation="vertical">
+                            <mat-step>
+                              <ng-template matStepLabel>Présence</ng-template>
+                              <ng-template matStepContent>
+                                @if (isPresent) {
+                                    <div>
+                                        <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding: 1rem; margin-top: 10px;">
+                                            <i  style="color: green; font-size: 5rem;" class="fa-solid fa-circle-check"></i>
+                                        </div>
+                                        <p class="text-center">Vous êtes présent(e)</p>
+                                    </div>  
+                                 }@else {
+                                    <div>
+                                        <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding: 1rem; margin-top: 10px;">
+                                            <i   style="color: rgba(128, 128, 128, 0.644); font-size: 5rem;" class="fa-solid fa-circle-xmark"></i>
+                                        </div>
+                                        <p class="text-center">Vous êtes absent(e)</p>
+                                    </div>  
+                                 }
+                              </ng-template>
+                            </mat-step>
+                            @if (isPresent) {
+                                <mat-step>
+                                    <ng-template matStepLabel>Evaluation</ng-template>
+                                    <ng-template matStepContent>
+                                     <!-- @for (item of session.demande.evaluationFormateurs; track $index) { -->
+                                        <table style="border-color: transparent;" class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th style="width: 1px;" scope="row">1</th>
+                                                    <td style="text-align: left;">
+                                                        <span >Niveau de participation des participants et l'ambiance de la session: </span><br>
+                                                        <small>{{session.demande.evaluationFormateurs[0].q1}}</small>
+                                                        
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th style="width: 15px;" scope="row">2</th>
+                                                    <td style="text-align: left;">
+                                                        <span>Temps imparti au déroulement du contenu pédagogique: </span><br>
+                                                        <small>{{session.demande.evaluationFormateurs[0].q2}}</small>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th style="width: 15px;" scope="row">3</th>
+                                                    <td style="text-align: left;">
+                                                       <span>Conclusions après évaluation rapide de la session de formation: </span><br>
+                                                       <small>{{session.demande.evaluationFormateurs[0].q3}}</small>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th style="width: 15px;" scope="row">4</th>
+                                                    <td style="text-align: left;">
+                                                        <span>Éventuels problèmes rencontrés: </span><br>
+                                                        <small>{{session.demande.evaluationFormateurs[0].q4}}</small>
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th style="width: 15px;" scope="row">5</th>
+                                                    <td style="text-align: left;">
+                                                        <span>Propositions d'améliorations: </span><br>
+                                                        <small>{{session.demande.evaluationFormateurs[0].q5}}</small>
+                                                    </td>
+                                                  </tr>
+                                    
+                                            </tbody>
+                                        </table>
+                                     <!-- } -->
+                                    </ng-template>
+                                  </mat-step>
+                            }
+                            
+                          </mat-stepper>
+                    </ng-template>
+                </ng-container>
+                <ng-container ngbNavItem="bottom">
+                    <button ngbNavLink>Commentaires</button>
+                    <ng-template ngbNavContent>
+                        <div style="width: 100%; " class="container">
+                            <div class="d-flex justify-content-center row " style="overflow-y: scroll;">
+                                @for (item of comments; track $index) {
+                                    <div style="width: 100%; background-color: transparent;" class="col-md-8">
+                                        <div  class="d-flex flex-column  comment-section" style="margin-bottom: 0;">
+                                            <div class=" p-2">
+                                                <div class="d-flex flex-row user-info">
+                                                    <div class="d-flex flex-column justify-content-start ml-2 sender" style="padding: 0 20px; margin-bottom: 0;">
+                                                        @if(item.apprenant!=null){
+                                                            <span class="d-block font-weight-bold name">{{item.apprenant.firstname}} {{item.apprenant.lastname}}</span>
+            
+                                                        }@else {
+                                                        <span class="d-block font-weight-bold name">{{item.formateur.firstname}} {{item.formateur.lastname}}</span>
+            
+                                                        }
+                                                        <span class="date text-black-50 ml-20" style="font-size: 12px;"> {{item.date|date : 'dd/MM'}}</span></div>
+                                                </div>
+                                                <div>
+                                                    <p style="padding: 0 20px; margin-bottom: 0;" class="comment-text">{{item.comment}}</p>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="bg-white">
+                                                <div class="d-flex flex-row fs-12">
+                                                    <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
+                                                    <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                                                    <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+                                                </div>
+                                            </div> -->
+                                           
+                                        </div>
+                                    </div>
+                                }
+                               
+                            </div>
+                            <form [formGroup]="commentForm" (ngSubmit)="comment()" style="justify-self: flex-end; width: 100%; " class="bg-light p-2">
+                                <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                    <textarea matInput formControlName="comment" class="form-control ml-1 shadow-none textarea" required></textarea></div>
+                                <div class="mt-2 text-right" align="end">
+                                    <button class="btn btn-sm shadow-none" type="submit">Ajouter</button></div>
+                            </form>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </div>
+        
+            <div [ngbNavOutlet]="nav" class="ms-4"></div>
+        </div>
+    </mat-dialog-content>
+    
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Quitter</button>
+    </mat-dialog-actions> 
+    <!-- <div style="padding: 0 15px;">
+    </div>
+    <mat-dialog-content class="mat-typography">
+    <div style="margin-bottom: 30px;" class="info">
+        <div class="a"><h6>Formateur:</h6><small>{{session.demande.formateur.firstname}} {{session.demande.formateur.lastname}}</small></div>
+        <div class="a"><h6>Theme de session:</h6><small>{{session.demande.theme}}</small></div>
+        <div class="a"><h6>Num de sessions:</h6><small>1</small></div>
+        <div class="a"><h6>Date:</h6><small>{{session.date|date:'dd/MM/yyyy'}} de {{session.debut|date:'HH:mm'}} a {{session.fin|date:'HH:mm'}}</small></div>
+        <div class="a"><h6>Lieu:</h6><small>{{session.lieu}}</small></div>
+    </div>
+    <mat-accordion >
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                Présence
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button style="margin-top: 20px;" mat-stroked-button (click)="openSnackBar()">
+            Marquer Présent
+          </button>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                Evaluation
+            </mat-panel-title>
+            
+          </mat-expansion-panel-header>
+          <button style="margin-top: 20px;" mat-stroked-button (click)="evaluer(session.id)">
+            Évaluer la Session
+        </button>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                Ajout Cours
+            </mat-panel-title>
+            <mat-panel-description>
+              
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+         
+        </mat-expansion-panel>
+      </mat-accordion>
+      
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Annuler</button>
+    
+    </mat-dialog-actions> -->
+}
+
+

@@ -1,0 +1,12 @@
+<!-- <h2 mat-dialog-title></h2> -->
+<mat-dialog-content>
+    <div style="margin-top: 10px;">
+        Notez cette session <br>
+    <div style="width: 100%; padding-top: 2rem; display: flex; align-items: center; justify-content: center;">
+        <ngb-rating align="center" [(rate)]="rating" [max]="5" />
+    </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="envoyer()"  mat-dialog-close>envoyer</button>
+</mat-dialog-actions>

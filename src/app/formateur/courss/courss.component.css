@@ -1,0 +1,119 @@
+.container{
+    min-width: 100%;
+    min-height: 85vh;
+    background-color: aliceblue;
+    padding: 30px 120px;
+    display: flex;
+    flex-direction: column;
+}
+.contain{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+    
+}
+.cours{
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid #eee;
+    max-height: 37vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    
+}
+.cours a{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 20px;
+    text-decoration: none;
+    color: #3658A2;
+    font-size: 18px;
+    font-weight: 600;
+}
+.cours a img{
+    height: 3em;
+    
+}
+.cours a:hover{
+    background-color: #3658a214;
+    font-size: larger;
+    box-shadow: 0 7px 9px -4px rgba(53, 49, 49, 0.621);
+}
+.detail{
+    padding: 10px 15px;
+}
+.detail small{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 5em; /* Adjust based on your line height and the number of lines you want to show */
+   font-size: smaller;
+   color: rgba(0, 0, 0, 0.605);
+   margin-bottom: 10px;
+}
+.plus{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+   color: rgba(0, 0, 0, 0.605);
+   padding: 0 25px;
+}
+.view{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+.edit{
+    /* font-size: 15px; */
+    cursor: pointer;
+    
+
+}
+.fa-eye{
+    color: cornflowerblue;
+}
+.fa-heart{
+    color: red;
+}
+.edit i:hover{
+    font-size: larger;
+}
+.search{
+    width: 60%;
+    height: 40px;
+    border-radius: 17px;
+    border-color: #eee;
+    padding: 0 20px;
+    align-self: center;
+}
+.ajout{
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    bottom: 50px;
+    right: 50px;
+    padding: 8px;
+    border-radius: 100%;
+    border-color: transparent;
+    background-color: #3658A2;
+    color: aliceblue;
+    box-shadow: 0 7px 9px -4px rgba(53, 49, 49, 0.621);
+
+}
+.ajout:hover{
+    height: 60px;
+    width: 60px;
+
+}

@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="t">
+        <div class="total">
+            <h3> total des sessions</h3>
+            <span>{{totale}}</span>
+        </div>
+        <div class="total">
+            <h3> Nombre d'Inscrits</h3>
+            <span>{{appPerSession}}/session</span>
+        </div>
+    </div>
+    <div class="chart">
+        <div  [chart]="presenceSem"></div>
+        <div  [chart]="presence"></div>
+    </div>
+</div>

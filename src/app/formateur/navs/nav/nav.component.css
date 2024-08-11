@@ -1,0 +1,14 @@
+.nav{
+    height: 8vh;
+    align-items: center;
+    gap: 35px;
+}
+.nav-link{
+    font-weight: 600;
+    font-size: 14px;
+    color: #3658A2;
+}
+.active{
+    border-color: #3658A2;
+    color: #3658A2;
+}

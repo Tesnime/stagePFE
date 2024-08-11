@@ -1,0 +1,95 @@
+<h2 class="titre" mat-dialog-title>{{session.nom}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="details">
+    <div class="a">Titre de la formation:<small>{{session.demande.titre}}</small></div>
+    <div class="a">Description:<small>{{session.demande.description}}</small></div>
+    
+    <div class="a">Sujet de session:
+      <small>
+        <ng-container *ngFor="let item of session.demande.theme; let i = index">
+          {{item}}{{i < session.demande.theme.length - 1 ? ', ' : ''}}
+        </ng-container>
+      </small>
+    </div>
+    <!-- <div class="a">Formateur:<small>{{session.demande.formateur.firstname}} {{session.demande.formateur.lastname}}</small></div> -->
+    <div class="a">Date de la session:<small>{{session.date | date:'dd/MM/yyyy'}}</small></div>
+    <div class="a">Horaire:<small>{{session.debut}} - {{session.fin}}</small></div>
+    <div class="a">Lieu:<small>{{session.lieu}}</small></div>
+  </div>
+
+  <div class="other">
+    <div class="donnee"> 
+        <div class="formateur">
+            <div class="a">Nom du formateur:<small>{{session.demande.formateur.firstname}} {{session.demande.formateur.lastname}}</small></div>
+            <div class="a">Bio:<small>{{session.demande.formateur.bio}}</small></div>
+            <div class="a">poste:<small>{{session.demande.formateur.poste}}</small></div> 
+            <div class="a">Email:<small>{{session.demande.formateur.email}}</small></div>
+            <div class="a">Numero:<small>{{session.demande.formateur.tel}}</small></div>
+            <div class="a">CIN:<small>{{session.demande.formateur.cin}} </small></div>
+            <div class="a">competances technique:<small><ng-container *ngFor="let item of session.demande.formateur.comTech; let i = index">
+                {{item}}{{i < session.demande.formateur.comTech.length - 1 ? ', ' : ''}}
+              </ng-container></small></div> 
+        </div>
+        @if(!isFutureDate(session.date)){
+          <div style="display: flex; gap: 10px; font-size: 18px;">
+              <h5>Statut de présence du formateur: </h5> 
+              @if(presence){
+                <small style="color: black; font-size: 13px;">
+                    @if(presence.present){
+                        <i style="color: green;" class="fa-solid fa-check"></i> Le formateur est présent.
+                    }@else{
+                        <i style="color: red;" class="fa-solid fa-xmark"></i> Le formateur est absent.
+                      } 
+                </small>
+            }@else{
+              <i style="color: red;" class="fa-solid fa-xmark"></i> Le formateur est absent.
+            }
+          </div>
+        }
+       
+      <h3>Commentaires</h3>
+      <div class="d-flex justify-content-center row comment" style="overflow-y: auto;">
+        @if(comments){
+        <div *ngFor="let comment of comments; let i = index" style="width: 100%; background-color: transparent;" class="col-md-8">
+          <div class="d-flex flex-column comment-section" style="margin-bottom: 7px;">
+            <div class="p-2">
+              <div class="d-flex flex-row user-info">
+                <div class="d-flex flex-column justify-content-start ml-2 sender" style="padding: 0 20px; margin-bottom: 0;">
+                  <span class="d-block font-weight-bold name">
+                    {{comment.apprenant ? (comment.apprenant.firstname + ' ' + comment.apprenant.lastname) : (comment.formateur.firstname + ' ' + comment.formateur.lastname)}}
+                  </span>
+                  <span class="date text-black-50 ml-20" style="font-size: 12px;">{{comment.date | date:'dd/MM'}}</span>
+                </div>
+              </div>
+              <div>
+                <p style="padding: 0 20px; margin-bottom: 0;" class="comment-text">{{comment.comment}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    }
+      </div>
+    </div>
+
+    <div class="apprenant">
+      <h3 style="margin-left: 10px;">Liste des apprenants</h3>
+      <table class="table table-hover tab">
+        <tbody>
+          <tr *ngFor="let apprenant of session.demande.apprenants; let i = index">
+            <td (click)="openApprenant(apprenant)">
+              {{i + 1}} - {{apprenant.firstname}} {{apprenant.lastname}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Quitter</button>
+</mat-dialog-actions>
+ 
+
+
+

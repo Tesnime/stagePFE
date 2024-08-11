@@ -1,0 +1,21 @@
+.a{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 7px;
+}
+.a h6{
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    letter-spacing: -0.019rem;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    font-weight: 600;
+    font-family: work-sans, sans-serif;
+    color: #252627b9;
+}
+.a small{
+    font-size: 13px;
+    color: black;
+}

@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Expériences professionnelles</h2>
+<form [formGroup]="exprForm" (ngSubmit)="addExpr()" class="infoper">
+    <mat-dialog-content class="mat-typography">
+        <div class="field">
+            <mat-form-field class="example-full-width">
+                <mat-label>Titre de poste</mat-label>
+                <input matInput formControlName="poste" type="text" class="form-control"  placeholder="titre de poste" required>
+            </mat-form-field>
+    
+            <mat-form-field class="example-full-width">
+                <mat-label>Entreprise ou Organisation</mat-label>
+                <input matInput formControlName="entreprise" type="text" class="form-control" placeholder="nom" required>
+            </mat-form-field>
+    
+            <mat-form-field class="example-full-width">
+                <mat-label>Lieu</mat-label>
+                <input matInput formControlName="lieu" type="text" class="form-control" placeholder="lieu" required>
+            </mat-form-field>
+           
+    
+            <mat-form-field class="example-full-width">
+                <mat-label>Début</mat-label>
+                <mat-select formControlName="debut">
+                  <mat-option *ngFor="let item of generateYears(1900, 2100)" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <mat-form-field class="example-full-width">
+                <mat-label>Fin</mat-label>
+                <mat-select formControlName="fin" [required]="!exprForm.get('currentlyWorking')?.value">
+                  <mat-option *ngFor="let item of generateYears(1900, 2100)" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        
+       
+          
+        
+        <div align="end" style="margin-top: 10px;">
+            <mat-checkbox color='primary'  formControlName="working">Je travaille actuellement ici.</mat-checkbox>
+        </div>
+        
+    </mat-dialog-content>
+    
+    <mat-dialog-actions align="end" >
+        <button mat-button mat-dialog-close>Annuler</button>
+        <button mat-button [mat-dialog-close]="true" type="submit" cdkFocusInitial>Ajouter</button>
+
+    </mat-dialog-actions>
+    
+   
+
+        
+   
+
+</form>

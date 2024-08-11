@@ -1,0 +1,13 @@
+.d-inline-flex {
+    font-size: 2rem; /* Adjust the size of the stars */
+    color: black; /* Default color of the stars */
+  }
+  
+  ::ng-deep .ngb-rating .star:hover,
+  ::ng-deep .ngb-rating .star:hover ~ .star {
+    color: gold !important; /* Color of the stars on hover */
+  }
+  
+  ::ng-deep .ngb-rating .star.filled {
+    color: gold; /* Color of the filled stars */
+  }

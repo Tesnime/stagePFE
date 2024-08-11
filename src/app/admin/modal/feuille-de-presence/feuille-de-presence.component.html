@@ -1,0 +1,108 @@
+<div class="container" id="theContent" #presenceContent>
+    <div class="entete">
+        <div class="b">
+            RÉPUBLIQUE TUNISIENNE <br>
+            MINISTÈRE DES TECHNOLOGIES DE LA COMMUNICATION <br>
+            Smart Tunisian Technoparks <br>
+        </div>
+        <div class="b">
+            <img src="../../../assets/images/s2t-logo.png" alt="S2T Logo">
+        </div>
+        <div class="b">
+            الجمهورية التونسية <br>
+            وزارة تكنولوجيات الاتصال <br>
+            تونس للأقطاب التكنولوجية الذكية <br>
+        </div>
+    </div>
+    <div class="titre">
+        <h1>Feuille de Présence</h1>
+    </div>
+    <div class="donnee">
+        <div class="a">Réf. Action :<small> ................................................................... </small></div>
+        <div class="a">
+            Thème de Formation :
+            <small>
+                <ng-container *ngFor="let item of demande.theme; let i = index">
+                    {{ item }}{{ i < demande.theme.length - 1 ? ', ' : '' }}
+                </ng-container>
+            </small>
+        </div>
+        <div class="a">Lieu de déroulement :<small>{{ sessions[1].lieu }}</small></div>
+        <div class="a">Gouvernorat :<small>Ariana</small></div>
+        <div class="a">
+            Période de formation :
+            <small>
+                Du {{ sessions[0].date | date: 'dd MMMM' }} au {{ sessions[sessions.length - 1].date | date: 'dd MMMM yyyy' }}
+            </small>
+        </div>
+        <div class="a">Horaires :<small>de {{ sessions[0].debut }} à {{ sessions[0].fin }}</small></div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="table-secondary">
+                <th scope="col">n</th>
+                <th scope="col">Nom et prénom</th>
+                <th scope="col">N CIN</th>
+                <th scope="col">Entreprise</th>
+                <ng-container *ngFor="let item of sessions">
+                    <th>Journée du {{ item.date | date: 'dd/MM/yyyy' }}</th>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let apprenant of demande.apprenants; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td style="text-transform: capitalize;">{{ apprenant.firstname }} {{ apprenant.lastname }}</td>
+                <td>{{ apprenant.cin }}</td>
+                <td>{{ apprenant.societe }}</td>
+                <ng-container *ngFor="let session of sessions">
+                    <td>
+                        <ng-container *ngIf="isApprenantPresent(session, apprenant.id); else noPresence">
+                            <ng-container *ngFor="let presence of session.presences">
+                                <ng-container *ngIf="presence.apprenant && apprenant.id === presence.apprenant.id">
+                                    <i *ngIf="presence.present" style="color: green;" class="fa-solid fa-circle-check"></i>
+                                    <i *ngIf="!presence.present" style="color: red;" class="fa-solid fa-circle-xmark"></i>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                        <ng-template #noPresence>
+                            <i style="color: red;" class="fa-solid fa-circle-xmark"></i>
+                        </ng-template>
+                    </td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+    <div class="signature">
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom et prénom du formateur</th>
+                        <th scope="col">Signature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" style="text-transform: capitalize;">{{ demande.formateur.firstname }} {{ demande.formateur.lastname }}</th>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="entreprise">
+                <strong>Entreprise bénéficiaire:</strong>
+                @for(item of getUniqueEnterprises();track $index){
+                    {{item}},
+                }
+            </div>
+        </div>
+        <div>
+            <div class="entreprise" style="min-height: 100%;">
+                <strong>
+                    Signature et cachet de l'organisme de formation / entreprise <br><br>
+                    <span style="text-align: center;" align="center">Mourad BEN Romdhane</span>
+                </strong>
+            </div>
+        </div>
+    </div>
+</div>

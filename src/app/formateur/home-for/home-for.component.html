@@ -1,0 +1,200 @@
+<div class="container">
+    <div class="d-flex">
+        <div class="nav-pills flex-column" orientation="vertical">
+            <ng-container>
+                <div class="logo"><img src="../../../assets/images/s2t-logo.png" alt=""> </div>   
+            </ng-container>
+            <div ngbNav #nav="ngbNav" [(activeId)]="active" (activeIdChange)="onTabChange($event)" >
+                <ng-container ngbNavItem="accueil">
+                    <button ngbNavLink><div class="btnTit"><i class="fa-solid fa-house"></i>Accueil</div></button>
+                    <ng-template ngbNavContent>
+                       <!-- <div class="home"> -->
+                        <div class="navv">
+                            
+                            <div style="display: flex; justify-content: flex-end; color: aliceblue;">
+                                <div align="end" ngbDropdown class="d-inline-block profile">
+                                    <div class="prof"  id="dropdown1" ngbDropdownToggle>
+                                       @if (formateur) {
+                                        <div class="donnee">
+                                            {{formateur.firstname}} {{formateur.lastname}}
+                                            <span>{{formateur.email}}</span>
+                                        </div>
+                                        <div class="photo">
+                                            @if (formateur.image==null) {
+                                                <img src="../../assets/images/user.png" alt="">
+                                            }@else {
+                                                <img [src]="imageUrl" alt="">
+                                            }
+                                        </div>
+                                    }
+                                    </div>
+                       
+                                    <div style="max-height:50px;" ngbDropdownMenu aria-labelledby="dropdown1">
+                                        <a href="formateur/profile" ngbDropdownItem >profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="nav1"> 
+                            <i class="fa-regular fa-message"></i>
+                            <i class="fa-regular fa-bell"></i>
+                        </div>
+                        <div class="programme">
+                            <div style="max-height: 65vh; width: 100%; display: flex; justify-content: center;"><app-agenda style="width: 70%;" ></app-agenda> </div>
+                            <div class="scedule">
+                                <mat-list>
+                                    @for (item of sessions; track $index) {
+                                        @if (isRange(item.date) ) {
+                                            <mat-list-item > <span class="date">{{item.date | date: 'dd/MM/yyyy'}} : </span> <span style="font-size: 13px;">{{item.nom}}</span></mat-list-item>
+                                            <mat-divider></mat-divider>
+                                        }@else {
+                                            <mat-list-item ><span style="font-size: 13px;">Aucun programme dans cette période</span></mat-list-item>
+    
+                                            
+                                        }
+                                    }@empty{
+                                        <mat-list-item align="center"><small style="color: grey;">vous n'avez pas du programme pour cette semaine.</small> </mat-list-item>
+                                    }
+                                  </mat-list> 
+                              </div>
+                        </div>
+                         <div class="content1" >
+                            
+                            <app-stat></app-stat>
+                        </div>
+                       <!-- <div class="plan">
+                            <div style="background-color: white;" class="pro">
+                                <h2>Mon profile</h2>
+                                <div class="cont">
+                                    <div shape="circle" role="img" class="phot"></div>
+                                    <p>Maximisez vos chances en complétant votre profil !</p>
+                                </div>
+                                <a class="button" href="/formateur/profile">Compléter mon profil</a>
+                            </div>
+                            <div class="cal">  
+                                <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t" outsideDays="collapsed" class="flex-datepicker"/>
+                                <ng-template #t let-date let-focused="focused" >
+                                  <span 
+                                    class="custom-day"
+                                    [class.focused]="focused"
+                                    [class.range]="isRange(date)"
+                                    [class.faded]="isHovered(date) || isInside(date)"
+                                    (mouseenter)="hoveredDate = date"
+                                    (mouseleave)="hoveredDate = null"
+                                  >
+                                    {{ date.day }}
+                                  </span>
+                                </ng-template>
+                            </div>
+                            <h5 align="left">Programme: </h5>
+                          <div class="scedule">
+                            <mat-list>
+                                @for (item of sessions; track $index) {
+                                    @if (isInRange(item.date) ) {
+                                        <mat-list-item > <span class="date">{{item.date | date: 'dd/MM/yyyy'}} : </span> <span style="font-size: 13px;">{{item.nom}}</span></mat-list-item>
+                                        <mat-divider></mat-divider>
+                                    }@else {
+                                        <mat-list-item ><span style="font-size: 13px;">Aucun programme dans cette période</span></mat-list-item>
+
+                                        
+                                    }
+                                }
+                              </mat-list> 
+                          </div>
+                            
+                        </div>
+                       
+                       </div>-->
+                    </ng-template>
+                </ng-container>
+                <ng-container ngbNavItem="demande">
+                    <button ngbNavLink><div class="btnTit"><i class="fa-solid fa-hourglass-start"></i><span>Demandes</span></div></button>
+                    <ng-template ngbNavContent>
+                        <div class="d"><app-demande></app-demande> </div>
+                    </ng-template>
+                </ng-container>
+                <ng-container ngbNavItem="session">
+                    <button ngbNavLink><div class="btnTit"><i class="fa-solid fa-chalkboard-user"></i><span>Sessions</span></div></button>
+                    <ng-template ngbNavContent>
+                        <div class="d"><app-sessions></app-sessions> </div>
+                    </ng-template>
+                </ng-container>
+                <ng-container ngbNavItem="message">
+                    <button ngbNavLink><div class="btnTit"><i class="fa-solid fa-inbox"></i><span>Messages</span></div></button>
+                    <ng-template ngbNavContent>
+                        <div class="d"><app-chat></app-chat> </div>
+                    </ng-template>
+                </ng-container>
+               
+            </div>
+            <ng-container>
+                <button (click)="logout()" mat-button><i class="fa-solid fa-right-from-bracket"></i> Deconnecter</button>   
+            </ng-container>
+        </div>
+    
+        <div [ngbNavOutlet]="nav" class="ms-4"></div>
+    </div>
+    
+</div>
+
+<!-- 
+<div class="container">
+    <div class="contt">
+        <div class="flex1">
+            <div class="demande">
+                <div class="x">
+                    <div class="c">
+                        <div class="icone"><i class="fa-solid fa-envelope-open-text"></i></div>
+                        <p>1</p>
+                    </div>
+                    <p class="fjENRB">Demandes en cours</p>
+                </div>
+                <a font-size="'sm" class="plus" href="formateur/demande">
+                    <span >Voir tout</span>
+                    <i color="dark-900" class="ic" name="arrow_right"></i>
+                </a>
+            </div>
+        </div>
+        <div></div>
+    </div>
+    <div class="flex2">
+        <div style="background-color: white;" class="profile">
+            <h2>Mon profile</h2>
+            <div class="cont">
+                <div shape="circle" role="img" class="photo"></div>
+                <p>Maximisez vos chances en complétant votre profil !</p>
+            </div>
+            <a class="button" href="/formateur/profile">Compléter mon profil</a>
+        </div>
+        <div style="background-color: white;" class="profile">
+            <h2>Programme de la semaine</h2>
+            <table class="table table-sm">
+                <tbody>
+                    @for (item of sessions; track $index) {
+                  <tr>
+                    <th scope="row">{{item.date |date: 'dd/MM/yyyy'}}</th>
+                    <td>{{item.nom}}</td>
+                    <td>{{item.debut|date:'HH:mm'}}</td>
+                    <td>{{item.status}}</td>
+                  </tr>
+                }@empty {
+                    <div>Auccun programme pour cette semaine</div>
+                }
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div> --> <!-- <ng-container ngbNavItem="bottom">
+                    <button ngbNavLink>Mess</button>
+                    <ng-template ngbNavContent>
+                        <p>
+                            Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla
+                            facilisi. Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu,
+                            congue et odio. Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices
+                            et. Sed diam urna, egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus
+                            faucibus nisl enim, nec tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci
+                            varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem
+                            aliquet ultricies in eget neque. Phasellus nec tortor vel tellus pulvinar feugiat.
+                        </p>
+                    </ng-template>
+                </ng-container> -->

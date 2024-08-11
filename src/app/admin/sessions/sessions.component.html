@@ -1,0 +1,96 @@
+<div class="container">
+  <mat-form-field>
+    <mat-label>Rechercher des sessions</mat-label>
+    <input matInput placeholder="Ex. ium" #input (input)="applyFilter(input.value)">
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    <!-- Number Column -->
+    <ng-container matColumnDef="number">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let item; let i = dataIndex">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Demande Column -->
+    <ng-container matColumnDef="demande">
+      <th mat-header-cell *matHeaderCellDef>Demande</th>
+      <td mat-cell *matCellDef="let item">{{ item.demande.titre }}</td>
+    </ng-container>
+
+    <!-- Formateur Column -->
+    <ng-container matColumnDef="formateur">
+      <th mat-header-cell *matHeaderCellDef>Formateur</th>
+      <td mat-cell *matCellDef="let item">{{ getFormateurName(item) }}</td>
+    </ng-container>
+
+    <!-- Theme Column -->
+    <ng-container matColumnDef="theme">
+      <th mat-header-cell *matHeaderCellDef>Theme</th>
+      <td mat-cell *matCellDef="let item">
+        <ng-container *ngFor="let t of item.demande.theme; let i = index">
+          {{ t }}<span *ngIf="i < item.demande.theme.length - 1">, </span>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Nombre des jours Column -->
+    <ng-container matColumnDef="nombre des jours">
+      <th mat-header-cell *matHeaderCellDef>Nombre des jours</th>
+      <td mat-cell *matCellDef="let item">{{ item.sessions.length }}</td>
+    </ng-container>
+    
+    <!-- Expand Column -->
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="expand row" (click)="toggleExpand(element); $event.stopPropagation()">
+          <mat-icon>{{ expandedElement === element ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+   
+
+    <!-- Expanded Detail Column -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail" [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+          <table class="table table-hover">
+            <tbody>
+              <tr *ngFor="let ite of element.sessions; let i = index" style="cursor: pointer;" (click)="open(ite)">
+                <th scope="row" style="width: 6%;">{{ i + 1 }}</th>
+                <td style="width: 20%;">{{ ite.date | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ ite.nom }}</td>
+              </tr>
+            
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions"></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openDemande(element)">
+            <mat-icon>info</mat-icon>
+            <span>Voir les détails</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <!-- Table Header and Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element" (click)="toggleExpand(element)">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+
+  <!-- Paginator -->
+  <mat-paginator [length]="dataSource.filteredData.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+</div>

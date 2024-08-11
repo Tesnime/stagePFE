@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light ">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="formateur/home"><img class="logo" src="../../../assets/images/logo.png" alt=""> s2t</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			aria-controls="navbarContent"
+			[attr.aria-expanded]="!collapsed"
+			aria-label="Toggle navigation"
+			(click)="collapsed = !collapsed"
+		>
+			<span class="navbar-toggler-icon"  ></span>
+		</button>
+
+		<div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent" >
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item " ngbDropdown>
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button"> <i class="fa-regular fa-envelope"></i> </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Action</a>
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Another action</a>
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Something else here</a>
+					</div>
+				</li>
+
+				<li class="nav-item" ngbDropdown>
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown2" role="button"> <i class="fa-regular fa-bell"></i> </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="dropdown-menu dropdown-menu-end">
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Action</a>
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Another action</a>
+						<a ngbDropdownItem href="#" (click)="$event.preventDefault()">Something else here</a>
+					</div>
+				</li>
+
+				<li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button"> <img class="user" src="../../../../assets/images/user.png" alt=""> </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+                        <div class="profile" *ngIf="profile">
+                            <img class="user" src="../../../../assets/images/logo.png" alt="">
+                            <div class="donne">
+                                <h6>{{profile.firstname}} {{profile.lastname}}</h6>
+                                <small>{{profile.email}}</small>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+						<a ngbDropdownItem href="formateur/profile"><i class="fa-solid fa-gear prof"></i> Profile</a>
+						<a ngbDropdownItem style="cursor: pointer;" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket prof"></i> Deconnecter</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

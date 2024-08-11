@@ -1,0 +1,53 @@
+<div class="titre" mat-dialog-title>
+    <h2>Poser votre question</h2>
+  </div>
+  
+  <form class="file-upload" [formGroup]="questForm" (ngSubmit)="addQuest()">
+    <div class="col-12 infoper">
+      <mat-dialog-content class="mat-typography">
+        <div class="row">
+          <div>
+            <div>
+              <div class="row g-3 formcontrol">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Titre de question</mat-label>
+                  <input type="text" matInput formControlName="titre" placeholder="Titre">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Question</mat-label>
+                  <textarea matInput formControlName="question" placeholder="Question...?"></textarea>
+                </mat-form-field>
+  
+                <mat-form-field class="example-chip-list">
+                  <mat-label>Thèmes</mat-label>
+                  <mat-chip-grid #chipGrid aria-label="Themes">
+                    <mat-chip-row *ngFor="let t of theme"
+                      (removed)="remove(t)"
+                      [editable]="true"
+                      (edited)="edit(t, $event)"
+                      [attr.aria-description]="'Press enter to edit ' + t">
+                      {{ t }}
+                      <button matChipRemove [attr.aria-label]="'Remove ' + t">
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip-row>
+  
+                    <input placeholder="Thème ..."
+                      [matChipInputFor]="chipGrid"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)" />
+                  </mat-chip-grid>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-content>
+    </div>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Annuler</button>
+      <button mat-button type="submit" cdkFocusInitial mat-dialog-close>Envoyer</button>
+    </mat-dialog-actions>
+  </form>
+  

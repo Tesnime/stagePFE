@@ -1,0 +1,18 @@
+.a{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 7px;
+}
+.a small{
+    font-size: 12px;
+}
+.a h6{
+    font-weight: 600;
+    font-size: 14px;
+    
+}
+.bttn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

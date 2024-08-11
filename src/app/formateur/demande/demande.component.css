@@ -1,0 +1,171 @@
+.container{
+    /* background-color: aliceblue; */
+    min-height: 80vh;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+.btn-success{
+    align-self: flex-end;
+    margin-right: 10%;
+}
+
+th,tr{
+    text-align: center;
+}
+.detail{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 5px;
+}
+.details{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.a{
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.834);
+}
+.a:hover{
+    font-size: larger;
+}
+.aa{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 1rem;
+  
+}
+.aa {
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    letter-spacing: -0.019rem;
+    -webkit-box-align: center;
+    align-items: flex-start;
+    display: flex;
+    flex-shrink: 0;
+    font-weight: 600;
+    font-family: work-sans, sans-serif;
+    color: #252627b9;
+}
+.aa small{
+    font-size: 13px;
+    color: black;
+    font-weight: 400;
+}
+.list{
+    max-height: 70vh;
+    overflow-y: auto;
+}
+.list::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: #b3b1b1; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Roundness of the scrollbar thumb */
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+    background-color: #bfbaba; /* Color of the scrollbar thumb on hover */
+}
+
+.list::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the scrollbar track */
+}
+.tables{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 25px;
+    justify-content: center;
+    align-items: flex-start;
+
+
+}
+ 
+.nav-pills{
+    min-width: 300px;
+    max-height: 210px;
+
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.179);
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background-color: #3658a210;
+    color: #3658A2;
+}
+.nav-pills .nav-link{
+    border-radius: 0;
+    color: #3658A2;
+    position: relative;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    font-weight: 600;
+    transition: all 300ms ease 0s;
+}
+.ms-4{
+    background-color: rgba(255, 255, 255, 0.356);
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.179);
+    min-height: 60vh;
+    min-width: 74%;
+    position: relative;
+    padding: 1rem;
+    transition: all 300ms ease 0s;
+}
+.mat-mdc-card{
+    background-color: white;
+    /* padding: 5px; */
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+.mat-mdc-card:hover{
+    background-color: #3658a210;
+}
+.badge{
+    padding: 7px;
+}
+.status{
+    /* border-radius: 5px;
+    padding: 7px 12px;
+    font-weight: 500;*/
+    color: white; 
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    height: 2rem;
+    font-size: 0.875rem;
+    gap: 0.5rem;
+    position: relative;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-radius: 0px;
+    line-height: initial;
+    transition: all 300ms ease 0s;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.empty{
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 30px;
+    color: #3658a2e2;
+}

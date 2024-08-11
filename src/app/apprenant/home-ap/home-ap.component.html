@@ -1,0 +1,139 @@
+<div class="container1">
+  <nav class="navbar bg-body-tertiary" style="width: 100%; padding: 15px 2rem;">
+      <div class="container">
+        <a class="navbar-brand" href="apprenant/home">
+          <img src="../../../assets/images/s2t-logo.png" width="120" height="55">
+        </a>
+        <button (click)="logout()" mat-button>Deconnecter</button>
+      </div>
+  </nav>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="0ms" [(selectedIndex)]="activeTab"  (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="Accueil">
+          <div class="inscrir">
+              <div class="content">
+                  <p>Inscrivez-vous dès maintenant à nos sessions de formation avec le code fourni par votre entreprise. 
+                      Profitez de cette opportunité exclusive pour développer vos compétences et améliorer votre performance professionnelle.
+                       Inscrivez-vous aujourd'hui et investissez dans votre avenir.</p>
+                       <button (click)="inscrire()" mat-flat-button color="primary">S'inscrire</button>
+              </div>
+              <div class="image">
+                  <div>
+                      <img src="../../../assets/images/inscrir.jpg" alt="" >
+                  </div>
+              </div>
+          </div>
+          <div class="inscrir" style="min-height: 20vh; background-color: #081F5c;">
+              <div class="agenda">
+                 
+                  <div class="width:100%;"><app-agenda></app-agenda></div>
+              </div>
+              <div class="go">
+                  <h1>.Sessions.</h1>
+                  <p>Consultez notre calendrier et découvrez notre programme de formation de cette semaine ! 
+                      Profitez de sessions variées conçues pour améliorer vos compétences et booster votre carrière.</p>
+                 <div class="plan">
+                  <h4>Programme de jour :</h4> 
+                 <div>
+                  @for (item of session; track $index) {
+                  <mat-card class="example-card">
+                      <mat-card-header >
+                        <mat-card-subtitle > <div style="text-align: left; padding:0 1rem;">{{item.nom}} <br>  {{item.date|date:'dd/MM/yyyy'}}</div></mat-card-subtitle>
+                      </mat-card-header>
+                      <mat-card-content >
+                         <div style="color: black; padding: 1rem;">
+                           de {{item.debut}} a {{item.fin}} <br> {{item.lieu}}</div>
+                         
+                         <mat-divider></mat-divider>
+                      </mat-card-content>
+                      @if (compare(item.debut,item.fin)) {
+                          <mat-card-actions>
+                              <button  (click)="openSessionModal(item)" mat-raised-button>Rejoindre la session</button>
+                          </mat-card-actions>
+                          <mat-card-footer>
+                            <mat-progress-bar mode="buffer"></mat-progress-bar>
+                          </mat-card-footer>
+                       }@else {
+                      <mat-card-actions>
+                        <button  (click)="openSessionModal(item)" mat-raised-button>Rejoindre la session</button>
+                        <button mat-raised-button disabled>Rejoindre la session</button>
+                      </mat-card-actions>
+                      <mat-card-footer>
+                        <mat-progress-bar mode="determinate"></mat-progress-bar>
+                      </mat-card-footer>
+                      }
+                    </mat-card>
+                  }@empty {
+                      <mat-card class="example-card">
+                          <mat-card-header>
+                            <mat-card-subtitle>
+                                  {{ currentDate | date: 'dd/MM/yyyy' }}
+                            </mat-card-subtitle>
+                          </mat-card-header>
+                          <mat-card-content>
+                              <div style="color: black; padding: 1rem;">
+                                  Aucune session n'est prévue pour aujourd'hui. Pour plus de détails, veuillez consulter votre calendrier de sessions.
+                              </div>
+                            <mat-divider></mat-divider>
+                          </mat-card-content>
+                          <mat-card-footer>
+                            <mat-progress-bar mode="determinate"></mat-progress-bar>
+                          </mat-card-footer>
+                        </mat-card>
+                  }
+
+                 </div>
+                 </div>
+              </div>
+          </div>
+          <div class="recommendations">
+              <h1 align="center" style="color: #081F5c; margin-bottom: 50px;">.Autres sessions.</h1>
+             <!-- <div style="width: 100%; display: flex; justify-content: center; align-items: center; ">
+              <div class="search" align="center">
+                  <i class="fa fa-search"></i>
+                  <input type="text" class="form-control" placeholder="Rechercher des formations">
+                  <button class="btn btn-primary">Search</button>
+                </div>
+             </div> -->
+             <div class="aut">
+              <div></div>
+              <div><app-to-do></app-to-do></div>
+             </div>
+           
+          </div>
+          <div class="contact">
+              <h1 align="center" style="color: #081F5c; margin-bottom: 50px;">.Contactez-Nous.</h1>
+              <p align="center">Pour toute question ou besoin d'assistance, n'hésitez pas à nous contacter. Notre équipe est à votre disposition pour
+                   répondre à vos besoins de manière professionnelle et efficace.</p>
+                   <button style="color: #081F5c; width: max-content; align-self: center;" mat-button>Contactez-Nous <i class="fa-solid fa-arrow-right"></i></button>
+                   <!-- <google-map height="600px" width="800px" [options]="options"> </google-map> -->
+                   <!-- <google-map height="45vh"
+                              width="100%"
+                              [center]="center"
+                              [zoom]="zoom"
+                              (mapClick)="moveMap($event)"
+                              (mapMousemove)="move($event)"
+                              style="margin-top: 20px;">
+                  </google-map> -->
+                  <!-- <map-marker 
+                  ></map-marker> -->
+                  <div #mapContainer style="height: 40vh; width: 100%; margin-top: 20px;"></div>
+                  <div class="details" >
+                      <div><span>Téléphone:</span> 71 856 600</div>
+                      <div><span>E-mail:</span></div>
+                      <div><span>Site web:</span><a href="/url?sa=t&source=web&rct=j&opi=89978449&url=http://www.s2t.tn/&ved=2ahUKEwj68JCs2p-GAxVLhP0HHb9bDBIQ_Bd6BAhKEAM"> www.s2t.tn</a></div>
+
+                  </div>
+
+          </div>
+
+
+      </mat-tab>
+      <mat-tab label="Messages"><app-chat></app-chat></mat-tab>
+      <mat-tab label="Aide">
+        <app-aide></app-aide>
+    </mat-tab>
+      <mat-tab label="Profile">
+          <app-mon-profile></app-mon-profile>
+      </mat-tab>
+    </mat-tab-group>
+</div>

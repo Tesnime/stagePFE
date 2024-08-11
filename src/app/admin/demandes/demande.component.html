@@ -1,0 +1,179 @@
+<div class="container">
+    <div align="end">  <button (click)="planifier()" mat-raised-button style="background-color: #374375; color: white; border-color: #374375;">Planifier une Nouvelle Session</button></div>
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step() === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title> Sessions proposées </mat-panel-title>
+            <!-- <mat-panel-description>
+            Type your name and age
+            <mat-icon>account_circle</mat-icon>
+            </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 4%; text-align: center;" scope="col">#</th>
+                <th style="width: 28%;" scope="col">Demande</th>
+                <th style="width: 34%" scope="col">Date </th>
+            </tr>
+            </thead>
+            <tbody>
+                @for (item of demande; track $index) {
+                @if (item.status == 'proposer') {
+                    <tr (click)="openSession(item.id)">
+                        <th scope="row" style="text-align: center;">{{enCours}}</th>
+                        <td>{{item.titre}}</td>
+                        <!-- <td>{{item.formateur.firstname}} {{item.formateur.lasttname}}</td> -->
+                        <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                    </tr>
+            
+                    }
+                }@if (enCours==0){
+                    <tr>
+                        <td style="text-align: center;" colspan="4">Aucune Session proposée trouvée</td>
+                    </tr>
+                    <!-- <tr colspan="4" >Auccun demandes trouvee </tr> -->
+                }
+            </tbody>
+        </table>
+      <mat-action-row>
+        <button mat-button (click)="nextStep()">demandes envoyées</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step() === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title> demandes envoyées </mat-panel-title>
+        <!-- <mat-panel-description>
+          Type the country name
+          <mat-icon>map</mat-icon>
+        </mat-panel-description> -->
+      </mat-expansion-panel-header>
+  
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th style="width: 8%; text-align: center;" scope="col">#</th>
+            <th style="width: 24%;" scope="col">Demande</th>
+            <th style="width: 34%"  scope="col">Formateur</th>
+            <th style="width: 34%" scope="col">Date depot</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (item of demande; track $index) {
+               @if (item.status == 'traitement') {
+                <tr (click)="openDialog(item.id)">
+                    <th scope="row" style="text-align: center;">{{enCours}}</th>
+                    <td>{{item.titre}}</td>
+                    <td>{{item.formateur.firstname}} {{item.formateur.lasttname}}</td>
+                    <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                </tr>
+        
+                }
+            }@if (enCours==0){
+                <tr>
+                    <td style="text-align: center;" colspan="4">Aucune demande en cours trouvée</td>
+                </tr>
+                <!-- <tr colspan="4" >Auccun demandes trouvee </tr> -->
+             }
+        </tbody>
+      </table>
+     
+  
+      <mat-action-row>
+        <button mat-button (click)="prevStep()">Sessions proposées</button>
+        <button mat-button (click)="nextStep()">Formations approuvées</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step() === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Formations approuvées </mat-panel-title>
+        <!-- <mat-panel-description>
+          Inform the date you wish to travel
+          <mat-icon>date_range</mat-icon>
+        </mat-panel-description> -->
+      </mat-expansion-panel-header>
+  
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th style="width: 8%; text-align: center;" scope="col">#</th>
+            <th style="width: 24%;" scope="col">Demande</th>
+            <th style="width: 34%"  scope="col">Formateur</th>
+            <th style="width: 34%" scope="col">Date depot</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (item of demande; track $index) {
+               @if (item.status == 'accept') {
+                <tr (click)="openDemande(item)">
+                    <th scope="row" style="text-align: center;">{{accepte}}</th>
+                    <td>{{item.titre}}</td>
+                    <td>{{item.formateur.firstname}} {{item.formateur.lasttname}}</td>
+                    <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                </tr>
+        
+                }
+            }@if (accepte==0){
+                <tr>
+                    <td style="text-align: center;" colspan="4">Aucune demande en cours trouvée</td>
+                </tr>
+             }
+        </tbody>
+      </table>
+     
+  
+      <mat-action-row>
+        <button mat-button (click)="prevStep()">demandes envoyées</button>
+        <button mat-button (click)="nextStep()">demandes refusées</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step() === 3" (opened)="setStep(3)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> demandes refusées </mat-panel-title>
+          <!-- <mat-panel-description>
+            Inform the date you wish to travel
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description> -->
+        </mat-expansion-panel-header>
+    
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th style="width: 8%; text-align: center;" scope="col">#</th>
+                <th style="width: 24%;" scope="col">Demande</th>
+                <th style="width: 34%"  scope="col">Formateur</th>
+                <th style="width: 34%" scope="col">Date depot</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (item of demande; track $index) {
+                   @if (item.status == 'refus') {
+                    <tr (click)="openDemande(item)">
+                        <th scope="row" style="text-align: center;">{{refuse}}</th>
+                        <td>{{item.titre}}</td>
+                        <td>{{item.formateur.firstname}} {{item.formateur.lasttname}}</td>
+                        <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                    </tr>
+            
+                    }
+                }@if (refuse==0){
+                    <tr>
+                        <td style="text-align: center;" colspan="4">Aucune demande en cours trouvée</td>
+                    </tr>
+                 }
+            </tbody>
+          </table>
+       
+    
+        <mat-action-row>
+          <button mat-button (click)="prevStep()">Formations approuvées</button>
+          <button mat-button (click)="nextStep()">fin</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+  </mat-accordion>
+  
+
+</div>

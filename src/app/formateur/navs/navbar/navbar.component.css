@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+}
+.container-fluid{
+    margin: 0;
+    padding: 7px 40px 7px 25px;
+    background-color: #3658a2d5;
+    max-width: 100%;
+
+}
+.navbar{
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 7px 9px -4px rgba(53, 49, 49, 0.621);
+    max-width: 100%;
+}
+
+.navbar-brand{
+    display: flex;
+    align-items: center;
+    color: aliceblue;
+    font-weight: 600;
+
+}
+.logo{
+    height: 45px;
+}
+.nav-link,
+#navbarDropdown1,
+#navbarDropdown2,
+#navbarDropdown3
+{
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: 300;
+}
+.user{
+    height: 40px;
+    border-radius: 100%;
+}
+.dropdown-toggle::after {
+    display: none; 
+  }
+.navbar-nav{
+    gap: 13px;
+    align-items: center;
+}
+.profile{
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}
+.dropdown-menu{
+    min-width: 13rem;
+}
+.prof{
+    color: #bbb;
+}
+.dropdown-divider{
+    padding-top:8px ;
+}
+.navbar-toggler{
+    color: aliceblue;
+    background-color: aliceblue;
+}

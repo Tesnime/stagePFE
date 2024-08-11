@@ -1,0 +1,28 @@
+<div class="titre" mat-dialog-title>
+    <h2  > </h2>
+    <span style="color: gray; font-size: medium; margin-top: -20px; margin-left: 20px;"> </span>
+</div>
+<form [formGroup]="postForm" (ngSubmit)="postuler()">
+<mat-dialog-content class="mat-typography">
+<div class="newsletter-subscribe">
+    <div class="container">
+        <div class="intro">
+            <h2 class="text-center">Inscription à la formation</h2>
+            <p class="text-center">Afin de valider votre inscription à la formation choisie, veuillez saisir le code fourni par votre entreprise dans le formulaire ci-dessous.
+                <br>
+                Après validation du code, votre inscription sera confirmée. </p>
+        </div>
+       <div class="form-inline">
+            <div class="form-group"><input  matInput formControlName="code" class="form-control" type="text"  placeholder="code"></div>
+            <div class="form-group"><button class="btn btn-primary" type="submit">S'inscrir </button></div>
+        </div>
+    </div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end" >
+    <button mat-button mat-dialog-close>Annuler</button>
+</mat-dialog-actions>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>

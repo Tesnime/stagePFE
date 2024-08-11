@@ -1,0 +1,122 @@
+<div class="container">
+    <div class="stat">
+        <div class="totale">
+            <div class="nn">
+                <div class="cont">
+                    <h3>Nombre total des apprenants</h3>
+                    @if (tot) {
+                    <h2>{{tot['apprenant']}}</h2>
+                    }
+                </div>
+                <div><img src="../../../../assets/images/student.png" alt=""></div>
+            </div>
+            <div class="nn">
+                <div class="cont">
+                    <h3>Nombre total des formateurs</h3>
+                    @if (tot) {
+                        <h2>{{tot['formateur']}}</h2>
+                        }
+                    <!-- <h2>{{tot[]}}</h2> -->
+                </div>
+                <div><img src="../../../../assets/images/tutor.png" alt=""></div>
+            </div>
+            <div class="nn">
+                <div class="cont">
+                    <h3>Nombre total des sessions</h3>
+                    @if (tot) {
+                        <h2>{{tot['session']}}</h2>
+                        }
+                    <!-- <h2>{{tot[]}}</h2> -->
+                </div>
+                <div><img src="../../../../assets/images/session.png" alt=""></div>
+            </div>
+            <div class="nn">
+                <div class="cont">
+                    <h3>Taux de présence</h3>
+                    @if (taux) {
+                        <h2>{{taux}}%</h2>
+                        }
+                    <!-- <h2>{{tot[]}}</h2> -->
+                </div>
+                <div><i style="font-size: 2rem;" class="fa-solid fa-user-check"></i></div>
+            </div>
+            
+        </div>
+        <div>
+            <div class="chart">
+                <div class="divChart">
+                    <div style="height: 35vh;" [chart]="presenceSem"></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="autre">
+        <div>
+            <div class="chart">
+                <div class="divChart">
+                    <div  [chart]="difficultes"></div>
+                </div> 
+            </div>
+            <div class="chart" style="margin-top: 10px;">
+                <div class="divChart">
+                    <div  [chart]="themes"></div>
+                </div> 
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div class="chart">
+                <h5>Demandes recommandées</h5> 
+                <div class="item" style="background-color: transparent; margin-bottom: -6px; ">
+                    <small style="font-size: 12px;">Titre</small>
+                    <small style="font-size: 12px;">formateur</small>
+                    <small style="font-size: 12px;">theme</small>
+                    <small style="font-size: 12px;">nbre des jours</small>
+                </div>
+                <mat-list role="list">
+                    <mat-list-item style="padding: 0;  border-radius: 25px; overflow: hidden;"  role="listitem">
+                        <div class="item">
+                            <small style="font-size: 12px;">xxxx</small>
+                            <small style="font-size: 12px;">xxxxx</small>
+                            <small style="font-size: 12px;">vvv</small>
+                            <small style="font-size: 12px;">2</small>
+                        </div>
+                
+                    </mat-list-item>
+                    
+                </mat-list>
+            </div>
+            <div class="chart">
+                <h5>Formateurs recommandées</h5>
+                <div class="item" style="background-color: transparent; margin-bottom: -6px; ">
+                    <small style="font-size: 12px;">nom formateur</small>
+                    <small style="font-size: 12px;">email</small>
+                    <small style="font-size: 12px;">numero</small>
+                    <small style="font-size: 12px;">nbre des sessions</small>
+                </div>
+                <mat-list role="list">
+                    <mat-list-item style="padding: 0;  border-radius: 25px; overflow: hidden;"  role="listitem">
+                        <div class="item">
+                            <div style="height: 40px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 7px;">
+                                <div class="image"></div>
+                                <span style="font-weight: bold; font-size: small;">formateur</span>
+                            </div>
+                            <!-- <small>{{'test@gmail.com'}}</small>
+                            <div>54378999999</div> -->
+                            <small style="font-size: 12px;">{{'test@gmail.com'}}</small>
+                            <small style="font-size: 12px;">543789999993</small>
+                            <small style="font-size: 12px;">5</small>
+                        </div>
+                
+                    </mat-list-item>
+                    
+                </mat-list>
+            </div>
+        </div>
+    
+    <!-- <div class="chart">
+        <app-agenda></app-agenda>
+    </div> -->
+    </div>
+</div>

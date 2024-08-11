@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Delete file</h2>
+<mat-dialog-content>
+    Êtes-vous sûr de vouloir choisir <span style="text-transform: capitalize;">{{data.formateur.firstname}} {{data.formateur.lastname}}</span> pour {{data.demande.titre}}?
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Non</button>
+  <button mat-button mat-dialog-close (click)="addFormateur()" cdkFocusInitial>Oui</button>
+</mat-dialog-actions>

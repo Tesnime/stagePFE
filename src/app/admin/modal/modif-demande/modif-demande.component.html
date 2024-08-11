@@ -1,0 +1,87 @@
+<h2 mat-dialog-title>Modifier les details de la formation</h2>
+
+<form [formGroup]="demandeForm"  class="infoper">
+    <mat-dialog-content class="mat-typography">
+       
+        
+            <mat-form-field class="example-full-width">
+              <mat-label>Nom de la formation</mat-label>
+              <input matInput formControlName="titre" value={{demande.titre}} placeholder="Ex.Java" required="">
+            </mat-form-field>
+
+            <mat-form-field class="example-chip-list">
+            <mat-label>Theme de la formation</mat-label>
+            <mat-chip-grid #chipGrid aria-label="entrer le theme">
+              @for (t of theme; track t) {
+                <mat-chip-row
+                  (removed)="remove(t)"
+                  [editable]="true"
+                  (edited)="edit(t, $event)"
+                  [aria-description]="'press enter to edit ' + t">
+                  {{t}}
+                  <button matChipRemove [attr.aria-label]="'remove ' + t">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip-row>
+              }
+              <input placeholder="theme ..."
+                     [matChipInputFor]="chipGrid"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)"/>
+            </mat-chip-grid>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" value={{demande.description}} placeholder="description..."></textarea>
+            </mat-form-field>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Document Supplémentaire</label>
+                <div class="custom-file-input-wrapper">
+                    <input type="file" id="fileInput" formControlName="doc" (change)="onFileSelected($event)" class="custom-file-input">
+                    <!-- <label for="fileInput" class="custom-file-label">{{ fileName }}</label> -->
+                  </div>
+            </div>
+           <div>
+            <label > Sessions:</label>
+            <mat-list>
+              @for (session of session; track $index) {
+              <mat-list-item >
+                <div class="a">
+                  <div >
+                    <span matListItemTitle>{{session.nom}}</span>
+                    <span matListItemLine>{{session.date | date: 'dd/MM/yyyy'}} {{session.debut}}..{{session.fin}} </span>
+                    <span matListItemLine>{{session.lieu}}</span>
+                  </div>
+                  <div> <button  (click)="openDialog(session)" mat-icon-button >
+                    <mat-icon>close</mat-icon>
+                  </button></div>
+                </div>
+               
+              </mat-list-item>
+            }
+                
+                  @empty {
+                    <small>Aucune session définie</small>
+                  }
+            
+            </mat-list>
+           </div>
+           <div><button (click)="ajout()" mat-raised-button>Ajouter un autre jour</button></div>
+           @if (open) {
+        <div>
+            <label>Définir les Détails de la Session</label>
+            <div align="center" class="agenda"><app-agenda style="width: 90%;" [agendaData]=demande.id  (sessionAdded)="onSessionAdded($event)"></app-agenda></div>
+            
+        </div>
+    }
+          
+    </mat-dialog-content>
+    
+    <mat-dialog-actions align="end" >
+        <button mat-button mat-dialog-close>Annuler</button>
+        <button mat-button [mat-dialog-close]="true" type="submit" (click)="modifier()" cdkFocusInitial>Modifier</button>
+    </mat-dialog-actions>
+
+</form>

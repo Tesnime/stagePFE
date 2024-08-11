@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="titre" align="center">Evaluation du formateur</div>
+    <div class="formateur">
+        <div>
+            <div class="det">Nom complet : <span>{{formateur.firstname}} {{formateur.lastname}} </span></div>
+            <div class="det">Email : <span>{{formateur.email}} </span></div>
+            <div class="det">Numero CIN :<span>{{formateur.cin}}</span></div>
+            <div class="det">Poste : <span>{{formateur.poste}}</span></div>
+        </div>
+        <div>
+            <div class="det">Date de naissance : <span>{{formateur.naissance | date: 'dd/MM/yyyy'}}</span></div>
+            <div class="det">Numero tel : <span>{{formateur.tel}}</span></div>
+            <div class="det">RIB :<span>{{formateur.rib}}</span></div>
+            <div class="det"> Date de la première formation :<span>
+                @if(session){
+                    {{session.date | date: 'dd/MM/yyyy'}}
+                }@else {
+                    Ce formateur n'a dispensé aucune formation au sein de notre établissement
+                }
+            </span></div>
+        </div>
+    </div>
+    <div class="rap">
+        <h3>Activités de Formation</h3>
+       
+        <div class="stat">
+            <div style="height: 350px;" [chart]="themeChart"></div>
+            <div style="height: 350px;" [chart]="percentageChart"></div>
+        </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 4%;" scope="col">#</th>
+                <th scope="col">Session</th>
+                <th scope="col">Theme</th>
+                <th style="width: 15%;" scope="col">Date</th>
+                <th style="width: 8%;" scope="col">Nombre des jours</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (item of demande; track $index) {
+              <tr>
+                <th scope="row">{{$index+1}}</th>
+                <td>{{item.demande.titre}}</td>
+                <td>
+                    @for (theme of item.demande.theme; track $index) {
+                        {{theme}},
+                    }
+                </td>
+                <td>{{item.firstSessionDate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.nbJours}}</td>
+              </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th>Totale</th>
+                <td>{{sum}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="det"> Nombre total de sessions animées :<span>
+            @if(demande){
+             {{demande.length}}
+            }@else {
+                0
+            }
+        </span></div>
+    </div>
+    <div class="rap">
+        <h3>Participation des Apprenants</h3> 
+        <div class="rap1">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 4%;" scope="col">#</th>
+                <th scope="col">Session</th>
+                <th style="width: 13%; text-align: center;" scope="col">Nombre des participants</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (item of demande; track $index) {
+              <tr>
+                <th scope="row">{{$index+1}}</th>
+                <td>{{item.demande.titre}}</td>
+                <td style="text-align: center;">{{item.demande.apprenants.length}}</td>
+              </tr>
+            }
+            <tr>
+                <td></td>
+                <th style="text-align: right;">Totale</th>
+                <td style="text-align: center;">{{apprenants }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div style="height: 350px;" [chart]="tauxPresence"></div>
+        </div>
+      
+
+          <!-- <div class="det"> Taux de presence :<span>
+            @if(taux){
+             {{taux}}%
+            }@else {
+                0%
+            }
+        </span></div> -->
+           <!-- <div class="stat">
+            <div style="height: 350px;" [chart]="themeChart"></div>
+            <div style="height: 350px;" [chart]="percentageChart"></div>
+        </div> -->
+    </div>
+    <div class="rap">
+      <h3>Évaluations des Formations</h3>
+      <div class="stat">
+        <div style="height: 350px;" [chart]="MoyStar"></div>
+        <div style="height: 350px;" [chart]="evalChart"></div>
+    </div>
+    </div>
+</div>
+

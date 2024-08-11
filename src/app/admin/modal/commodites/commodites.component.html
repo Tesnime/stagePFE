@@ -1,0 +1,120 @@
+<div class="container" id="theContent" #presenceContent>
+    <div class="entete">
+      <div class="b">
+        RÉPUBLIQUE TUNISIENNE <br>
+        MINISTÈRE DES TECHNOLOGIES DE LA COMMUNICATION <br>
+        Smart Tunisian Technoparks <br>
+      </div>
+      <div class="b">
+        <img src="../../../assets/images/s2t-logo.png" alt="">
+      </div>
+      <div class="b">
+        الجمهورية التونسية <br>
+        وزارة تكنولوجيات الاتصال <br>
+        تونس للأقطاب التكنولوجية الذكية <br>
+      </div>
+    </div>
+    <div class="titre">
+      <h1>Accusé de Réception des Commodités Offertes</h1>
+    </div>
+    <div class="donnee">
+      <div class="a">
+        Thème de Formation :
+        <small>
+          <ng-container *ngFor="let item of demande.theme; let i = index">
+            {{ item }}{{ i < demande.theme.length - 1 ? ', ' : '' }}
+          </ng-container>
+        </small>
+      </div>
+      <div class="a">
+        Lieu de déroulement :<small>{{ sessions[1]?.lieu }}</small>
+      </div>
+      <div class="a">
+        Période de formation :
+        <small>Du {{ sessions[0]?.date | date: 'dd MMMM' }} au {{ sessions[sessions.length - 1]?.date | date: 'dd MMMM yyyy' }}</small>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr class="table-secondary">
+          <th scope="col">n</th>
+          <th scope="col">Nom et prénom</th>
+          <th scope="col">N CIN</th>
+          <th scope="col">Entreprise</th>
+          <th scope="col">Tel mobile</th>
+          <th scope="col">Tel fixe</th>
+          <th scope="col">e-mail</th>
+          <th scope="col" style="width: 10%;">Manuel de formation+cle USB</th>
+          <th scope="col" style="width: 10%;">Cartable</th>
+          <th scope="col" style="width: 10%;">Pause cafe</th>
+          <th scope="col" style="width: 10%;">Dejeuner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let apprenant of demande.apprenants; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td style="text-transform: capitalize;">{{ apprenant.firstname }} {{ apprenant.lastname }}</td>
+          <td>{{ apprenant.cin }}</td>
+          <td>{{ apprenant.societe }}</td>
+          <td>{{ apprenant.tel }}</td>
+          <td>{{ apprenant.telFix }}</td>
+          <td>{{ apprenant.email }}</td>
+          <td>
+            <i *ngIf="getFirstSessionPresence(apprenant.id, 'manuel')" style="color: green;" class="fa-solid fa-circle-check"></i>
+            <i *ngIf="getFirstSessionPresence(apprenant.id, 'manuel') == false" style="color: red;" class="fa-solid fa-circle-xmark"></i>
+            <i *ngIf="getFirstSessionPresence(apprenant.id, 'manuel') === null" style="color: red;" class="fa-solid fa-circle-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="getFirstSessionPresence(apprenant.id, 'cartable')" style="color: green;" class="fa-solid fa-circle-check"></i>
+            <i *ngIf="getFirstSessionPresence(apprenant.id, 'cartable') == false" style="color: red;" class="fa-solid fa-circle-xmark"></i>
+            <i *ngIf="getFirstSessionPresence(apprenant.id, 'cartable') === null" style="color: red;" class="fa-solid fa-circle-xmark"></i>
+          </td>
+          <td>
+            <ng-container *ngFor="let session of sessions">
+              <ng-container *ngIf="isApprenantPresent(session, apprenant.id); else noPresence">
+                <ng-container *ngFor="let presence of session.presences">
+                  <ng-container *ngIf="presence.apprenant && apprenant.id === presence.apprenant.id">
+                    <i *ngIf="presence.pauseCafe" style="color: green;" class="fa-solid fa-circle-check"></i>
+                    <i *ngIf="!presence.pauseCafe" style="color: red;" class="fa-solid fa-circle-xmark"></i>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <ng-template #noPresence>
+                <i style="color: red;" class="fa-solid fa-circle-xmark"></i>
+              </ng-template>
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngFor="let session of sessions">
+              <ng-container *ngIf="isApprenantPresent(session, apprenant.id); else noPresence">
+                <ng-container *ngFor="let presence of session.presences">
+                  <ng-container *ngIf="presence.apprenant && apprenant.id === presence.apprenant.id">
+                    <i *ngIf="presence.dejeuner" style="color: green;" class="fa-solid fa-circle-check"></i>
+                    <i *ngIf="!presence.dejeuner" style="color: red;" class="fa-solid fa-circle-xmark"></i>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <ng-template #noPresence>
+                <i style="color: red;" class="fa-solid fa-circle-xmark"></i>
+              </ng-template>
+            </ng-container>
+          </td>
+     
+        </tr>
+      </tbody>
+    </table>
+    <div class="signature">
+      <div>
+        <strong>Signature et cachet de Amart Tunisian Technoparks</strong>
+      </div>
+      <div>
+        <div>
+          <strong>
+            Nom et signature de formateur <br>
+            <span style="text-transform: capitalize;">{{demande.formateur.firstname}}  {{demande.formateur.lastname}}</span>  
+          </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  

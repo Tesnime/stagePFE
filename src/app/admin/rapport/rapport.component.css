@@ -1,0 +1,21 @@
+.content{
+    padding: 1rem;
+}
+.deviser{
+    display: grid;
+    grid-template-columns: 10% max-content max-content 10%;
+    gap: 10px;
+    align-items: center;
+    color: #44435F;
+}
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.example-form{
+    width: 55%;
+}
+.example-full-width{
+    width: 100%;
+}

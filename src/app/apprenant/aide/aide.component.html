@@ -1,0 +1,140 @@
+<div align="end" style="margin-right: 28px; min-height: max-content; padding: 10px;" >
+    <button mat-button [matMenuTriggerFor]="menu">Questions</button>
+    <mat-menu #menu="matMenu">
+        <button (click)="envoyer()" mat-menu-item>Envoyer un question</button>
+        <button (click)="showMyQuestions()" mat-menu-item>Mes questions</button>
+    </mat-menu>
+</div>
+
+@if (showingAllQuestions) {
+    <div class="qustionns">
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Dernières questions</mat-radio-button>
+            <mat-radio-button value="2">Meilleures questions</mat-radio-button>
+          </mat-radio-group>
+    </div>
+    <div style="display: flex;flex-direction: column;padding: 1rem 2rem; width: 100%;">
+        <mat-form-field>
+          <mat-label>Chercher </mat-label>
+          <input matInput placeholder="Ex. ium" [(ngModel)]="searchTerm" (ngModelChange)="filterQuestions()" />
+        </mat-form-field>
+    </div>
+    <div class="all" >
+
+        <mat-card appearance="outlined">
+            <mat-card-content class="qest" >
+                <div>
+                    @for (item of filteredQuestions; track $index) {
+                        <div class="child" (click)="toggleAnswer($index)">
+                            <h2 class="QuestTitre">#{{$index+1}} {{item.titre}}</h2>
+                            <div class="questContent">
+                                <p class="limited-text"> {{item.question}}</p>
+                                <div class="tagsContainer">
+                                    <mat-chip-listbox>
+                                        @for (tag of item.tags; track $index) {
+                                        <mat-chip>{{tag}}</mat-chip>
+                                        }
+                                    </mat-chip-listbox>
+                                </div>
+                                <hr style=" background: #eeeeee9b;">
+                                <h5 style="margin-top: -15px;">
+                                    publié par: <b> {{item.apprenant.firstname}} {{item.apprenant.lastname}}</b> -
+                                    Publié le: <b>{{item.date| date: 'dd/MM/yyyy'}} </b>
+                                </h5>
+                            </div>
+                        </div>
+                        @if (openQuestions[$index]) {
+                            <div class="answer">
+                                <div class="listofanswer">
+                                    @for (it of item.answers; track $index) {
+                                        <div class="reponse">
+                                            <b>{{it.apprenant.firstname}} {{it.apprenant.lastname}}</b>
+                                            <p>{{it .reponse}}</p>
+                                            <small>{{it.date| date: 'dd/MM/yyyy HH:mm'}}</small>
+                                        </div>
+                                    }
+                                </div>
+                                <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
+                                    <form class="rep" [formGroup]="answerForm" (ngSubmit)="answerQ(item)">
+                                        <textarea class="custom-textarea" rows="2" placeholder="Repondre au question..." matInput formControlName="reponse"></textarea>
+                                        <button type="submit" style="color: #081F5c;" mat-button>Envoyer</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }@empty {
+                    <div class="empty_message">
+                        <mat-icon>drafts</mat-icon>
+                        <p>Aucune question trouvée.</p>
+                    </div>
+                }
+                </div>
+                
+                
+                
+            </mat-card-content>
+        </mat-card>
+
+        <mat-paginator  showFirstLastButtons 
+        (page)="handlePageEvent($event)" 
+        [length]="filteredQuestions.length" 
+        [pageSize]="pageSize" [pageSizeOptions]="[3, 5, 10, 25, 100, 200]" aria-label="Select page" ></mat-paginator>
+
+    </div>
+}
+@if (showingMyQuestions) {
+    <h2 style="margin-left: 30px;">Mes questions <span (click)="retour()" class="retour">[Retour]</span></h2>
+
+    <div class="all">
+        <mat-card appearance="outlined">
+        <mat-card-content class="qest">
+            <div>
+            <div *ngFor="let item of myQuestions; let i = index">
+                <div class="child" (click)="toggleAnswer(i)">
+                <h2 class="QuestTitre">#{{i + 1}} {{item.titre}}</h2>
+                <div class="questContent">
+                    <p class="limited-text">{{item.question}}</p>
+                    <div class="tagsContainer">
+                    <mat-chip-listbox>
+                        <mat-chip *ngFor="let tag of item.tags">{{tag}}</mat-chip>
+                    </mat-chip-listbox>
+                    </div>
+                    <hr style="background: #eeeeee9b;">
+                    <h5 style="margin-top: -15px;">
+                    publié par: <b>{{item.apprenant.firstname}} {{item.apprenant.lastname}}</b> -
+                    Publié le: <b>{{item.date | date: 'dd/MM/yyyy'}}</b>
+                    </h5>
+                </div>
+                </div>
+                
+            
+            @if (openQuestions[i]) {
+                <div class="answer">
+                    <div class="listofanswer">
+                        @for (it of item.answers; track $index) {
+                            <div class="reponse">
+                                <b>{{it.apprenant.firstname}} {{it.apprenant.lastname}}</b>
+                                <p>{{it .reponse}}</p>
+                                <small>{{it.date| date: 'dd/MM/yyyy HH:mm'}}</small>
+                            </div>
+                        }
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
+                        <form class="rep" [formGroup]="answerForm" (ngSubmit)="answerQ(item)">
+                            <textarea class="custom-textarea" rows="2" placeholder="Repondre au question..." matInput formControlName="reponse"></textarea>
+                            <button type="submit" style="color: #081F5c;" mat-button>Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+            <div *ngIf="myQuestions.length === 0" class="empty_message">
+                <mat-icon>drafts</mat-icon>
+                <p>Aucune question trouvée.</p>
+            </div>
+            </div>
+        </mat-card-content>
+        </mat-card>
+        <mat-paginator [length]="filteredQuestions.length" [pageSize]="pageSize" [pageSizeOptions]="[3, 5, 10, 25, 100, 200]" aria-label="Select page" showFirstLastButtons (page)="handlePageEvent($event)"></mat-paginator>
+    </div>
+}

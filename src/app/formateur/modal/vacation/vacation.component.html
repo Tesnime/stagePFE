@@ -1,0 +1,69 @@
+<div class="container0">
+  <div class="container" id="theContent">
+    <div class="entete">
+        <div class="a">
+            REPUBLIQUE TUNISIENNE <br>
+            MINISTERE DES TECHNOLOGIES DE LA COMMUNICATION <br>
+            Smart Tunisian Technoparks <br>
+            
+        </div>
+        <div class="a"><img src="../../../assets/images/s2t-logo.png" alt=""></div>
+        <div class="a">
+            الجمهورية الـتونسيـّة <br>
+            وزارة تكنولوجيات الإتصال <br>
+            تونس للأقطاب التكنولوجية الذكية <br>
+
+        </div>
+    </div>
+    <div class="titre">
+        <h1>Memoire de vacation</h1>
+    </div>
+    @if (demande) {
+    <div style="align-self: center;">
+        <div class="info"><h5>Nom & Prénom : </h5> <span>{{demande.formateur.firstname}} {{demande.formateur.lastname}}</span> </div>
+        <div class="info"> <h5>Matière :</h5><span>{{demande.theme}}</span></div>
+        <div class="info"> <h5>N° Compte RIB / RIP :</h5><span>{{demande.formateur.rib}}</span></div>
+        <div class="info"><h5>N° CIN : </h5><span>{{demande.formateur.cin}}</span></div>
+    </div>
+    <div><table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Horaire</th>
+            <th scope="col" >Nombre d'Heures</th>
+            <th scope="col">Observations</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of sessions; track $index) {
+          <tr>
+              <th scope="row">{{item.date|date:'dd/MM/yyy'}}</th>
+              <td>De {{item.debut| date: 'HH:mm'}} a {{item.fin| date: 'HH:mm'}}</td>
+              <td>6h</td>
+              <td></td>
+          </tr>}
+        </tbody>
+        <tfoot>
+          <tr>
+              <th></th>
+              <th>Total</th>
+              <th>{{6*sessions.length}}</th>
+              <th></th>
+            </tr>
+        </tfoot>
+      </table>
+      </div>
+      <div class="entete" style="align-self: baseline;">
+        <div class="b"><h6>Signature du formateur</h6> formateur</div>
+        <div class="b"><h6>
+            Signature du chef de la direction de développement des entreprises
+            </h6> Mourad Ben Romdhane</div>
+        
+        
+      </div>
+    }
+</div>
+
+<div style="width: 100%; display: flex; align-items: center; justify-content: center;"></div>
+
+</div>

@@ -1,0 +1,45 @@
+<!-- <app-navbar></app-navbar>
+<app-nav></app-nav>
+<div class="container" >
+    <input class="search" type="search" name="" id="">
+    <div class="contain">
+        @for (cours of cours; track $index) {
+        <div class="cours">
+            <a href="#"><img src="../../../assets/images/image-removebg-preview (18).png" alt="">{{cours.nom}}</a>
+            <div class="detail">
+                <h4>{{cours.theme}} </h4>
+                <small>{{cours.description}}</small>
+                <div class="view">
+                    <span><i class="fa-solid fa-eye"></i> 20</span>
+                    <span><i class="fa-solid fa-heart"></i> 5</span>
+                </div>
+                <div class="plus">
+                    <span style="font-size: small;">{{cours.date_depo|date:'shortDate'}}</span>
+                    <div class="view edit">
+                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @empty {
+        <div style="justify-self:center ;">Aucun cours trouvé. </div>
+    }
+    </div>
+    
+    
+    
+</div>
+<button class="btn btn-outline-primary mb-2 me-2 ajout" (click)="openVerticallyCentered(content)" mat-mini-fab matTooltip="Primary" color="primary" aria-label="Example mini fab with a heart icon">
+    <mat-icon>add</mat-icon>
+  </button>
+  <ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Ajouter un cours</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<app-course></app-course>
+	</div>
+</ng-template> -->

@@ -1,0 +1,40 @@
+    <div class="titre" mat-dialog-title>
+        <h2  >Ajouter une session </h2>
+        <!-- <span style="color: gray; font-size: medium; margin-top: -20px; margin-left: 20px;">{{session.nom}} </span> -->
+    </div>
+    <form [formGroup]="sessionForm" (ngSubmit)="add()" class="infoper">
+    <mat-dialog-content class="mat-typography">
+        <div align="center" style=" width: 100%;">
+            <mat-form-field class="example-full-width">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="nom" >
+              </mat-form-field>
+        </div>
+        <div align="center" style=" width: 100%; ">
+            <mat-form-field class="example-full-width" >
+                <mat-label> Date pour la session</mat-label>
+                    <input matInput formControlName="date" [matDatepicker]="picker">
+                    <mat-hint>mm/jj/aaaa</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
+                </mat-form-field>
+        </div>
+        <div class="time">
+            De  <ngb-timepicker formControlName="debut"  [spinners]="false" /> a <ngb-timepicker formControlName="fin" [spinners]="false" />
+        </div>
+        <div align="center" style="  width: 100%; margin-top: 20px;">
+            <mat-form-field class="example-full-width">
+                <mat-label>Lieu</mat-label>
+                <input matInput formControlName="lieu" placeholder="Ex. Tunis">
+              </mat-form-field>
+        </div>
+            
+    
+    
+        </mat-dialog-content>
+        <mat-dialog-actions align="end" >
+            <button mat-button [mat-dialog-close]="true" type="submit" cdkFocusInitial>Ajouter</button>
+            <button mat-button mat-dialog-close>Annuler</button>
+        </mat-dialog-actions>
+    
+    </form>

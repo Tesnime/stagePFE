@@ -1,0 +1,237 @@
+@if (demande) {
+<div class="container">
+    <button type="button" (click)="openVerticallyCentered()" style="background-color: #9fa8d0; border-color: #9fa8d0; margin-bottom: 10px;" class="btn btn-success">envoyer un demande</button>
+    <div style="min-width: 100%;" class="d-flex">
+        <div ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills flex-column" orientation="vertical">
+            <ng-container ngbNavItem="tous">
+                <button ngbNavLink>Formations proposées <span>{{filteredDemProp.length}}</span></button>
+                <ng-template ngbNavContent>
+                  <div style="display: flex;flex-direction: column;padding: 1rem 2rem; width: 100%;">
+                    <mat-form-field>
+                      <mat-label>Rechercher des demandes selon theme</mat-label>
+                      <input matInput placeholder="Ex. ium" #input (input)="applyFilter(input.value)">
+                    </mat-form-field>
+                  </div >
+                 
+                 <div class="list">
+                  @for (item of filteredDemProp; track $index) {
+                           
+
+                    <mat-card (click)="toggleDetails(item.demande.id)">
+                        <mat-card-header>
+                          <mat-card-title>{{item.demande.titre}}</mat-card-title>
+                          @if(item.sessions.length>0){
+                            <!-- {{item.sessions[0].date}} -->
+                          <mat-card-subtitle>Du {{item.sessions[0].date |date:'dd/MM'}} au
+                             {{item.sessions[item.sessions.length-1].date |date:'dd/MM/yyyy'}}
+                            </mat-card-subtitle> 
+                        }
+                        </mat-card-header>
+                        <div class="detail" *ngIf="selectedDemandeId === item.demande.id">
+                          <div class="aa">Description:<small>{{item.demande.description}}</small></div>
+                          <div class="aa">Nombre des sessions:<small>{{item.sessions.length}}</small></div>
+                          @if(item.sessions.length>0){
+                              <div class="aa">Date de la premiere session:<small>{{item.sessions[0].date| date: 'dd/MM/yyyy'}}</small></div>
+                              <div class="aa">Lieu:<small>{{item.sessions[0].lieu}}</small></div>
+                          }
+                          <!-- <h4>Liste des sessions</h4> -->
+                          <table class="table table-hover tab">
+                            <tbody>
+                                <tr *ngFor="let sess of item.sessions; let i = index" >
+                                    <td style="width: 7%;">{{i + 1}} - </td>
+                                    <td style="width: 73%;">{{sess.nom}}</td>
+                                    <td style="width: 20%;">{{sess.date| date:'dd/MM/yyyy'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                          <div align="end"><button (click)="deleteDemande(item.demande.id)" mat-raised-button>Envoyer une demande</button></div>
+                    </div>
+                        <mat-card-actions align="end">
+                          <div class="tagsContainer">
+                            <mat-chip-listbox>
+                                <mat-chip *ngFor="let tag of item.demande.theme">{{tag}}</mat-chip>
+                            </mat-chip-listbox>
+                            </div>
+                        </mat-card-actions>
+                       
+                      </mat-card>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="openDialog1(item.id)">Annuler</button>
+                      </mat-menu>
+                    
+        }@empty {
+            <div class="empty">Vous n'avez envoyé aucune demande</div>
+        }
+                 </div>
+                       
+                       
+                   
+                </ng-template>
+            </ng-container>
+            <ng-container ngbNavItem="accepte">
+                <button ngbNavLink>Accepte<span>{{accepte}}</span></button>
+                <ng-template ngbNavContent>
+                    @if (accepte==0) {
+                        <div class="empty">Vous n'avez envoyé aucune demande</div>
+                    }@else {
+                    @for (item of demande; track $index) {
+                        @if (item.status=='accept') {
+                        <mat-card (click)="openDialog(item.id)">
+                            <mat-card-header>
+                              <mat-card-title>{{item.titre}}</mat-card-title>
+                              <mat-card-subtitle>{{item.date|date:'dd/MM/yyyy'}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-actions align="end">
+                                <span style="background-color: green;" class="status" ><i class="fa-solid fa-check"> </i> accepte</span>
+                              </mat-card-actions>
+                          </mat-card>
+                        }
+                }}
+                </ng-template>
+            </ng-container>
+            <ng-container ngbNavItem="en cours">
+                <button ngbNavLink>En cours de traitement<span>{{enCours}} </span></button>
+                <ng-template ngbNavContent>
+                    @if (enCours==0) {
+                        <div class="empty">Vous n'avez envoyé aucune demande</div>
+                    }@else {
+                    @for (item of demande; track $index) {
+                        @if (item.status=='traitement') {
+
+                        <mat-card [matMenuTriggerFor]="menu" #menuTrigger>
+                            <mat-card-header>
+                              <mat-card-title>{{item.titre}}</mat-card-title>
+                              <mat-card-subtitle>{{item.date|date:'dd/MM/yyyy'}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-actions align="end">
+                                <span style="background-color: goldenrod;" class="status">En cours de traitement</span>
+                            </mat-card-actions>
+                          </mat-card>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openDialog1(item.id)">Annuler</button>
+                          </mat-menu>
+                        }
+                }}
+                
+                </ng-template>
+            </ng-container>
+            <ng-container ngbNavItem="refuse">
+                <button ngbNavLink>Refuse<span>{{refuse}} </span></button>
+                <ng-template ngbNavContent>
+                    @if (refuse==0) {
+                        <div class="empty">Vous n'avez envoyé aucune demande</div>
+                    }@else {
+                    @for (item of demande; track $index) {
+                        @if (item.status=='refus') {
+                        <mat-card (click)="openDialog(item.id)">
+                            <mat-card-header>
+                              <mat-card-title>{{item.titre}}</mat-card-title>
+                              <mat-card-subtitle>{{item.date|date:'dd/MM/yyyy'}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-actions align="end">
+                                <span style="background-color: rgb(142, 5, 5);" class="status"><i class="fa-solid fa-xmark"></i><span style="min-width: 4px;"></span>  Refuse</span>
+                              </mat-card-actions>
+                          </mat-card>
+                        }
+                }}
+                </ng-template>
+            </ng-container>
+        </div>
+    
+        <div [ngbNavOutlet]="nav" class="ms-4"></div>
+    </div>
+    
+    <!-- <div class="tables">
+        <div>
+            <table class="table  table-bordered">
+                <thead>
+                  <tr>
+                    <th style="width: 60px;" scope="col">#</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Date</th>
+                    <th style="width: 100px;" scope="col">Status</th>
+                    <th style="width: 90px;" scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @for (item of demande; track $index) {
+                  <tr>
+                    <th scope="row">{{$index+1}}</th>
+                    <td>{{item.titre}}</td>
+                    <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                    
+                    @if (item.status=='accept') {
+                        <td><i style="color: green;" class="fa-solid fa-check"></i></td>
+                        <td >
+                            <div class="details">
+                                <i class="fa-solid fa-circle-info a" (click)="openDialog(item.id)"></i>
+                            </div>
+                        </td>
+        
+                    }@else if (item.status=='refus') {
+                        <td><i style="color: red;" class="fa-solid fa-xmark"></i></td>
+                        <td>
+                            <div class="details">
+                                <i class="fa-solid fa-circle-info a" (click)="openDialog(item.id)"></i>
+                                
+                            </div>
+                        </td>
+        
+                    }@else{
+                        <td>
+                            <div style="display: flex; justify-content: center;">
+                                <mat-spinner diameter="20" ></mat-spinner>
+                            </div>
+                        </td>
+                        <td ><button mat-stroked-button (click)="deleteDemande(item.id)" >
+                            Annuler
+                        </button></td>
+                        
+                    }
+              
+                  </tr>
+                }@empty {
+                    Auccun demandes trouvee 
+                }
+                </tbody>
+              </table>
+        </div> -->
+        <!-- <div>
+            <h5>Mes sessions</h5>
+            <table class="table  table-bordered">
+                <thead>
+                  <tr>
+                    <th style="width: 60px;" scope="col">#</th>
+                    <th scope="col">Titre</th>
+                    <th style="width: 280px;"  scope="col">Date</th>
+                    <th style="width: 280px;" scope="col">Temps</th>
+                    <th style="width: 100px;" scope="col">Lieu</th>
+                    <th style="width: 70px;" scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @for (item of sessions; track $index) {
+                  <tr>
+                    <th scope="row">{{$index+1}}</th>
+                    <td>{{item.titre}}</td>
+                    <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                    <td>De {{item.debut| date: 'HH:mm'}} a {{item.fin| date: 'HH:mm'}}</td>
+                    <td>{{item.lieu}}</td>
+                    <td>
+                        <i class="fa-solid fa-circle-info a" (click)="openDialog(item.id)"></i>
+                    </td>
+              
+                  </tr>
+                }@empty {
+                    Auccun demandes trouvee 
+                }
+                </tbody>
+              </table>
+        </div>
+         -->
+        
+    <!-- </div> -->
+</div>
+}
+

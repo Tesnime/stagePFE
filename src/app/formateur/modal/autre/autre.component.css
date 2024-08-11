@@ -1,0 +1,39 @@
+.infoper{
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.form-control{
+    padding: 4px 8px;
+    border-color: #3658a231;
+}
+
+.btn{
+
+    padding: 5px 8px;
+    background-color: #3658A2;
+    border-color: #3658A2;
+    width: 40%;
+    margin-top: 20px;
+    align-self: flex-end;
+}
+h6{
+    color: #3658A2;
+}
+.mat-mdc-dialog-content{
+    min-height: 65vh;
+} 
+.form-group{
+    margin-bottom: 7px;
+}
+.input-group-prepend,#linkedin,.input-group-text{
+    border-color: transparent;
+}
+.iconinput{
+    border: 1px solid rgba(150, 146, 185, 0.418);
+    border-radius: 5px;
+    align-items: center;
+    color: grey;
+}

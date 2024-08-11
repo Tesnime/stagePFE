@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>liste de tâches</h2>
+    <div class="add">
+        <input type="text" placeholder="Ajouter une tâche" [(ngModel)]="newTask">
+        <span (click)="addItem()"><i class="fas fa-plus"></i></span>
+    </div>
+    <ul>
+        @for (item of taches; track $index) {
+            <li> <div>{{item.tache}} <br> <span>{{item.date| date: 'dd/MM/yyyy'}}</span></div> 
+                 <i (click)="removeItem(item.id,$index)" class="fas fa-trash-alt"></i>
+            </li>
+        }
+        
+    </ul>
+</div>

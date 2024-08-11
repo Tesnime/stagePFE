@@ -1,0 +1,203 @@
+.container{
+    background-color: aliceblue;
+    max-width: 100%;
+    min-height: 90vh;
+    display: grid;
+    grid-template-columns: 30% 60%;
+    gap: 50px;
+    padding: 50px 10%;
+}
+.image{
+    background-color: white;
+    min-height: 50vh;
+    max-height: 50vh;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.donn{
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.titre{
+    height: 45px;
+    padding: 10px 20px;
+    background-color: #3658a21c;
+    color: #3658a2;
+    font-weight: 600;
+    border-bottom: 1px solid #cccccc81;
+}
+.contenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 20px;
+}
+.cont0{
+    align-items: flex-start;
+    gap: 2px;
+    padding: 20px 50px;
+}
+.contenu img{
+    height: 180px;
+    border-radius: 100%;
+}
+.contenu button{
+    margin-top: 25px;
+    color: white;
+    border-radius: 0px;
+    background-color:#3658a2;
+    border-color: #3658a2;
+    position: relative;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    gap: 10px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: auto;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    letter-spacing: -0.019rem;
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    appearance: none;
+    overflow: hidden;
+    transition: all 300ms ease 0s;
+    outline: none !important;
+
+}
+.contenu small{
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    letter-spacing: -0.019rem;
+    display: block;
+    color: rgb(0, 0, 0);
+    font-family: work-sans, sans-serif;
+}
+.donnee{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+.cont1{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    /* background-color: #3658a2; */
+    /* gap: 7px; */
+}
+.cont1 h6{
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    letter-spacing: -0.019rem;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    font-weight: 500;
+    font-family: work-sans, sans-serif;
+    color: #252627ad;
+}
+.formation{
+    width: 100%;
+    margin-bottom: 15px;
+}
+.cont2{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.separateur{
+    width: 100%;
+    border: 1px solid #eee;
+    align-self: center;
+    margin-top: 20px;
+}
+h5{
+    margin: 15px 0;
+}
+.champs{
+    height: 45px;
+    border-bottom: solid 1px #eee;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+
+}
+.chammp{
+    display: flex;
+    flex-direction: column;
+}
+.dark-modal .modal-content {
+    background-color: #292b2c;
+    color: white;
+}
+.dark-modal .close {
+    color: white;
+}
+.light-blue-backdrop {
+    background-color: #5cb3fd;
+}
+.modal-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+}
+textarea{
+    border-radius: 5px;
+    border-color: #c6d1dcc4;
+    padding: 5px;
+}
+.custom-modal {
+    max-width:  70%; /* Définissez la largeur souhaitée */
+    max-height: 70vh; /* Définissez la hauteur souhaitée */
+}
+.item{
+    display: grid;
+    grid-template-columns: 90% 10%;
+    align-items: center;
+    justify-content: center;
+}
+.edi{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+.edi button{
+    background-color: transparent;
+    border: 1px solid #292b2cc5;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    color: #292b2cc5;
+    margin: 0;
+    font-size: small;
+}
+.edi button:hover{
+    font-size: medium;
+    width: 40px;
+    height: 40px;
+}
+.btn-success-soft {
+    color: #3658a2;
+    background-color: #3658a247;
+    margin-top: 1rem;
+    
+}

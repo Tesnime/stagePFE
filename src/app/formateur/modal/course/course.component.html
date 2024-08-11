@@ -1,0 +1,27 @@
+<form [formGroup]="coursForm" class="infoper">
+    <div class="form-group">
+        <label for="exampleInputPassword1">Nom de cours</label>
+        <input matInput formControlName="nom" type="text" class="form-control" id="exampleInputPassword1" placeholder="cours">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">cours</label>
+        <div class="custom-file">
+            <input matInput formControlName="cours" type="file" class="custom-file-input" id="customFile">
+          </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Description</label>
+        <textarea matInput formControlName="description" name="" id="" cols="50" rows="4" placeholder="description .."></textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Theme</label>
+        <input matInput formControlName="theme" type="text" class="form-control" id="exampleInputPassword1" placeholder="taper votre theme">
+    </div>
+    
+   
+    <button type="submit" (click)="addcours()" class="btn btn-primary">Ajouter</button>
+
+        
+   
+
+</form>

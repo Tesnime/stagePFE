@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="container1">
+        <img src="../../../assets/images/icons8-user-64.png" alt="">
+        <div class="tit"> Bienvenue</div>
+        <p>vbnm,l;lkjhgfdxcfghjkl;.lkhgbvfcdxcvfghjk,kjhgb gdjs vcvfghjhjdhfklkhgbvfcdfvghjjhgdddd</p>
+        <div class="conn">
+            <small>j'ai deja un compte.</small>
+            <button (click)="navigateToSignIn()" type="button" class="btn btn-outline-light" >Se connecter</button>
+        </div>
+    </div>
+    <div class="login">
+        <p class="logo"><img src="../../assets/images/s2t-logo.png" alt=""></p>
+        <div class="con">Inscription</div>
+        <div class="role">
+            <input type="radio"  [(ngModel)]="selectedRole"   class="btn-check" name="role" id="btn-check-outlined" value="formateur" >
+            <label class="btn btn-outline-primary" for="btn-check-outlined">Formateur</label>
+            <input  type="radio"  [(ngModel)]="selectedRole"    class="btn-check" name="role" id="btn-check-2-outlined" value="apprenant" >
+            <label class="btn btn-outline-primary" for="btn-check-2-outlined">Apprenant</label>
+          </div>
+
+        <form [formGroup]="signupForm">  
+            <div class="row">
+                <mat-form-field appearance="outline" class="col" style="margin-right: 5px; ">
+                  <mat-label for="exampleInputNom">Nom</mat-label>
+                  <input matInput formControlName="lastname" type="text" class="form-control" placeholder="Nom"  id="exampleInputNom" required>
+
+                  <mat-error *ngIf="signupForm.get('lastname')?.invalid && signupForm.get('lastname')?.touched"> 
+                    entrer le valid email</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col" style="margin-left: 5px;">
+                  <mat-label for="exampleInputPrenom">Prenom</mat-label>
+                  <input matInput formControlName="firstname" type="text" class="form-control" placeholder="Prenom" id="exampleInputPrenom" required>
+
+                  <mat-error *ngIf="signupForm.get('firstname')?.invalid && signupForm.get('firstname')?.touched"> 
+                    entrer le valid email</mat-error>
+                </mat-form-field>
+
+                
+            </div>
+            <mat-form-field appearance="outline" class="form-group">
+              <mat-label for="exampleInputEmail1">Email</mat-label>
+              <input matInput formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
+
+              <mat-error *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"> 
+                entrer le valid email</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field  appearance="outline" class="form-group">
+              <mat-label>Mot de passe</mat-label>
+              <input matInput formControlName="password" class="form-control" placeholder="mot de passe" required [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"> 
+                entrer le valid mot de passe</mat-error>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="outline" class="form-group">
+              <mat-label for="exampleInputPassword1">Mot de passe</mat-label>
+              <input matInput formControlName="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe" required>
+
+              <mat-error *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"> 
+                entrer le valid email</mat-error>
+            </mat-form-field> -->
+            <div class="l"> <button mat-raised-Button type="submit" (click)="onSubmit()" [disabled]="signupForm.invalid" class="btn btn-primary">Submit</button></div>
+          <!-- {{selectedRole}} -->
+           
+          </form>
+
+    </div>
+
+</div>
+
+

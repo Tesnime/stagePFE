@@ -1,0 +1,76 @@
+.container{
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 2rem ;
+}
+.titre{
+    color:#374375;
+    font-family: welcome-font, sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    letter-spacing: -0.0375rem;
+    display: block;
+    /* font-size: 0.8125rem;
+    line-height: 1.15;
+    letter-spacing: -0.0125rem; */
+    text-transform: uppercase;
+}
+.encours{
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+.reste{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.tab{
+    background-color: rgba(255, 255, 255, 0.504);
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.reste div{
+    max-height: 60vh;
+    overflow-y: scroll;
+}
+table tbody {
+    /* display: block; */
+    max-height: 45vh;
+    overflow-y: auto;
+    width: 100%;
+}
+
+/* table tr {
+    display: table;
+    width: 100%;
+
+}
+
+table td {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    cursor: pointer;
+} */
+
+/* Custom scrollbar styles */
+table tbody::-webkit-scrollbar {
+    width: 3px; 
+}
+
+table tbody::-webkit-scrollbar-thumb {
+    background-color: #b3b1b1; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Roundness of the scrollbar thumb */
+}
+
+table tbody::-webkit-scrollbar-thumb:hover {
+    background-color: #bfbaba; /* Color of the scrollbar thumb on hover */
+}
+
+table tbody::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the scrollbar track */
+}

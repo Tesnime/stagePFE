@@ -1,0 +1,29 @@
+@if (session) {
+<div class="titre" mat-dialog-title>
+    <h2  >Modifier les détails de session </h2>
+    <span style="color: gray; font-size: medium; margin-top: -20px; margin-left: 20px;">{{session.nom}} </span>
+</div>
+<form [formGroup]="sessionForm" (ngSubmit)="modifier()" class="infoper">
+    <mat-dialog-content class="mat-typography">
+        <div align="center" style="margin-bottom: 10px; width: 100%; ">
+            <mat-form-field class="example-full-width" >
+                <mat-label> Date pour la session</mat-label>
+                    <input matInput formControlName="date" [matDatepicker]="picker">
+                    <mat-hint>mm/jj/aaaa</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
+                </mat-form-field>
+        </div>
+        <div class="time">
+            De  <ngb-timepicker formControlName="debut"  [spinners]="false" /> a <ngb-timepicker formControlName="fin" [spinners]="false" />
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end" >
+        <button mat-button mat-dialog-close>Annuler</button>
+        <button mat-button [mat-dialog-close]="true" type="submit" cdkFocusInitial>Modifier</button>
+    </mat-dialog-actions>
+
+</form>
+}

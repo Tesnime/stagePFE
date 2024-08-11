@@ -1,0 +1,119 @@
+<div class="container">
+  <div><app-agenda></app-agenda></div>
+
+  <div class="ceJour">
+    <h3>Programme du jour</h3>
+    @for (item of sessions; track $index) {
+      @if (isToday(item.date)) {
+        <div class="inf">
+          <ul>
+            <li>
+              <div>
+                <strong>{{item.nom}}</strong> <br>
+                du {{item.debut}} au {{item.fin}} <br>
+                A {{item.lieu}}
+              </div>
+              <button style="margin-top: 10px;" (click)="openSession(item.id)" mat-raised-button>Accéder à la session</button>
+             </li>
+          </ul>
+          
+        </div>
+
+      }
+    }
+  </div>
+  <mat-accordion style="margin-top: 40px;">
+    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Sessions à Venir </mat-panel-title>
+        
+      </mat-expansion-panel-header>
+      <div class="sess">
+        <table class="table  table-bordered">
+        <thead>
+          <tr>
+            <th style="width: 60px;" scope="col">#</th>
+            <th scope="col">Titre</th>
+            <th style="width: 280px;"  scope="col">Date</th>
+            <th style="width: 70px;" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (item of sessions; track $index) {
+                @if (isToday(item.date)) {
+          <tr class="table-secondary">
+            <th scope="row">{{i}}</th>
+            <td>{{item.nom}}</td>
+            <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+            <!-- <td>De {{item.debut}} a {{item.fin}}</td>
+            <td>{{item.lieu}}</td> -->
+            <td>
+                <i class="fa-solid fa-circle-info a" (click)="openSession(item.id)"></i>
+            </td>
+      
+          </tr>
+        }@else if (isFutureDate(item.date)) {
+          <tr  >
+            <th scope="row">{{i}}</th>
+            <td>{{item.nom}}</td>
+            <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+            <!-- <td>De {{item.debut}} a {{item.fin}}</td>
+            <td>{{item.lieu}}</td> -->
+            <td>
+                <i class="fa-solid fa-circle-info a" (click)="openDialog(item)"></i>
+            </td>
+      
+          </tr>
+        }
+        }@empty {
+          <tr>
+            <td style="text-align: center;" colspan="4">Aucune session trouvée</td>
+        </tr>
+        }
+        </tbody>
+      </table></div>
+      
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Sessions Passées </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="sess">
+        <table class="table  table-bordered" >
+          <thead>
+            <tr>
+              <th style="width: 60px;" scope="col">#</th>
+              <th scope="col">Titre</th>
+              <th style="width: 280px;"  scope="col">Date</th>
+              <th style="width: 70px;" scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+              @for (item of sessions; track $index) {
+                  @if (!isFutureDate(item.date)) {
+            <tr>
+              <th scope="row">{{i+1}}</th>
+              <td>{{item.nom}}</td>
+              <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+              <td>
+                  <i class="fa-solid fa-circle-info a" (click)="openDialog1(item.id)"></i>
+              </td>
+        
+            </tr>
+          }
+          }@empty {
+            <tr>
+              <td style="text-align: center;" colspan="4">Aucune session trouvée</td>
+          </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+      
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+  
+    
+   
+</div>

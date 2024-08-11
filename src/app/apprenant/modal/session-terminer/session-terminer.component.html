@@ -1,0 +1,207 @@
+<!-- @if(data.demande){ -->
+    <h2 class="titre"  mat-dialog-title>{{session.nom}}</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="details">
+            <div class="a">Titre de la formation:<small>{{session.demande.titre}}</small></div>
+            <div class="a">Description:<small>{{session.demande.description}}</small></div>
+           
+                <div class="a">Sujet de session:
+                    <small>
+                        @for (item of session.demande.theme; track $index) {
+                            {{item}},
+                        }
+                    </small>
+                </div>
+                <div class="a">Nombre de jours :<small>{{Sessions.length}}</small></div>
+                <div class="a">Formateur:<small>{{session.demande.formateur.firstname}} {{session.demande.formateur.lastname}}</small></div>
+                <div class="a">Date de la session:<small>{{session.date|date:'dd/MM/yyyy'}} </small></div>
+                <div class="a">Horaire:<small>{{session.debut}} - {{session.fin}} </small></div>
+                <div class="a">Lieu:<small>{{session.lieu}}</small></div>
+            
+        </div>
+        <div class="other">
+            <div class="donnee">
+                <h3>Suivi de la session</h3>
+                <div class="b">Présence: 
+                    @if (isPresent.present) {
+                        <i style="color: green;" class="fa-solid fa-check"></i>
+                    }@else {
+                        <i style="color: red;" class="fa-solid fa-xmark"></i>
+                    }
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        @if (session.id == sess['firstSessionId']) { 
+                        <th style="width: 12%;" scope="col">Manuel de formation + cle USB</th>
+                        <th style="width: 12%;" scope="col">Cartable</th>
+                        }
+                        <th style="width: 12%;" scope="col">Pause cafe</th>
+                        <th style="width: 12%;" scope="col">Dejeuner</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                      <tr>
+                        @if (session.id == sess['firstSessionId']) { 
+                            @if(isPresent.manuel=='oui'){
+                            <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                            }@else{
+                            <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                            }
+                            @if(isPresent.cartable=='oui'){
+                                <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                                }@else{
+                                <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                                }
+                        }
+                        @if(isPresent.pauseCafe=="oui"){
+                            <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                        }@else {
+                            <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                        }
+                        @if(isPresent.dejeuner=="oui"){
+                            <td><i style="color: green;" class="fa-solid fa-circle-check"></i></td>
+                        }@else{
+                            <td><i style="color: red;" class="fa-solid fa-circle-xmark"></i></td>
+                        }
+
+                      </tr>
+                    
+                     
+                    </tbody>
+                  </table>
+                  <h3>Commentaires</h3>
+                  <div class="d-flex justify-content-center row comment" style="overflow-y: auto;">
+                    @for (item of comments; track $index) {
+                        <div style="width: 100%; background-color: transparent;" class="col-md-8">
+                            <div  class="d-flex flex-column  comment-section" style="margin-bottom: 0;">
+                                <div class=" p-2">
+                                    <div class="d-flex flex-row user-info">
+                                        <div class="d-flex flex-column justify-content-start ml-2 sender" style="padding: 0 20px; margin-bottom: 0;">
+                                            @if(item.apprenant!=null){
+                                                <span class="d-block font-weight-bold name">{{item.apprenant.firstname}} {{item.apprenant.lastname}}</span>
+
+                                            }@else {
+                                            <span class="d-block font-weight-bold name">{{item.formateur.firstname}} {{item.formateur.lastname}}</span>
+
+                                            }
+                                            <span class="date text-black-50 ml-20" style="font-size: 12px;"> {{item.date|date : 'dd/MM'}}</span></div>
+                                    </div>
+                                    <div>
+                                        <p style="padding: 0 20px; margin-bottom: 0;" class="comment-text">{{item.comment}}</p>
+                                    </div>
+                                </div> 
+                               
+                            </div>
+                        </div>
+                    }
+                   
+                </div>
+            </div>
+            <div class="apprenant">
+                <h3 style="margin-left: 10px;">Liste des apprenants</h3>
+                <table class="table table-hover tab">
+                    <tbody>
+                        @for (item of session.demande.apprenants; track $index) {
+                      <tr>
+                        
+                        @if (item.id == userId ) {
+                             <td style="background-color: #0c265f15;">{{$index+1}} - {{item.firstname}} {{item.lastname}}</td>
+                        }@else {
+                             <td (click)="openApprenant(item)"> {{$index+1}} - {{item.firstname}} {{item.lastname}}</td>
+                        }
+                      </tr>
+                    }
+                    </tbody>
+                  </table> 
+                <!-- <h3 style="margin-left: 10px;">Document</h3>
+                <table class="table table-hover tab">
+                    <tbody>
+                        @for (item of certif; track $index) {
+                      <tr>
+                            <td (click)="viewCertif(item.id)"> {{item.fileName}} </td>
+                      </tr>
+                    }
+                    </tbody>
+                  </table>  -->
+
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Quitter</button>
+    </mat-dialog-actions>
+    <!-- 
+        
+                
+                <ng-container ngbNavItem="middle">
+                    <button ngbNavLink>Suivi de la session</button>
+                    <ng-template ngbNavContent>
+                        <mat-stepper orientation="vertical">
+                            <mat-step>
+                               
+                            </mat-step>
+                           
+                           
+                            
+                          </mat-stepper>
+                    </ng-template>
+                </ng-container>
+                <ng-container ngbNavItem="bottom">
+                    <button ngbNavLink>Commentaires</button>
+                    <ng-template ngbNavContent>
+                        <div style="width: 100%; " class="container">
+                            <div class="d-flex justify-content-center row " style="overflow-y: scroll;">
+                                @for (item of comments; track $index) {
+                                    <div style="width: 100%; background-color: transparent;" class="col-md-8">
+                                        <div  class="d-flex flex-column  comment-section" style="margin-bottom: 0;">
+                                            <div class=" p-2">
+                                                <div class="d-flex flex-row user-info">
+                                                    <div class="d-flex flex-column justify-content-start ml-2 sender" style="padding: 0 20px; margin-bottom: 0;">
+                                                        @if(item.apprenant!=null){
+                                                            <span class="d-block font-weight-bold name">{{item.apprenant.firstname}} {{item.apprenant.lastname}}</span>
+            
+                                                        }@else {
+                                                        <span class="d-block font-weight-bold name">{{item.formateur.firstname}} {{item.formateur.lastname}}</span>
+            
+                                                        }
+                                                        <span class="date text-black-50 ml-20" style="font-size: 12px;"> {{item.date|date : 'dd/MM'}}</span></div>
+                                                </div>
+                                                <div>
+                                                    <p style="padding: 0 20px; margin-bottom: 0;" class="comment-text">{{item.comment}}</p>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="bg-white">
+                                                <div class="d-flex flex-row fs-12">
+                                                    <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
+                                                    <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                                                    <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+                                                </div>
+                                            </div> -->
+                                           
+                                        <!-- </div>
+                                    </div>
+                                }
+                               
+                            </div>
+                            <form [formGroup]="commentForm" (ngSubmit)="comment()" style="justify-self: flex-end; width: 100%; " class="bg-light p-2">
+                                <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                    <textarea matInput formControlName="comment" class="form-control ml-1 shadow-none textarea" required></textarea></div>
+                                <div class="mt-2 text-right" align="end">
+                                    <button class="btn btn-sm shadow-none" type="submit">Ajouter</button></div>
+                            </form>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </div>
+        
+            <div [ngbNavOutlet]="nav" class="ms-4"></div>
+        </div>
+    </mat-dialog-content>
+    
+  -->
+  
+<!-- } -->
+
+

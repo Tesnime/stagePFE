@@ -1,0 +1,44 @@
+.infoper{
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.form-control{
+    padding: 4px 8px;
+    border-color: #3658a231;
+}
+.titre{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn{
+
+    padding: 5px 8px;
+    background-color: #3658A2;
+    border-color: #3658A2;
+    width: 40%;
+    margin-top: 20px;
+    align-self: flex-end;
+}
+h6{
+    color: #3658A2;
+}
+.mat-mdc-dialog-content{
+    min-height: 45vh;
+} 
+.form-group{
+    margin-bottom: 7px;
+}
+.time{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+.example-full-width {
+    width: 60%;
+  }

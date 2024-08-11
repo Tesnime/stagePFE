@@ -1,0 +1,8 @@
+.calendar .fc-daygrid-day .fc-daygrid-day-top {
+    text-decoration: none; 
+    color: #44435F; 
+}
+.calendar a{
+    color: #44435F;
+    text-decoration: none;
+}

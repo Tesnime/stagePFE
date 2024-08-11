@@ -1,0 +1,142 @@
+<form [formGroup]="evalForm" (ngSubmit)="envoyer()">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col" ></th>
+            <th scope="col" style="width: 12%; text-align: center;">Très bien</th>
+            <th scope="col" style="width: 12%; text-align: center;">Bien</th>
+            <th scope="col" style="width: 12%; text-align: center;">Passable</th>
+            <th scope="col" style="width: 12%; text-align: center;">Insuffisant</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">N°1 La formation que vous venez de suivre a-t-elle respecté 
+                le programme annoncé et atteint les objectifs ?
+                </th>
+                <td><input type="radio" formControlName="q1" value="très bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q1" value="bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q1" value="passable" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q1" value="insuffisant" class="custom-control-input"></td>
+            <!-- <mat-radio-group formControlName="q1">
+                <td><mat-radio-button  class="example-margin" value="très bien"></mat-radio-button></td>
+                <td><mat-radio-button  class="example-margin" value="bien"></mat-radio-button></td>
+                <td><mat-radio-button  class="example-margin" value="passable"></mat-radio-button></td>
+                <td><mat-radio-button  class="example-margin" value="insuffisant"></mat-radio-button></td>
+            </mat-radio-group> -->
+        </tr>
+        <tr>
+            <td style="text-align: left;">commentaire:</td>
+            <td colspan="4"><textarea matInput formControlName="comQ1" class="form-control" rows="1"></textarea></td>
+        </tr>
+        <tr>
+            <th scope="row">N°2 Pensez-vous que les connaissances que vous avez acquises
+                pourront être mises en oeuvre dans votre travail ? 
+                </th>
+                <td><input type="radio" formControlName="q2" value="très bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q2" value="bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q2" value="passable" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q2" value="insuffisant" class="custom-control-input"></td>
+            
+                <!-- <mat-radio-group formControlName="q2">
+                    <td><mat-radio-button  class="example-margin" value="très bien"></mat-radio-button></td>
+                    <td><mat-radio-button  class="example-margin" value="bien"></mat-radio-button></td>
+                    <td><mat-radio-button  class="example-margin" value="passable"></mat-radio-button></td>
+                    <td><mat-radio-button  class="example-margin" value="insuffisant"></mat-radio-button></td>
+            </mat-radio-group> -->
+        </tr>
+        <tr>
+            <td style="text-align: left;">commentaire:</td>
+            <td colspan="4"><textarea formControlName="comQ2" class="form-control" rows="1"></textarea></td>
+        </tr>
+        <tr>
+            <th scope="row">N°3 Le niveau de compétences techniques de
+                l’animateur vous a paru 
+                </th>
+                <td><input type="radio" formControlName="q3" value="très bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q3" value="bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q3" value="passable" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q3" value="insuffisant" class="custom-control-input"></td>
+            
+                <!-- <mat-radio-group formControlName="q3">
+                    <td><mat-radio-button class="example-margin" value="très bien"></mat-radio-button></td>
+                    <td><mat-radio-button class="example-margin" value="bien"></mat-radio-button></td>
+                    <td><mat-radio-button class="example-margin" value="passable"></mat-radio-button></td>
+                    <td><mat-radio-button class="example-margin" value="insuffisant"></mat-radio-button></td>
+            </mat-radio-group> -->
+        </tr>
+        <tr>
+            <td style="text-align: left;">commentaire:</td>
+            <td colspan="4"><textarea formControlName="comQ3" class="form-control" rows="1"></textarea></td>
+        </tr>
+        <tr>
+            <th scope="row">N°4 Les supports pédagogiques utilisés par l’animateur
+                sont-ils satisfaisants ? (qualité, contenu…)            
+                </th>
+                <td><input type="radio" formControlName="q4" value="très bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q4" value="bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q4" value="passable" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q4" value="insuffisant" class="custom-control-input"></td>
+            
+            <!-- <mat-radio-group formControlName="q4">
+                <td><mat-radio-button  class="example-margin" value="très bien"></mat-radio-button></td>
+                <td><mat-radio-button  class="example-margin" value="bien"></mat-radio-button></td>
+                <td><mat-radio-button  class="example-margin" value="passable"></mat-radio-button></td>
+                <td><mat-radio-button  class="example-margin" value="insuffisant"></mat-radio-button></td>
+            </mat-radio-group> -->
+        </tr>
+        <tr>
+            <td style="text-align: left;">commentaire:</td>
+            <td colspan="4"><textarea formControlName="comQ4" class="form-control" rows="1"></textarea></td>
+        </tr>
+        <tr>
+            <th scope="row">N°5 Les conditions du déroulement de la formation (accueil, 
+                local, restauration, rythme, durée…) vous ont-ils paru ?             
+                </th>
+                <td><input type="radio" formControlName="q5" name="q5" value="très bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q5" name="q5" value="bien" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q5" name="q5" value="passable" class="custom-control-input"></td>
+                <td><input type="radio" formControlName="q5" name="q5" value="insuffisant" class="custom-control-input"></td>
+            
+                <!-- <mat-radio-group formControlName="q5">
+                    <td><mat-radio-button  class="example-margin" value="très bien"></mat-radio-button></td>
+                    <td><mat-radio-button  class="example-margin" value="bien"></mat-radio-button></td>
+                    <td><mat-radio-button  class="example-margin" value="passable"></mat-radio-button></td>
+                    <td><mat-radio-button  class="example-margin" value="insuffisant"></mat-radio-button></td>
+            </mat-radio-group> -->
+        </tr>
+        <tr>
+            <td style="text-align: left;">commentaire:</td>
+            <td colspan="4"><textarea formControlName="comQ5" class="form-control" rows="1"></textarea></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" ></th>
+                <th scope="col" style="width: 24.6%; text-align: center;">Oui</th>
+                <th scope="col" style="width: 24.6%; text-align: center;">Non</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">N°6	Souhaiteriez-vous une suite à cette formation ?</th>
+                    <td><input type="radio" formControlName="q6" name="q6" value="oui" class="custom-control-input"></td>
+                    <td><input type="radio" formControlName="q6" name="q6" value="non" class="custom-control-input"></td>
+                    
+                    <!-- <mat-radio-group formControlName="q6">
+                        <td><mat-radio-button  class="example-margin" value="très bien"></mat-radio-button></td>
+                        <td><mat-radio-button  class="example-margin" value="bien"></mat-radio-button></td>
+                    </mat-radio-group> -->
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Sur quel(s) thème(s) ?</td>
+                    <td colspan="4"><textarea formControlName="comQ6" class="form-control" rows="1"></textarea></td>
+                </tr>
+            </tbody>
+    </table>
+    <div align="end" style="padding: 1rem 3rem;">
+        <button type="submit" mat-stroked-button>Envoyer</button>
+    </div>
+</form>
