@@ -24,6 +24,7 @@ import { SessionDetailsComponent } from '../modal/session-details/session-detail
 export class SessionsComponent {
   sessions:any;
   i=0;
+  t=0;
   readonly panelOpenState = signal(false);
 
   constructor(
@@ -38,6 +39,11 @@ export class SessionsComponent {
           this.sessions = prof;
           this.sessions.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
           console.log('sessions:', this.sessions);
+          this.sessions.forEach((element: any) => {
+            if (this.isToday(element.date)) {
+              this.t++;
+            }
+          });          
         },
         error => {
           console.error('Error fetching detail:', error);
@@ -86,7 +92,8 @@ export class SessionsComponent {
     
       const providedDate = new Date(date);
       providedDate.setHours(0, 0, 0, 0);
-    
+
+     
       // Compare the time values of the two dates
       return providedDate.getTime() === currentDate.getTime();
     }
