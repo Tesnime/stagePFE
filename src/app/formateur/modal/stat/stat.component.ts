@@ -12,7 +12,11 @@ import { Chart, ChartModule } from 'angular-highcharts';
 })
 
 export class StatComponent {
-  
+  recommendations!:any[];
+
+
+
+
 presenceSem = new Chart({
   chart: {
     polar: true,
@@ -55,6 +59,16 @@ presence = new Chart({
       this.formateurService.total().subscribe(
         prof => {
           this.totale = prof;
+        },
+        error => {
+          console.error('Error fetching profile:', error);
+          this.snackBar.open('Error fetching profile. Please try again.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+        }
+      );
+
+      this.formateurService.recommendation().subscribe(
+        prof => {
+          this.recommendations = prof;
         },
         error => {
           console.error('Error fetching profile:', error);

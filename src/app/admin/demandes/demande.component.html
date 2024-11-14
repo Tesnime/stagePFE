@@ -37,13 +37,13 @@
             </tbody>
         </table>
       <mat-action-row>
-        <button mat-button (click)="nextStep()">demandes envoyées</button>
+        <button mat-button (click)="nextStep()">Demandes reçues</button>
       </mat-action-row>
     </mat-expansion-panel>
   
     <mat-expansion-panel [expanded]="step() === 1" (opened)="setStep(1)" hideToggle>
       <mat-expansion-panel-header>
-        <mat-panel-title> demandes envoyées </mat-panel-title>
+        <mat-panel-title> Demandes reçues</mat-panel-title>
         <!-- <mat-panel-description>
           Type the country name
           <mat-icon>map</mat-icon>
@@ -82,13 +82,13 @@
   
       <mat-action-row>
         <button mat-button (click)="prevStep()">Sessions proposées</button>
-        <button mat-button (click)="nextStep()">Formations approuvées</button>
+        <button mat-button (click)="nextStep()">Formations en cours</button>
       </mat-action-row>
     </mat-expansion-panel>
   
     <mat-expansion-panel [expanded]="step() === 2" (opened)="setStep(2)" hideToggle>
       <mat-expansion-panel-header>
-        <mat-panel-title> Formations approuvées </mat-panel-title>
+        <mat-panel-title> Formations en cours </mat-panel-title>
         <!-- <mat-panel-description>
           Inform the date you wish to travel
           <mat-icon>date_range</mat-icon>
@@ -125,14 +125,14 @@
      
   
       <mat-action-row>
-        <button mat-button (click)="prevStep()">demandes envoyées</button>
-        <button mat-button (click)="nextStep()">demandes refusées</button>
+        <button mat-button (click)="prevStep()">Demandes reçues</button>
+        <button mat-button (click)="nextStep()">Demandes refusées</button>
       </mat-action-row>
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="step() === 3" (opened)="setStep(3)" hideToggle>
         <mat-expansion-panel-header>
-          <mat-panel-title> demandes refusées </mat-panel-title>
+          <mat-panel-title> Demandes refusées </mat-panel-title>
           <!-- <mat-panel-description>
             Inform the date you wish to travel
             <mat-icon>date_range</mat-icon>
@@ -169,7 +169,7 @@
        
     
         <mat-action-row>
-          <button mat-button (click)="prevStep()">Formations approuvées</button>
+          <button mat-button (click)="prevStep()">Formations en cours</button>
           <button mat-button (click)="nextStep()">fin</button>
         </mat-action-row>
       </mat-expansion-panel>

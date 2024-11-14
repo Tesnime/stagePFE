@@ -8,6 +8,13 @@ nav{
   height: 10%;
     
 }
+df-messenger {
+    --df-messenger-bot-message: burlywood;
+    --df-messenger-user-message: cadetblue;
+    --df-messenger-font-color: #fff;
+    --df-messenger-button-titlebar-color: burlywood; /* Change header button color */
+    --df-messenger-send-icon: burlywood; /* Customize send button icon color */
+  }
 .logo{
     width: 18%;
     max-height: 100% ;

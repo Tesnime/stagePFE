@@ -9,8 +9,13 @@
             <span>{{appPerSession}}/session</span>
         </div>
     </div>
-    <div class="chart">
-        <div  [chart]="presenceSem"></div>
-        <div  [chart]="presence"></div>
+     <div class="chart" style="background-color: white;">
+        <h2>Recommandations de Sujets à Considérer pour Vos Futures Formations</h2>
+       <div class="sujet">
+            @for (item of recommendations; track $index) {
+                <div class="tit"><div class="cer"></div> {{item}}</div>
+            }
+        </div>
+       
     </div>
 </div>

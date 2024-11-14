@@ -139,19 +139,36 @@ export class SessionDetailsComponent {
 
   }
   comment(){
-    if(this.commentForm.valid){
-      this.formateurService.comment(this.commentForm.value,this.data.id).subscribe((res)=>{
-        if(res.id != null){
-          this.snackBar.open('ajout avec succes!','close',{duration:5000});
-          // this.router.navigateByUrl('formateur/home');
-          location.reload();
+    if (this.commentForm.valid) {
+      const commentValue = this.commentForm.get('comment')?.value;
+
+
+  
+      // Vérification des termes inappropriés
+      this.formateurService.checkAnswer(commentValue).subscribe((res) => {
+        if (!res) {
+          // Si des termes inappropriés sont détectés
+          alert("Des termes inappropriés ont été détectés dans votre commentaire, ce qui empêche son envoi.");
+        } else {
+          // Si tout est correct, soumettre le commentaire
+          this.formateurService.comment(this.commentForm.value, this.session.id).subscribe((response) => {
+            if (response && response.id != null) {
+              this.snackBar.open('Ajout avec succès!', 'Fermer', { duration: 5000 });
+              location.reload();
+            } else {
+              this.snackBar.open('L\'ajout a échoué. Veuillez réessayer.', 'Fermer', {
+                duration: 5000,
+                panelClass: 'error-snackbar'
+              });
+            }
+          });
         }
-        else{
-          this.snackBar.open('signup failed,Please try again.','close',{duration:5000,panelClass:'error-snackbar'});
-        }
-      })
-    }else{
-      this.snackBar.open('Veuillez remplir tous les champs obligatoires.','close',{duration:5000,panelClass:'error-snackbar'});
+      });
+    } else {
+      this.snackBar.open('Le formulaire est invalide. Veuillez vérifier les champs.', 'Fermer', {
+        duration: 5000,
+        panelClass: 'error-snackbar'
+      });
     }
   }
   openApprenant(app : any){

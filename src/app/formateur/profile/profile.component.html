@@ -27,6 +27,15 @@
     </div>
     <div class="donnee">
         <div class="donn" id="infoper">
+            <div class="titre" style="max-height: 2px;"></div>
+            <div class="contenu cont0" style="display: flex; justify-content: center; align-items: center;">
+               <strong>Améliorez votre profil facilement grâce à notre technologie avancée</strong><br>
+               <small align="center">importez votre CV, et laissez notre IA s'occuper de l'extraction et du remplissage automatique de vos informations. </small><br>
+               <input type="file" id="customFile1" name="file1" (change)="onCVSelected($event)"  hidden="">
+               <label class="btn btn-success-soft btn-block" style="margin-top: 0; width: 200px; display: flex; gap: 15px; align-items: center; justify-content: center;" for="customFile1"><i class="fa-solid fa-upload"></i>Importer</label>
+            </div>
+        </div>
+        <div class="donn" id="infoper">
             <div class="titre" >Informations personnelles</div>
             <div class="contenu cont0">
                 <div class="cont1"><h6>Nom complet:</h6><small>{{profile.firstname}} {{profile.lastname}}</small></div>
@@ -50,7 +59,17 @@
             <div class="titre">Formations Académiques et Certifications</div>
             <div class="contenu cont0">
                 <ul class="formation list-group list-group-flush" >
-                    @for (item of formation; track $index) {
+                    @if (profile.education==null && formation.length==0) {
+                        <small align="center">Auccune Formations Académiques et Certifications trouvees</small> 
+                    }@else{
+                        {{profile.education}} <br>
+                        @for (item of formation; track $index) {      
+                               {{item.date}} <br>
+                               {{item.diplome}}, {{item.specialite}} | {{item.etablissement}} <br>
+                                 
+                        } 
+                    }
+                    <!-- @for (item of formation; track $index) {
                         <li class="list-group-item item">
                             <div>
                                 <div class="cont1"><h6>Diplôme/Certification obtenue:</h6><small>{{item.diplome}}</small></div>
@@ -66,8 +85,8 @@
                             </div>
                         </li>
                     }@empty {
-                        <small align="center">Auccune Formations Académiques et Certifications trouvees </small> 
-                    }
+                        <small align="center"> </small> 
+                    } -->
                    
                 </ul>
                 <div class="separateur"></div>
@@ -83,25 +102,18 @@
             <div class="titre">Expériences professionnelles</div>
             <div class="contenu cont0">
                 <ul class="formation list-group list-group-flush">
-                    @for (item of experience; track $index) {
-                        <li class="list-group-item item">
-                            <div>
-                                <div class="cont1"><h6>Titre de poste:</h6><small>{{item.poste}}</small></div>
-                            <div class="cont1"><h6>Entreprise ou Organisation:</h6><small>{{item.entreprise}}</small></div>
-                            <div class="cont1"><h6>Lieu:</h6><small>{{item.lieu}}</small></div>
-                            <div class="cont2">
-                                <div class="cont1"><h6>Debut:</h6><small>{{item.debut}}</small></div>
-                                <div class="cont1"><h6>Fin:</h6><small>{{item.fin || '__'}}</small></div>
-                            </div>
-                            </div>
-                            <div class="edi">
-                                <button (click)="editExpr(item.id)"><i class="fa-solid fa-pen"></i></button>
-                                <button (click)="deleteExpr(item.id)"><i class="fa-solid fa-trash"></i></button>
-                            </div>
-                        </li>
-                    }@empty {
+                    @if (profile.experience==null && experience.length==0) {
                         <small align="center">Auccune Expériences professionnelles trouvees </small> 
-                    }      
+                    }@else{
+                        {{profile.experience}} <br>
+                        @for (item of experience; track $index) {      
+                                {{item.debut}}-{{item.fin || '__'}} <br>
+                                {{item.poste}} <br>
+                                <small>{{item.entreprise}}</small>
+                                <p>{{item.description}}</p> 
+                        } 
+                    }
+                       
                 </ul>
                 <div class="separateur"></div>
                 <button style="align-self: flex-start;" class="btn btn-outline-primary mb-2 me-2" (click)="openDialog2()">

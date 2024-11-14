@@ -20,6 +20,11 @@ export class FormateurService {
       headers: this.createAuthorizationHeader(),
     })
   }
+  updateCV(cvDetails:any):Observable<any>{
+    return this.http.put(URL+'updateCV?id='+this.userId,cvDetails,{
+      headers: this.createAuthorizationHeader(),
+    })
+  }
 
   
   autre(profile:any):Observable<any>{
@@ -304,7 +309,25 @@ firstAndLastSession(demandeId:number):Observable<any>{
     map(response => response)
   )
 }
-
+recommendation():Observable<any[]>{
+  return this.http.get<any[]>(URL+'recommend-themes/?formateurId='+this.userId,{
+    headers: this.createAuthorizationHeader(),
+  }).pipe(
+    map(response => response)
+  )
+}
+checkAnswer(answerDetails:any):Observable<any>{
+  return this.http.post(URL+'checkComment?comment='+answerDetails,{},{
+    headers: this.createAuthorizationHeader(),
+  })
+}
+upload_CV(file: File): Observable<any> {
+  const formData = new FormData();
+  formData.append('file', file, file.name);
+  return this.http.post<any>(URL+'upload_cv?',formData,{
+    headers: this.createAuthorizationHeader(),
+  })
+}
   private createAuthorizationHeader(): HttpHeaders{
    
     console.log('Token:', this.token);

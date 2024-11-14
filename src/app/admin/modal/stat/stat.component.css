@@ -73,3 +73,38 @@ small{
 h5{
     font-weight: bold;
 }
+.sujet{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: flex-start;
+    justify-content: flex-start;
+    row-gap: 10px;
+    column-gap: 5px;
+}
+.cer{
+    min-width: 10px;
+    min-height: 10px;
+    background-color: rgb(53, 121, 194);
+    border-radius: 100%;
+}
+.tit{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: flex-start;
+}
+.best{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+.formateur-image{
+    width: 160px;
+    height: 130px;
+}

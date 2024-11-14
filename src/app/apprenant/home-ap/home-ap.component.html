@@ -7,6 +7,13 @@
         <button (click)="logout()" mat-button>Deconnecter</button>
       </div>
   </nav>
+  <df-messenger
+    intent="WELCOME"
+    chat-title="Chatbot"
+    agent-id="c45b4b98-c099-4ea9-ab19-fb5dcbde4433"
+    language-code="fr"
+    style="position: fixed; bottom: 0; right: 20px; z-index: 1000; background-color: azure;" 
+  ></df-messenger>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="0ms" [(selectedIndex)]="activeTab"  (selectedIndexChange)="onTabChange($event)">
       <mat-tab label="Accueil">
           <div class="inscrir">
@@ -86,7 +93,7 @@
               </div>
           </div>
           <div class="recommendations">
-              <h1 align="center" style="color: #081F5c; margin-bottom: 50px;">.Autres sessions.</h1>
+              <h1 align="center" style="color: #081F5c; margin-bottom: 50px;"></h1>
              <!-- <div style="width: 100%; display: flex; justify-content: center; align-items: center; ">
               <div class="search" align="center">
                   <i class="fa fa-search"></i>
@@ -95,7 +102,11 @@
                 </div>
              </div> -->
              <div class="aut">
-              <div></div>
+              <div class="chart" style="margin-top: 10px;">
+                <div class="divChart">
+                    <div  [chart]="themes"></div>
+                </div> 
+              </div>
               <div><app-to-do></app-to-do></div>
              </div>
            

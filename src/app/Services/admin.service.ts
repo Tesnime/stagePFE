@@ -257,7 +257,7 @@ listePresence(sessionId:any):Observable<any>{
     const formData: FormData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(URL + 'upload', formData, {
+    return this.http.put(URL + 'upload', formData, {
       headers: this.createAuthorizationHeader(),
       responseType: 'text' 
     });
@@ -372,7 +372,25 @@ SessionbyDemande(demandeId:number):Observable<any>{
     map(response => response)
   )
 }
-
+suitbleTrainer(themes: string[]):Observable<any[]>{
+  return this.http.post<any[]>(URL+'suitable-trainers',themes,{
+    headers: this.createAuthorizationHeader(),
+  }) 
+}
+RecommendedTheme():Observable<any[]>{
+  return this.http.get<any[]>(URL+'recommend-themes-adm',{
+    headers: this.createAuthorizationHeader(),
+  }).pipe(
+    map(response => response)
+  )
+}
+BestFormateur():Observable<any>{
+  return this.http.get<any>(URL+'bestFormateur',{
+    headers: this.createAuthorizationHeader(),
+  }).pipe(
+    map(response => response)
+  )
+}
 private createAuthorizationHeader(): HttpHeaders{
    
   // console.log('Token:', this.token);

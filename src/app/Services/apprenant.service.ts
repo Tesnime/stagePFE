@@ -250,6 +250,18 @@ export class ApprenantService {
     });
   }
 
+  getTheme():Observable<any>{
+    return this.http.get<any>(URL+'Theme?apprenantId='+this.userId,{
+      headers: this.createAuthorizationHeader(),
+    }).pipe(
+      map(response => response)
+    )
+  }
+  checkAnswer(answerDetails:any):Observable<any>{
+    return this.http.post(URL+'checkComment?comment='+answerDetails,{},{
+      headers: this.createAuthorizationHeader(),
+    })
+  }
   private createAuthorizationHeader(): HttpHeaders{
    
     console.log('Token:', this.token);

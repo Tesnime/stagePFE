@@ -96,73 +96,162 @@
                                
                             </div>
                         </div>
-                        <div style="margin-bottom: 30px; display: flex; flex-direction: column; gap: 10px; " >
-                            <h3>Formateurs ayant soumis une demande pour cette formation</h3>
-                            <div class="info">
-                            @for(item of demande.formateurPropose;track $index){
-                                <div class="info formateur" (click)="toggleDetails(item.id)">
-                                    <div class="front">
-                                        <div class="image">
-                                            <img [src]="formateurImageUrls[item.id]" alt="{{item.firstname}} {{item.lastname}}" class="formateur-image">
-                                        </div>
-                                        <div>
-                                            <strong>{{item.firstname}} {{item.lastname}}</strong><br>
-                                            <small>{{item.poste}}</small>
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="details" *ngIf="selectedFormateur === item.id">
-                                        <div class="det" style="max-height: 35vh;overflow-y: auto;padding: 1rem;">
-                                            <div align="end" style="cursor: pointer;" (click)="openCvInNewTab(item.id)"> <strong style="color: black; font-size: 13px;">Consulter cv</strong></div>
-                                            <div class="a"><h6>Bio:</h6><small>{{item.bio}}</small></div>
-                                            <div class="a"><h6>Date de naissance:</h6><small>{{item.naissance| date: 'dd/MM/yyyy'}}</small></div>
-                                            <div class="a"><h6>Email:</h6><small>{{item.email}}</small></div>
-                                            <div class="a"><h6>Numero:</h6><small>{{item.tel}}</small></div>
-                                            <div class="a"><h6>CIN:</h6><small>{{item.cin}} </small></div>
-                                            <div class="a"><h6>Adresse:</h6><small>{{item.adresse}}</small></div>
-                                            @if (item.linkedin !='') {
-                                                <div class="a"><h6>Consultez le profil LinkedIn :</h6><a href={{item.linkedin}}>lien profile linkedin </a></div>
-                                            }
-                                            <div class="a"><h6>competances technique:</h6><small>{{item.comTech}}</small></div>
-                                            <div class="a"><h6>competances:</h6><small>{{item.competances}}</small></div>
-                                            <div class="b"><h6>information supplementaires:</h6><small>{{item.autre || "aucun détail supplémentaire n'est disponible" }} </small></div>
-                                            <div class="b">
-                                                <h6>Formations Académiques et Certifications:</h6>
-                                                <mat-list>
-                                                    @for (form of item.formAcademique; track $index) {
-                                                    <mat-list-item>
-                                                      <span matListItemTitle>{{form.diplome}} </span>
-                                                      <span matListItemLine>{{form.specialite}}</span>
-                                                      <span matListItemLine>{{form.date}} <a style="margin-left: 60%; color: #aaa;" href="#">Consulter le preuve</a></span>
-                                                    </mat-list-item>
-                                                }
-                                                </mat-list>
+                        <mat-tab-group animationDuration="0ms">
+                            <mat-tab label="Demandes">
+                                <div style="margin-bottom: 20px; padding: 1rem; display: flex; flex-direction: column; gap: 10px; " >
+                                    <h3 style="font-weight: bold;">Formateurs ayant soumis une demande pour cette formation</h3>
+                                    <div class="info">
+                                    @for(item of demande.formateurPropose;track $index){
+                                        <div class="info formateur" (click)="toggleDetails(item.id)">
+                                            <div class="front">
+                                                <div class="image">
+                                                    <img [src]="formateurImageUrls[item.id]" alt="{{item.firstname}} {{item.lastname}}" class="formateur-image">
+                                                </div>
+                                                <div>
+                                                    <strong>{{item.firstname}} {{item.lastname}}</strong><br>
+                                                    <small>{{item.poste}}</small>
+                                                </div>
                                             </div>
-                                            <div class="b">
-                                                <h6>Expériences professionnelles:</h6>
-                                                <mat-list>
-                                                    @for (exp of item.experiencePro; track $index) {
-                                                    <mat-list-item>
-                                                      <span matListItemTitle>{{exp.poste}} </span>
-                                                      <span matListItemLine>{{exp.entreprise}} {{exp.lieu}}</span>
-                                                      <span matListItemLine>{{exp.debut}}-{{exp.fin}}</span>
-                                                    </mat-list-item>
-                                                }
-                                                </mat-list>
+                                           
+                                            <div class="details" *ngIf="selectedFormateur === item.id">
+                                                <div class="det" style="max-height: 35vh;overflow-y: auto;padding: 1rem;">
+                                                    <div align="end" style="cursor: pointer;" (click)="openCvInNewTab(item.id)"> <strong style="color: black; font-size: 13px;">Consulter cv</strong></div>
+                                                    <div class="a"><h6>Bio:</h6><small>{{item.bio}}</small></div>
+                                                    <div class="a"><h6>Date de naissance:</h6><small>{{item.naissance| date: 'dd/MM/yyyy'}}</small></div>
+                                                    <div class="a"><h6>Email:</h6><small>{{item.email}}</small></div>
+                                                    <div class="a"><h6>Numero:</h6><small>{{item.tel}}</small></div>
+                                                    <div class="a"><h6>CIN:</h6><small>{{item.cin}} </small></div>
+                                                    <div class="a"><h6>Adresse:</h6><small>{{item.adresse}}</small></div>
+                                                    @if (item.linkedin !='') {
+                                                        <div class="a"><h6>Consultez le profil LinkedIn :</h6><a href={{item.linkedin}}>lien profile linkedin </a></div>
+                                                    }
+                                                    <div class="a"><h6>competances technique:</h6><small>{{item.comTech}}</small></div>
+                                                    <div class="a"><h6>competances:</h6><small>{{item.competances}}</small></div>
+                                                    <div class="b"><h6>information supplementaires:</h6><small>{{item.autre || "aucun détail supplémentaire n'est disponible" }} </small></div>
+                                                    <div class="b">
+                                                        <h6>Formations Académiques et Certifications:</h6>
+                                                        <mat-list>
+                                                            @for (form of item.formAcademique; track $index) {
+                                                            <mat-list-item>
+                                                              <span matListItemTitle>{{form.diplome}} </span>
+                                                              <span matListItemLine>{{form.specialite}}</span>
+                                                              <span matListItemLine>{{form.date}} <a style="margin-left: 60%; color: #aaa;" href="#">Consulter le preuve</a></span>
+                                                            </mat-list-item>
+                                                        }
+                                                        </mat-list>
+                                                    </div>
+                                                    <div class="b">
+                                                        <h6>Expériences professionnelles:</h6>
+                                                        <mat-list>
+                                                            @for (exp of item.experiencePro; track $index) {
+                                                            <mat-list-item>
+                                                              <span matListItemTitle>{{exp.poste}} </span>
+                                                              <span matListItemLine>{{exp.entreprise}} {{exp.lieu}}</span>
+                                                              <span matListItemLine>{{exp.debut}}-{{exp.fin}}</span>
+                                                            </mat-list-item>
+                                                        }
+                                                        </mat-list>
+                                                    </div>
+                                                </div>
+                                               <div align="end" class="action">
+                                                <button style="display: flex; align-items: center; justify-content: center;" (click)="openDialog(item)" mat-stroked-button mat-raised-button><i style="color: green; font-size: 6px;" class="fa-solid fa-circle"></i> Assigner ce formateur à cette formation</button>
+                                               </div>
                                             </div>
-                                        </div>
-                                       <div align="end" class="action">
-                                        <button style="display: flex; align-items: center; justify-content: center;" (click)="openDialog(item)" mat-stroked-button mat-raised-button><i style="color: green; font-size: 6px;" class="fa-solid fa-circle"></i> Assigner ce formateur à cette formation</button>
+                                            
                                        </div>
+                                    }@empty{
+                                        <small>Aucun formateur n'a soumis de demande</small>
+                                    }
                                     </div>
-                                    
-                               </div>
-                            }@empty{
-                                <small>Aucun formateur n'a soumis de demande</small>
-                            }
-                            </div>
-                           
-                        </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Recommandations">
+                                <div style="margin-bottom: 20px; padding: 1rem; display: flex; flex-direction: column; gap: 10px; " >
+                                    <h3 style="font-weight: bold;">Recommandation des Formateurs les Mieux Adaptés pour la Formation</h3>
+                                    <div class="info">
+                                        @for(item of recommendation ;track $index){
+                                            <div class="info recommandation" (click)="toggleDetails(item.formateur.id)">
+                                                <div class="aaaa">
+                                                    <div class="front">
+                                                        <div class="image">
+                                                            @if (item.formateur.image==null) {
+                                                                <img src="../../../../assets/images/user.png" class="formateur-image">
+                                                            }@else {
+                                                                <img [src]="formateurImageUrls[item.formateur.id]" alt="{{item.formateur.firstname}} {{item.formateur.lastname}}" class="formateur-image">
+                                                            }
+                                                            
+                                                        </div>
+                                                        <div>
+                                                            <strong>{{item.formateur.firstname}} {{item.formateur.lastname}}</strong><br>
+                                                            <small>{{item.formateur.poste}}</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="note">
+                                                        <strong>Note</strong>
+                                                        {{item.predicted_star}}
+                                                    </div>
+                                                    <div style="display: flex; align-items: flex-start; height: 100%; justify-content: flex-end;">
+                                                        @if (item.predicted_star>3) {
+                                                            <i style="color: goldenrod;" class="fa-solid fa-star"></i>
+                                                        }   
+                                                    </div>
+                                                </div>
+                                               
+                                               
+                                                <div class="details" *ngIf="selectedFormateur === item.formateur.id">
+                                                    <div class="det" style="max-height: 35vh;overflow-y: auto;padding: 1rem;">
+                                                        <div align="end" style="cursor: pointer;" (click)="openCvInNewTab(item.id)"> <strong style="color: black; font-size: 13px;">Consulter cv</strong></div>
+                                                        <div class="a"><h6>Bio:</h6><small>{{item.formateur.bio}}</small></div>
+                                                        <div class="a"><h6>Date de naissance:</h6><small>{{item.formateur.naissance| date: 'dd/MM/yyyy'}}</small></div>
+                                                        <div class="a"><h6>Email:</h6><small>{{item.formateur.email}}</small></div>
+                                                        <div class="a"><h6>Numero:</h6><small>{{item.formateur.tel}}</small></div>
+                                                        <div class="a"><h6>CIN:</h6><small>{{item.formateur.cin}} </small></div>
+                                                        <div class="a"><h6>Adresse:</h6><small>{{item.formateur.adresse}}</small></div>
+                                                        @if (item.linkedin !='') {
+                                                            <div class="a"><h6>Consultez le profil LinkedIn :</h6><a href={{item.formateur.linkedin}}>lien profile linkedin </a></div>
+                                                        }
+                                                        <div class="a"><h6>competances technique:</h6><small>{{item.formateur.comTech}}</small></div>
+                                                        <div class="a"><h6>competances:</h6><small>{{item.formateur.competances}}</small></div>
+                                                        <div class="b"><h6>information supplementaires:</h6><small>{{item.formateur.autre || "aucun détail supplémentaire n'est disponible" }} </small></div>
+                                                        <div class="b">
+                                                            <h6>Formations Académiques et Certifications:</h6>
+                                                            <mat-list>
+                                                                @for (form of item.formateur.formAcademique; track $index) {
+                                                                <mat-list-item>
+                                                                  <span matListItemTitle>{{form.formateur.diplome}} </span>
+                                                                  <span matListItemLine>{{form.formateur.specialite}}</span>
+                                                                  <span matListItemLine>{{form.formateur.date}} <a style="margin-left: 60%; color: #aaa;" href="#">Consulter le preuve</a></span>
+                                                                </mat-list-item>
+                                                            }
+                                                            </mat-list>
+                                                        </div>
+                                                        <div class="b">
+                                                            <h6>Expériences professionnelles:</h6>
+                                                            <mat-list>
+                                                                @for (exp of item.formateur.experiencePro; track $index) {
+                                                                <mat-list-item>
+                                                                  <span matListItemTitle>{{exp.formateur.poste}} </span>
+                                                                  <span matListItemLine>{{exp.formateur.entreprise}} {{exp.lieu}}</span>
+                                                                  <span matListItemLine>{{exp.formateur.debut}}-{{exp.formateur.fin}}</span>
+                                                                </mat-list-item>
+                                                            }
+                                                            </mat-list>
+                                                        </div>
+                                                    </div>
+                                                   <div align="end" class="action">
+                                                    <button style="display: flex; align-items: center; justify-content: center;" (click)="openDialog(item.formateur)" mat-stroked-button mat-raised-button><i style="color: green; font-size: 6px;" class="fa-solid fa-circle"></i> Assigner ce formateur à cette formation</button>
+                                                   </div>
+                                                </div>
+                                                
+                                           </div>
+                                        }@empty{
+                                            <small>Aucune recommandation trouvée</small>
+                                        }
+                                    </div>
+                                </div>
+                            </mat-tab>
+                          </mat-tab-group>
+                        
                     </ng-template>
                 </ng-container>
                 <!-- <ng-container ngbNavItem="middle">

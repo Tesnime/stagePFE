@@ -24,13 +24,14 @@ import { MatChipsModule } from '@angular/material/chips';
 import { AddFormateurComponent } from '../add-formateur/add-formateur.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ModifDemandeComponent } from '../modif-demande/modif-demande.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @Component({
   selector: 'app-demandeproposer',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule,CommonModule,MatListModule,MatExpansionModule,MatDatepickerModule,NgbTimepickerModule,
-    MatIconModule,MatFormFieldModule,MatInputModule,NgbNavModule,MatRadioModule,
+    MatIconModule,MatFormFieldModule,MatInputModule,NgbNavModule,MatRadioModule,MatTabsModule,
     FormsModule,ReactiveFormsModule,AgendaComponent,MatChipsModule,MatMenuModule],
     providers: [provideNativeDateAdapter(),{ provide: LOCALE_ID, useValue: 'fr' }],
   templateUrl: './demandeproposer.component.html',
@@ -59,6 +60,7 @@ certificateId!: number;
 imageUrl!: SafeUrl;
 formateurImageUrls: { [key: number]: SafeUrl } = {};
 selectedFormateur: number | null = null;
+recommendation:any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -100,6 +102,18 @@ selectedFormateur: number | null = null;
           fin:  new FormControl(),
     
         });
+        console.log(JSON.stringify(this.demande.theme));
+        this.adminService.suitbleTrainer(this.demande.theme).subscribe(
+          demandes => {
+            
+            this.recommendation = demandes;
+            console.log("recommendation:"+demandes)
+          },
+          error => {
+            console.error('Error fetching demandes:', error);
+            this.snackBar.open('Error fetching recommendation . Please try again.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+          }
+        );
   
         // Only make subsequent requests if this.demande is defined
         if (this.demande.formateur?.id) {

@@ -1,0 +1,51 @@
+.infoper{
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+    
+}
+.field{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 1rem;
+}
+.nom{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+}
+.addImg{
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: small;
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+.addImg img{
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    
+}
+.addImg small{
+    cursor: pointer;
+}
+.form-control{
+    padding: 4px 8px;
+    border-color: #3658a231;
+}
+
+
+h6{
+    color: #3658A2;
+}
+.form-group,.row{
+    margin-bottom: 7px;
+}

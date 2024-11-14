@@ -11,14 +11,14 @@
 }
 .total{
     background-color: white;
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     /* gap: 10px; */
     align-items: center;
     justify-content: center;
-    border: 1px solid #ddd;
+    border: 1px solid #eee;
 
 }
 .total span{
@@ -27,7 +27,28 @@
     color: rgb(16, 16, 74);
 }
 .chart{
+   width: 95%;
+   border-radius: 5px;
+   border: 1px solid #eee;
+    padding: 1rem;
+}
+.sujet{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr 1fr ;
+    align-items: flex-start;
+    justify-content: flex-start;
+    row-gap: 15px;
+    column-gap: 5px;
+}
+.cer{
+    min-width: 15px;
+    min-height: 15px;
+    background-color: rgb(53, 121, 194);
+    border-radius: 100%;
+}
+.tit{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: flex-start;
 }

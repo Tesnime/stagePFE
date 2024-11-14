@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>Profil extrait depuis le CV</h2>
+<form [formGroup]="profileForm" class="infoper" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="mat-typography">
+        <div class="field">
+            <div class="nom">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nom</mat-label>
+                    <input matInput formControlName="lastname" type="text" placeholder="nom" required>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Prénom</mat-label>
+                    <input matInput formControlName="firstname" type="text" placeholder="prénom" required>
+                </mat-form-field>
+            </div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" placeholder="email" required>
+                <mat-error *ngIf="profileForm.get('email')?.hasError('email') && !profileForm.get('email')?.hasError('required')">
+                    Format d'email invalide
+                </mat-error>
+                <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+                    Email est requis
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Bio</mat-label>
+                <textarea matInput formControlName="bio" placeholder="Bio..." rows="3"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>CIN</mat-label>
+                <input matInput formControlName="cin" type="text" placeholder="CIN" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Date de naissance</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="naissance">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Numéro</mat-label>
+                <input matInput formControlName="tel" type="tel" placeholder="numéro" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>RIB/RIP</mat-label>
+                <input matInput formControlName="rib" type="text" placeholder="RIB/RIP">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Adresse</mat-label>
+                <input matInput formControlName="adresse" type="text" placeholder="adresse">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Formation</mat-label>
+                <textarea matInput formControlName="education" placeholder="formation..." rows="4"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Experience</mat-label>
+                <textarea matInput formControlName="experience" placeholder="expreience..." rows="4"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Competances</mat-label>
+                <textarea matInput formControlName="competance" placeholder="Competance..." rows="4"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Autre</mat-label>
+                <textarea matInput formControlName="autre" placeholder="autres"></textarea>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button type="submit" cdkFocusInitial>Confirmer</button>
+        <button mat-button mat-dialog-close>Annuler</button>
+    </mat-dialog-actions>
+</form>

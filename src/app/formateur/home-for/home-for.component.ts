@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { NavbarComponent } from '../navs/navbar/navbar.component';
 import { NavComponent } from '../navs/nav/nav.component';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -47,7 +47,8 @@ import { StatComponent } from '../modal/stat/stat.component';
     // MatFormFieldModule,
     MatInputModule,MatListModule, MatDividerModule,
     DemandeComponent,SessionsComponent,ChatComponent,AgendaComponent,StatComponent,AgendaComponent],
-  templateUrl: './home-for.component.html',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    templateUrl: './home-for.component.html',
   styleUrl: './home-for.component.css'
 })
 export class HomeForComponent {

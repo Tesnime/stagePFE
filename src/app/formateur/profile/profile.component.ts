@@ -16,6 +16,7 @@ import { AutreComponent } from '../modal/autre/autre.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EditExprComponent } from '../modal/edit-expr/edit-expr.component';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { CvModalComponent } from '../../cv-modal/cv-modal.component';
 
 @Component({
   selector: 'app-profile',
@@ -97,6 +98,48 @@ export class ProfileComponent implements OnInit{
     location.reload();
 
   }
+  file: File | undefined;
+
+  onCVSelected(event: any): void {
+    this.file = event.target.files[0];
+    if (this.file) {
+      this.onUpload();
+      this.openCVModal(this.file);  // Opens modal for previewing or uploading CV
+    }
+  }
+  
+  openCVModal(cv: File): void {
+    const dialogRef = this.dialog.open(CvModalComponent, {
+      width: '50%',
+      height: '85%',
+      data: { cv: cv, formateur: this.profile } // Pass the selected file to the modal
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  
+  onUpload(): void {
+    if (this.file) {
+      console.log('Uploading file: ', this.file);
+      this.formateurService.uploadCV(this.file)
+        .subscribe(
+          (response) => {
+            console.log(response);
+            alert('CV uploaded successfully.');
+          },
+          (error) => {
+            console.error(error);
+            alert('Failed to upload CV.');
+          }
+        );
+    } else {
+      alert('Please select a file to upload.');
+    }
+  }
+  
+
   onSubmit(): void {
     if(this.selectedFile){
       this.formateurService.uploadImage(this.selectedFile).subscribe(
@@ -196,14 +239,25 @@ export class ProfileComponent implements OnInit{
       }
     )
   }
+  refreshExperienceList(): void {
+   this.formateurService.exprs().subscribe(
+     data => {
+       this.experience = data;
+     },
+     error => {
+       console.error('Error fetching experiences:', error);
+       this.snackBar.open('Error refreshing experiences.', 'Close', { duration: 5000 });
+     }
+   );
+}
+
   deleteExpr(id:number){
     this.formateurService.deleteExpr(id).subscribe(
       data =>{
         console.log('delete response',data);
          this.snackBar.open('supprimer avec succes.', 'Close', { duration: 5000 });
-         setTimeout(() => {
-          location.reload();
-        }, 3000);
+        
+        this.refreshExperienceList();
       }
     )
   }

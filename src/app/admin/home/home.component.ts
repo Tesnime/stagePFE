@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Route, Router } from '@angular/router';
@@ -27,6 +27,7 @@ import { AgendaComponent } from '../modal/agenda/agenda.component';
   imports: [MatButtonModule, MatDividerModule,MatIconModule,NgbNavModule,DemandesComponent,SessionsAdComponent,
     MatBadgeModule,ChatComponent,RapportComponent,StatComponent,AgendaComponent],
   templateUrl: './home.component.html',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './home.component.css'
 })
 export class HomeComponent {

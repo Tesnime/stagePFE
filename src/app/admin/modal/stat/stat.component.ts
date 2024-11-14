@@ -5,6 +5,7 @@ import { Chart, ChartModule } from 'angular-highcharts';
 import { catchError, forkJoin, of, tap } from 'rxjs';
 import { AgendaComponent } from '../agenda/agenda.component';
 import { MatListModule } from '@angular/material/list';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,6 +19,10 @@ export class StatComponent {
   difficultes!:Chart;
   presenceSem!:Chart;
   themes!:Chart;
+  recommendations!:any[] ;
+  imageUrl!: SafeUrl;
+ formateurImageUrls: { [key: number]: SafeUrl } = {};
+ bestFormateur!:any;
   
 
 //   presenceSem = new Chart({
@@ -40,6 +45,7 @@ export class StatComponent {
 
   constructor(private adminService:AdminService,
     private snackBar:MatSnackBar,
+    private sanitizer: DomSanitizer,
    ){
   }
 
@@ -48,6 +54,26 @@ export class StatComponent {
       t => {
         console.log(t)
        this.diffChart(t);
+      },
+      error => {
+        console.error('Error fetching demandes:', error);
+        this.snackBar.open('Error fetching demandes . Please try again.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+      }
+    );
+    this.adminService.BestFormateur().subscribe(
+      t => {
+        this.bestFormateur=t
+        this.loadFormateurImage(t.id);
+      },
+      error => {
+        console.error('Error fetching demandes:', error);
+        this.snackBar.open('Error fetching demandes . Please try again.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+      }
+    );
+    this.adminService.RecommendedTheme().subscribe(
+      t => {
+      this.recommendations=t;
+      console.log("recommendations:"+this.recommendations.length)
       },
       error => {
         console.error('Error fetching demandes:', error);
@@ -151,6 +177,21 @@ diffChart(diff: any[]) {
       });
     }
   );
+}
+loadFormateurImage(id: number): void {
+  this.adminService.getFormateurImage(id).subscribe(
+    response => {
+      this.formateurImageUrls[id] = this.createImageFromBlob(response);
+    },
+    error => {
+      console.error('Error loading image', error);
+    }
+  );
+}
+createImageFromBlob(image: Blob): SafeUrl {
+  const reader = new FileReader();
+  reader.readAsDataURL(image);
+  return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(image));
 }
 getColumnColor(index: number): string {
   // Add your custom colors here, if needed

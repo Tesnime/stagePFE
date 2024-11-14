@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, NgZone, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,13 +20,14 @@ import { ChatComponent } from '../../chat/chat/chat.component';
 import { SessionDetailsComponent } from '../modal/session-details/session-details.component';
 import { ToDoComponent } from '../to-do/to-do.component';
 import { AideComponent } from '../aide/aide.component';
+import { Chart, ChartModule } from 'angular-highcharts';
 
 @Component({
   selector: 'app-home-ap',
   standalone: true,
-  imports: [MatButtonModule, MatDividerModule, MatIconModule,MatTabsModule,
-    MonProfileComponent,AgendaComponent,MatCardModule, MatProgressBarModule,CommonModule, GoogleMapsModule,ChatComponent,ToDoComponent,AideComponent],
-  templateUrl: './home-ap.component.html',
+  imports: [MatButtonModule, MatDividerModule, MatIconModule,MatTabsModule,ChartModule, MonProfileComponent,AgendaComponent,MatCardModule, MatProgressBarModule,CommonModule, GoogleMapsModule,ChatComponent,ToDoComponent,AideComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    templateUrl: './home-ap.component.html',
   styleUrl: './home-ap.component.css'
 })
 export class HomeApComponent {
@@ -37,6 +38,7 @@ export class HomeApComponent {
   display: any;
   map!: google.maps.Map;
   marker!: google.maps.Marker;
+  themes!:Chart;
 
   companyPosition: google.maps.LatLngLiteral = {
     lat: 36.89363078046629,  
@@ -101,6 +103,17 @@ export class HomeApComponent {
       } else {
         this.activeTab = 0; // Définir l'onglet par défaut si aucun n'est trouvé dans le stockage local
       }
+
+      this.apprenantService.getTheme().subscribe(
+        t => {
+          console.log(t)
+          this.DemandeTheme(t);
+        },
+        error => {
+          console.error('Error fetching demandes:', error);
+          this.snackBar.open('Error fetching demandes . Please try again.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+        }
+      );
 
     }
     onTabChange(event: number): void {
@@ -178,5 +191,49 @@ logout(){
   localStorage.setItem('activeTabIndex', '0');
   this.router.navigateByUrl('');
 }
+
+DemandeTheme(demandeTheme: any) {
+  const themes = Object.keys(demandeTheme).slice(0, 10);
+  const themeValues = Object.values(demandeTheme).slice(0, 10);
+
+  const dataWithLabels = themes.map((label, index) => ({
+    name: label,
+    y: themeValues[index]
+  }));
+
+  this.themes = new Chart({
+    chart: {
+      polar: true,
+      type: 'pie'
+    },
+    // credits:{
+    //   enabled:false
+    // },
+    // plotOptions:{
+    //   pie:{
+    //     innerSize: '75%',
+    //     borderWidth: 200,
+    //     borderColor: 'transparent',
+    //     slicedOffset: 20,
+    //     dataLabels:{
+    //       connectorWidth: 1
+    //     }
+    //   }
+    // },
+    title: {
+      text: 'Distribution des principaux sujets abordés lors des séances'
+    },
+    series: [
+      {
+        name: 'Pourcentage',
+        data: dataWithLabels
+      } as any
+    ],
+    tooltip: {
+      pointFormat: '<b>{point.name}: {point.y}</b>'
+    }
+  });
+}
+
 
 }

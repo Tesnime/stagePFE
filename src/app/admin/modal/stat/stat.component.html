@@ -66,55 +66,31 @@
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 15px;">
+            <h2>Découvrez Nos Recommandations</h2>
             <div class="chart">
-                <h5>Demandes recommandées</h5> 
-                <div class="item" style="background-color: transparent; margin-bottom: -6px; ">
-                    <small style="font-size: 12px;">Titre</small>
-                    <small style="font-size: 12px;">formateur</small>
-                    <small style="font-size: 12px;">theme</small>
-                    <small style="font-size: 12px;">nbre des jours</small>
+                <h5>Les Sujets de Formation Idéaux</h5> 
+                <div class="sujet">
+                    @for (item of recommendations; track $index) {
+                        <div class="tit"><div class="cer"></div> {{item}}</div>
+                    }
                 </div>
-                <mat-list role="list">
-                    <mat-list-item style="padding: 0;  border-radius: 25px; overflow: hidden;"  role="listitem">
-                        <div class="item">
-                            <small style="font-size: 12px;">xxxx</small>
-                            <small style="font-size: 12px;">xxxxx</small>
-                            <small style="font-size: 12px;">vvv</small>
-                            <small style="font-size: 12px;">2</small>
-                        </div>
-                
-                    </mat-list-item>
-                    
-                </mat-list>
             </div>
+           
             <div class="chart">
-                <h5>Formateurs recommandées</h5>
-                <div class="item" style="background-color: transparent; margin-bottom: -6px; ">
-                    <small style="font-size: 12px;">nom formateur</small>
-                    <small style="font-size: 12px;">email</small>
-                    <small style="font-size: 12px;">numero</small>
-                    <small style="font-size: 12px;">nbre des sessions</small>
+                <h5>Notre Meilleur Formateur</h5> 
+                <div class="best">
+                    <img src="../../../../assets/images/icons8-best-seller-60.png" alt="">
+                    <div class="form">
+                        <img [src]="formateurImageUrls[bestFormateur.id]" alt="{{bestFormateur.firstname}} {{bestFormateur.lastname}}" class="formateur-image">
+                        <strong>{{bestFormateur.firstname}} {{bestFormateur.lastname}}</strong>
+                    </div>
                 </div>
-                <mat-list role="list">
-                    <mat-list-item style="padding: 0;  border-radius: 25px; overflow: hidden;"  role="listitem">
-                        <div class="item">
-                            <div style="height: 40px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 7px;">
-                                <div class="image"></div>
-                                <span style="font-weight: bold; font-size: small;">formateur</span>
-                            </div>
-                            <!-- <small>{{'test@gmail.com'}}</small>
-                            <div>54378999999</div> -->
-                            <small style="font-size: 12px;">{{'test@gmail.com'}}</small>
-                            <small style="font-size: 12px;">543789999993</small>
-                            <small style="font-size: 12px;">5</small>
-                        </div>
-                
-                    </mat-list-item>
-                    
-                </mat-list>
+               
             </div>
+                
         </div>
     
+        
     <!-- <div class="chart">
         <app-agenda></app-agenda>
     </div> -->

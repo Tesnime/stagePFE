@@ -4,6 +4,13 @@
         <button (click)="logout()" mat-button>Déconnecter</button>
     </div>
 </nav>
+<df-messenger
+    intent="WELCOME"
+    chat-title="Chatbot"
+    agent-id="c45b4b98-c099-4ea9-ab19-fb5dcbde4433"
+    language-code="fr"
+    style="position: fixed; bottom: 0; right: 20px; z-index: 1000; background-color: azure;" 
+  ></df-messenger>
 <div class="d-flex">
 	<div ngbNav #nav="ngbNav" [(activeId)]="active" (activeIdChange)="onTabChange($event)" class="nav-pills flex-column" orientation="vertical">
         <ng-container ngbNavItem="top">

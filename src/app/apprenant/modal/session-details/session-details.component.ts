@@ -309,45 +309,91 @@ export class SessionDetailsComponent {
      terminer(){
         location.reload();
      }
+     comment() {
+      if (this.commentForm.valid) {
+        const commentValue = this.commentForm.get('comment')?.value;
 
-     comment(){
-      if(this.commentForm.valid){
-        this.apprenantService.comment(this.commentForm.value,this.session.id).subscribe((res)=>{
-          if(res.id != null){
-            this.snackBar.open('ajout avec succes!','close',{duration:5000});
-            // this.router.navigateByUrl('formateur/home');
-            location.reload();
+
+    
+        // Vérification des termes inappropriés
+        this.apprenantService.checkAnswer(commentValue).subscribe((res) => {
+          if (!res) {
+            // Si des termes inappropriés sont détectés
+            alert("Des termes inappropriés ont été détectés dans votre commentaire, ce qui empêche son envoi.");
+          } else {
+            // Si tout est correct, soumettre le commentaire
+            this.apprenantService.comment(this.commentForm.value, this.session.id).subscribe((response) => {
+              if (response && response.id != null) {
+                this.snackBar.open('Ajout avec succès!', 'Fermer', { duration: 5000 });
+                location.reload();
+              } else {
+                this.snackBar.open('L\'ajout a échoué. Veuillez réessayer.', 'Fermer', {
+                  duration: 5000,
+                  panelClass: 'error-snackbar'
+                });
+              }
+            });
           }
-          else{
-            this.snackBar.open('signup failed,Please try again.','close',{duration:5000,panelClass:'error-snackbar'});
-          }
-        })
-      }else{
-        this.snackBar.open('Veuillez remplir tous les champs obligatoires.','close',{duration:5000,panelClass:'error-snackbar'});
+        });
+      } else {
+        this.snackBar.open('Le formulaire est invalide. Veuillez vérifier les champs.', 'Fermer', {
+          duration: 5000,
+          panelClass: 'error-snackbar'
+        });
       }
     }
+    
 
-    confirmerModele() {
-      this.apprenantService.modifyCertificateApp(this.session.demande.certifications[0].id).subscribe();
-      this.view=true;
+  //   confirmerModele() {
+  //     this.apprenantService.modifyCertificateApp(this.session.demande.certifications[0].id).subscribe();
+  //     this.view=true;
       
       
-    }
-    viewCertificate(id: number): void {
-      this.apprenantService.Certificate(id).subscribe({
-        next: (blob) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const unsafeUrl = URL.createObjectURL(blob);
-            this.fileContent = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
-          };
-          reader.readAsDataURL(blob);
-        },
-        error: (error) => {
-          this.responseMessage = `Failed to fetch certificate content: ${error.message}`;
-        }
-      });
-    }
+  //   }
+  //   viewCertificate(id: number): void {
+  //     this.apprenantService.Certificate(id).subscribe({
+  //       next: (blob) => {
+  //         const reader = new FileReader();
+  //         reader.onload = (e) => {
+  //           const unsafeUrl = URL.createObjectURL(blob);
+  //           this.fileContent = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
+  //         };
+  //         reader.readAsDataURL(blob);
+  //       },
+  //       error: (error) => {
+  //         this.responseMessage = `Failed to fetch certificate content: ${error.message}`;
+  //       }
+  //     });
+  //   }
+  // }
+
+  confirmerModele() {
+    this.apprenantService.modifyCertificateApp(this.session.demande.certifications[0].id).subscribe({
+      next: () => {
+        this.view = true;
+        // Appel pour récupérer le modèle de l'attestation après la modification
+        this.viewCertificate(this.session.demande.certifications[0].id);
+      },
+      error: (error) => {
+        this.responseMessage = `Failed to modify certificate: ${error.message}`;
+      }
+    });
   }
 
+  viewCertificate(id: number): void {
+    this.apprenantService.Certificate(id).subscribe({
+      next: (blob) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const unsafeUrl = URL.createObjectURL(blob);
+          this.fileContent = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
+        };
+        reader.readAsDataURL(blob);
+      },
+      error: (error) => {
+        this.responseMessage = `Failed to fetch certificate content: ${error.message}`;
+      }
+    });
+  }
+}
 

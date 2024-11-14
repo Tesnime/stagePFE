@@ -181,12 +181,25 @@ a{
     --mat-radio-checked-ripple-color: #374375;
     --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
 }
+.aaaa{
+    display: grid;
+    grid-template-columns: 80% 16% 4%;
+    align-items: center;
+}
 .front{
     display: grid;
     grid-template-columns: 4rem auto;
     min-height: 4rem;
     max-height: 4rem;
     gap: 20px;
+    align-items: center;
+}
+.note{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-left: solid 1px #ccc;
 }
 .image{
 

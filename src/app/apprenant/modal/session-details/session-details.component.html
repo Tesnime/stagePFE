@@ -15,7 +15,12 @@
                                 <div class="card p-3 py-4" style="width: 100%;">
                                     
                                     <div class="text-center">
-                                        <img [src]="imageUrl"  width="150" class="rounded-circle">
+                                        @if (session.demande.formateur.image == null) {
+                                            <img src="../../../../assets/images/user.png"  width="150" class="rounded-circle">
+                                        }
+                                        @else {
+                                            <img [src]="imageUrl"  width="150" class="rounded-circle">
+                                        }
                                     </div>
                                     
                                     <div class="text-center mt-3">

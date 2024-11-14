@@ -70,7 +70,7 @@
                 </ng-template>
             </ng-container>
             <ng-container ngbNavItem="accepte">
-                <button ngbNavLink>Accepte<span>{{accepte}}</span></button>
+                <button ngbNavLink>Demandes acceptées<span>{{accepte}}</span></button>
                 <ng-template ngbNavContent>
                     @if (accepte==0) {
                         <div class="empty">Vous n'avez envoyé aucune demande</div>
@@ -91,7 +91,7 @@
                 </ng-template>
             </ng-container>
             <ng-container ngbNavItem="en cours">
-                <button ngbNavLink>En cours de traitement<span>{{enCours}} </span></button>
+                <button ngbNavLink>Demandes en cours de traitement<span>{{enCours}} </span></button>
                 <ng-template ngbNavContent>
                     @if (enCours==0) {
                         <div class="empty">Vous n'avez envoyé aucune demande</div>
@@ -117,7 +117,7 @@
                 </ng-template>
             </ng-container>
             <ng-container ngbNavItem="refuse">
-                <button ngbNavLink>Refuse<span>{{refuse}} </span></button>
+                <button ngbNavLink>Demandes refusées<span>{{refuse}} </span></button>
                 <ng-template ngbNavContent>
                     @if (refuse==0) {
                         <div class="empty">Vous n'avez envoyé aucune demande</div>
